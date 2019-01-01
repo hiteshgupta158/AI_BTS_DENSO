@@ -1,0 +1,3014 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AI_BTS_DENSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ACTIVE_MST">
+          <Key>
+            <PropertyRef Name="ACTIVE_MST_ID" />
+          </Key>
+          <Property Name="ACTIVE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ACTIVE_VALUE" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="BIN_MST">
+          <Key>
+            <PropertyRef Name="BIN_MST_ID" />
+          </Key>
+          <Property Name="BIN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BIN_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="BIN_TYPE_MST_ID" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+          <Property Name="STATUS" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="BIN_TYPE_MST">
+          <Key>
+            <PropertyRef Name="BIN_TYPE_MST_ID" />
+          </Key>
+          <Property Name="BIN_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BIN_TYPE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="CATEGORY_MST">
+          <Key>
+            <PropertyRef Name="CATEGORY_MST_ID" />
+          </Key>
+          <Property Name="CATEGORY_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="DEPARTMENT_MST">
+          <Key>
+            <PropertyRef Name="DEPARTMENT_MST_ID" />
+          </Key>
+          <Property Name="DEPARTMENT_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DEPARTMENT_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="FG_BOM">
+          <Key>
+            <PropertyRef Name="FG_BOM_MST_ID" />
+          </Key>
+          <Property Name="FG_BOM_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FG_MST_ID" Type="int" />
+          <Property Name="FG_QTY" Type="int" />
+          <Property Name="INPUT_MATERIAL_ID" Type="int" />
+          <Property Name="INPUT_MATERIAL_QTY" Type="int" />
+          <Property Name="INPUT_MATERIAL_UOM_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="FG_MST">
+          <Key>
+            <PropertyRef Name="FG_MST_ID" />
+          </Key>
+          <Property Name="FG_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FG_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="FG_TYPE" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="GRN_DTL">
+          <Key>
+            <PropertyRef Name="GRN_DTL_ID" />
+          </Key>
+          <Property Name="GRN_DTL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GRN_MST_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PART_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="SUPPLIER_BATCH_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PACK_SIZE" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="IS_BLOCK" Type="int" />
+          <Property Name="PALLETE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PALLET_SIZE" Type="varchar" MaxLength="250" />
+          <Property Name="PART_TYPE" Type="varchar" MaxLength="50" />
+          <Property Name="PALLETE_NO_BARCODE" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="GRN_LABEL_PRINTING">
+          <Key>
+            <PropertyRef Name="LBL_PRN_CFM" />
+          </Key>
+          <Property Name="LBL_PRN_CFM" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GRN_DTL_ID" Type="int" />
+          <Property Name="PRIMARY_BARCODE" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="BR_SERIAL" Type="int" Nullable="false" />
+          <Property Name="LABEL_TYPE_MST_ID" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="varchar" MaxLength="15" />
+          <Property Name="BOX_QUANTITY" Type="int" />
+          <Property Name="PALLETE_NO_BARCODE" Type="varchar" MaxLength="250" />
+          <Property Name="PRINT_TYPE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GRN_MST">
+          <Key>
+            <PropertyRef Name="GRN_MST_ID" />
+          </Key>
+          <Property Name="GRN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SITE_MST_ID" Type="int" />
+          <Property Name="A_NOTICE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="A_NOTICE_DATE" Type="datetime" />
+          <Property Name="INVOICE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="INVOICE_DATE" Type="datetime" />
+          <Property Name="GRN_TYPE_MST_ID" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_DATE" Type="datetime" />
+          <Property Name="STO_NO" Type="varchar" MaxLength="100" />
+          <Property Name="CONTAINER_NO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GRN_TYPE_MST">
+          <Key>
+            <PropertyRef Name="GRN_TYPE_MST_ID" />
+          </Key>
+          <Property Name="GRN_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GRN_TYPE_NAME" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="INVENTORY_DTL">
+          <Key>
+            <PropertyRef Name="INVD_REC_ID" />
+          </Key>
+          <Property Name="INVD_REC_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="INV_MST_ID" Type="int" />
+          <Property Name="P_BARCODE" Type="varchar" MaxLength="200" />
+          <Property Name="C_BARCODE" Type="varchar" MaxLength="200" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="QUANTITY_ISSUED" Type="int" />
+          <Property Name="QUANTITY_REMAINING" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="INVENTORY_MST">
+          <Key>
+            <PropertyRef Name="INV_MST_ID" />
+          </Key>
+          <Property Name="INV_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QC_MST_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="QUANTITY_ISSUED" Type="int" />
+          <Property Name="QUANTITY_REMAINING" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
+          <Property Name="SITE_MST_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="LABEL_TYPE_MST">
+          <Key>
+            <PropertyRef Name="LABEL_TYPE_MST_ID" />
+          </Key>
+          <Property Name="LABEL_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LABEL_TYPE_NAME" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="LOCATION_MST">
+          <Key>
+            <PropertyRef Name="LOCATION_MST_ID" />
+          </Key>
+          <Property Name="LOCATION_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOCATION_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MACHINE_MST">
+          <Key>
+            <PropertyRef Name="MACHINE_MST_ID" />
+          </Key>
+          <Property Name="MACHINE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MACHINE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="MACHINE_TYPE_MST_ID" Type="int" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="PROCESS_MST_ID" Type="int" />
+          <Property Name="DEPARTMENT_MST_ID" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="MACHINE_TYPE_MST">
+          <Key>
+            <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+          </Key>
+          <Property Name="MACHINE_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MACHINE_TYPE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MATERIAL_MST">
+          <Key>
+            <PropertyRef Name="MATERIAL_MST_ID" />
+          </Key>
+          <Property Name="MATERIAL_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PART_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="MATERIAL_TYPE_MST_ID" Type="int" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="PRIMARY_UOM_ID" Type="int" />
+          <Property Name="SECONDARY_UOM_ID" Type="int" />
+          <Property Name="PACK_SIZE" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+          <Property Name="CAGE_QTY" Type="int" />
+          <Property Name="BAG_QTY" Type="int" />
+        </EntityType>
+        <EntityType Name="MATERIAL_TYPE_MST">
+          <Key>
+            <PropertyRef Name="MATERIAL_TYPE_MST_ID" />
+          </Key>
+          <Property Name="MATERIAL_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MATERIAL_TYPE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MIXED_PALLET_STO">
+          <Key>
+            <PropertyRef Name="STO_MST_ID" />
+          </Key>
+          <Property Name="STO_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STO_NO" Type="varchar" MaxLength="20" />
+          <Property Name="MIXED_PALLET_NO" Type="varchar" MaxLength="100" />
+          <Property Name="STO_TIME" Type="datetime" />
+          <Property Name="GRN_PRINTING_TIME" Type="datetime" />
+          <Property Name="GRN_DTL_ID" Type="int" />
+          <Property Name="IS_PICKED" Type="int" />
+          <Property Name="IS_DISPATCHED" Type="int" />
+        </EntityType>
+        <EntityType Name="MRN_MST">
+          <Key>
+            <PropertyRef Name="MRN_MST_ID" />
+          </Key>
+          <Property Name="MRN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MRN_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="100" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="KANBAN_TEXT" Type="varchar" MaxLength="250" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
+          <Property Name="SITE_MST_ID" Type="int" />
+          <Property Name="DISPATCH_BY" Type="int" />
+          <Property Name="DISPATCH_ON" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PICKING_DTL">
+          <Key>
+            <PropertyRef Name="PICKING_DTL_ID" />
+          </Key>
+          <Property Name="PICKING_DTL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PICKING_MST_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PACK_SIZE" Type="int" />
+          <Property Name="BOX_BARCODE" Type="varchar" MaxLength="200" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="PICKED_BY" Type="int" />
+          <Property Name="PICKED_ON" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PICKING_MST">
+          <Key>
+            <PropertyRef Name="PICK_MST_ID" />
+          </Key>
+          <Property Name="PICK_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STO_MST_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="REQUESTED_QTY" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="PICKED_QTY" Type="int" />
+          <Property Name="PICKED_BY" Type="int" />
+          <Property Name="PICKED_ON" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PROCESS_MST">
+          <Key>
+            <PropertyRef Name="PROCESS_MST_ID" />
+          </Key>
+          <Property Name="PROCESS_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROCESS_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="PROCESS_TYPE_MST_ID" Type="int" />
+          <Property Name="SEQUENCE" Type="varchar" MaxLength="50" />
+          <Property Name="FG_MST_ID" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="PROCESS_TYPE_MST">
+          <Key>
+            <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+          </Key>
+          <Property Name="PROCESS_TYPE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROCESS_TYPE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="QC_DTL">
+          <Key>
+            <PropertyRef Name="QC_DTL_ID" />
+          </Key>
+          <Property Name="QC_DTL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QC_MST_ID" Type="int" />
+          <Property Name="PRIMARY_BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="QUANTITY_APPROVED" Type="int" />
+          <Property Name="QUANTITY_REJECTED" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="QUANTITY_SCRAPPED" Type="int" />
+        </EntityType>
+        <EntityType Name="QC_LABEL_PRINTING">
+          <Key>
+            <PropertyRef Name="QC_LBL_ID" />
+          </Key>
+          <Property Name="QC_LBL_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QC_DTL_ID" Type="int" />
+          <Property Name="PARENT_BARCODE" Type="varchar" MaxLength="200" />
+          <Property Name="QC_BARCODE" Type="varchar" MaxLength="200" />
+          <Property Name="BARCODE_TYPE" Type="int" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="PACK_SIZE" Type="int" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="varchar" MaxLength="20" />
+          <Property Name="QC_ON" Type="datetime" />
+          <Property Name="QC_BY" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="QC_MST">
+          <Key>
+            <PropertyRef Name="QC_MST_ID" />
+          </Key>
+          <Property Name="QC_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GRN_DTL_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="A_NOTICE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="QUANTITY_TOTAL" Type="int" />
+          <Property Name="QUANTITY_APPROVED" Type="int" />
+          <Property Name="QUANTITY_REJECTED" Type="int" />
+          <Property Name="QUANTITY_SCRAPPED" Type="int" />
+          <Property Name="SUPPLIER_BATCH_NO" Type="varchar" MaxLength="200" />
+          <Property Name="QC_BY" Type="int" />
+          <Property Name="QC_ON" Type="datetime" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
+        <EntityType Name="QC_REJECTION_NOTE">
+          <Key>
+            <PropertyRef Name="QC_NOTE_ID" />
+          </Key>
+          <Property Name="QC_NOTE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PART_NO" Type="int" />
+          <Property Name="PART_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
+        </EntityType>
+        <EntityType Name="REASON_MST">
+          <Key>
+            <PropertyRef Name="REASON_MST_ID" />
+          </Key>
+          <Property Name="REASON_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REASON_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="RECEPIE_MST">
+          <Key>
+            <PropertyRef Name="RECEPIE_ID" />
+          </Key>
+          <Property Name="RECEPIE_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RECEPIE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="PROCESS_MST_ID" Type="int" />
+          <Property Name="OUTPUT_FG_MST_ID" Type="int" />
+          <Property Name="OUTPUT_FG_QTY" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="REJECTION_DTL">
+          <Key>
+            <PropertyRef Name="WC_RJN_ID" />
+          </Key>
+          <Property Name="WC_RJN_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QC_NOTE_ID" Type="int" />
+          <Property Name="QC_BARCODE" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="REJECTION_MST">
+          <Key>
+            <PropertyRef Name="REJECTION_ID" />
+          </Key>
+          <Property Name="REJECTION_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="REJECTION_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="SCREEN_LIST">
+          <Key>
+            <PropertyRef Name="SCREEN_MST_ID" />
+          </Key>
+          <Property Name="SCREEN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SCREEN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="SERIAL_CONTROL_MST">
+          <Key>
+            <PropertyRef Name="SERIAL_MST_ID" />
+          </Key>
+          <Property Name="SERIAL_MST_ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SERIAL_DATE" Type="date" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="bigint" />
+          <Property Name="TARGET_MST" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="SITE_MST">
+          <Key>
+            <PropertyRef Name="SITE_MST_ID" />
+          </Key>
+          <Property Name="SITE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SITE_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+          <Property Name="ACTIVE" Type="int" />
+        </EntityType>
+        <EntityType Name="STATUS_MST">
+          <Key>
+            <PropertyRef Name="STATUS_MST_ID" />
+          </Key>
+          <Property Name="STATUS_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STATUS_TYPE" Type="varchar" MaxLength="100" />
+          <Property Name="STATUS_VALUE" Type="varchar" MaxLength="50" />
+          <Property Name="STATUS_VALUE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="STO_MST">
+          <Key>
+            <PropertyRef Name="MRN_MST_ID" />
+          </Key>
+          <Property Name="MRN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MRN_NO" Type="varchar" MaxLength="200" />
+          <Property Name="REFERENCE_NO" Type="varchar" MaxLength="200" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
+          <Property Name="SITE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="UOM_MST">
+          <Key>
+            <PropertyRef Name="UOM_MST_ID" />
+          </Key>
+          <Property Name="UOM_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UOM_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="USER_MST">
+          <Key>
+            <PropertyRef Name="USER_MST_ID" />
+          </Key>
+          <Property Name="USER_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOGIN_ID" Type="varchar" MaxLength="50" />
+          <Property Name="USER_NAME" Type="varchar" MaxLength="200" />
+          <Property Name="USER_PASSWORD" Type="varchar" MaxLength="250" />
+          <Property Name="USER_ROLE_MST_ID" Type="int" />
+          <Property Name="ACTIVE" Type="int" />
+          <Property Name="SITE_MST_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="USER_ROLE_ACCESS_MST">
+          <Key>
+            <PropertyRef Name="USER_ROLE_ACCESS_MST_ID" />
+          </Key>
+          <Property Name="USER_ROLE_ACCESS_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_ROLE_MST_ID" Type="int" />
+          <Property Name="SCREEN_NAME" Type="varchar" MaxLength="100" />
+          <Property Name="READ_ACCESS" Type="int" />
+          <Property Name="ADD_ACCESS" Type="int" />
+          <Property Name="DELETE_ACCESS" Type="int" />
+        </EntityType>
+        <EntityType Name="USER_ROLE_MST">
+          <Key>
+            <PropertyRef Name="USER_ROLE_MST_ID" />
+          </Key>
+          <Property Name="USER_ROLE_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="USER_ROLE" Type="varchar" MaxLength="200" />
+          <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK__BIN_MST__STATUS__29572725">
+          <End Role="BIN_TYPE_MST" Type="Self.BIN_TYPE_MST" Multiplicity="0..1" />
+          <End Role="BIN_MST" Type="Self.BIN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIN_TYPE_MST">
+              <PropertyRef Name="BIN_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="BIN_MST">
+              <PropertyRef Name="BIN_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DEPARTMEN__ACTIV__04E4BC85">
+          <End Role="ACTIVE_MST" Type="Self.ACTIVE_MST" Multiplicity="0..1" />
+          <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVE_MST">
+              <PropertyRef Name="ACTIVE_MST_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT_MST">
+              <PropertyRef Name="ACTIVE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FG_BOM__INPUT_MA__37A5467C">
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="0..1" />
+          <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL_MST">
+              <PropertyRef Name="MATERIAL_MST_ID" />
+            </Principal>
+            <Dependent Role="FG_BOM">
+              <PropertyRef Name="INPUT_MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FG_BOM__INPUT_MA__38996AB5">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="FG_BOM">
+              <PropertyRef Name="INPUT_MATERIAL_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_DTL__STATUS__6442E2C9">
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="0..1" />
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_MST">
+              <PropertyRef Name="GRN_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_DTL">
+              <PropertyRef Name="GRN_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__CREAT__7C1A6C5A">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__LABEL__7A3223E8">
+          <End Role="LABEL_TYPE_MST" Type="Self.LABEL_TYPE_MST" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LABEL_TYPE_MST">
+              <PropertyRef Name="LABEL_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="LABEL_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__TODAY__793DFFAF">
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_DTL">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__CREATED__5629CD9C">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__CREATED__5812160E">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__GRN_TYP__571DF1D5">
+          <End Role="GRN_TYPE_MST" Type="Self.GRN_TYPE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_TYPE_MST">
+              <PropertyRef Name="GRN_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="GRN_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__CREAT__70A8B9AE">
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__INV_M__74794A92">
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_DTL" Type="Self.INVENTORY_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTORY_MST">
+              <PropertyRef Name="INV_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_DTL">
+              <PropertyRef Name="INV_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__SITE___2116E6DF">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__ACTIV__0D7A0286">
+          <End Role="MACHINE_TYPE_MST" Type="Self.MACHINE_TYPE_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINE_TYPE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__DEPAR__0E6E26BF">
+          <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT_MST">
+              <PropertyRef Name="DEPARTMENT_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="DEPARTMENT_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__PROCE__0F624AF8">
+          <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESS_MST">
+              <PropertyRef Name="PROCESS_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="PROCESS_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MATERIAL___ACTIV__31EC6D26">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="MATERIAL_MST">
+              <PropertyRef Name="PRIMARY_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MATERIAL___SECON__32E0915F">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="MATERIAL_MST">
+              <PropertyRef Name="SECONDARY_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PICKING_M__PICKE__318258D2">
+          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STO_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="STO_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PICKING_M__PICKE__32767D0B">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="PICKED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROCESS_M__ACTIV__3F466844">
+          <End Role="PROCESS_TYPE_MST" Type="Self.PROCESS_TYPE_MST" Multiplicity="0..1" />
+          <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESS_TYPE_MST">
+              <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="PROCESS_MST">
+              <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_DTL__STATUS__6AEFE058">
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
+          <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_DTL">
+              <PropertyRef Name="QC_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_LABEL___QUANT__6DCC4D03">
+          <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="0..1" />
+          <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_DTL">
+              <PropertyRef Name="QC_DTL_ID" />
+            </Principal>
+            <Dependent Role="QC_LABEL_PRINTING">
+              <PropertyRef Name="QC_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_MST__QC_BY__681373AD">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_MST">
+              <PropertyRef Name="QC_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_MST__STATUS__671F4F74">
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_DTL">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Principal>
+            <Dependent Role="QC_MST">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_REJECT__CREAT__11158940">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_REJECTION_NOTE">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RECEPIE_M__ACTIV__4F7CD00D">
+          <End Role="FG_MST" Type="Self.FG_MST" Multiplicity="0..1" />
+          <End Role="RECEPIE_MST" Type="Self.RECEPIE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FG_MST">
+              <PropertyRef Name="FG_MST_ID" />
+            </Principal>
+            <Dependent Role="RECEPIE_MST">
+              <PropertyRef Name="OUTPUT_FG_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REJECTION__QC_BA__13F1F5EB">
+          <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="0..1" />
+          <End Role="REJECTION_DTL" Type="Self.REJECTION_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_REJECTION_NOTE">
+              <PropertyRef Name="QC_NOTE_ID" />
+            </Principal>
+            <Dependent Role="REJECTION_DTL">
+              <PropertyRef Name="QC_NOTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__STO_MST__SITE_ID__2EA5EC27">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="STO_MST">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_MST__ACTIVE__4CA06362">
+          <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_ROLE_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ROLE__DELET__7FB5F314">
+          <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
+          <End Role="USER_ROLE_ACCESS_MST" Type="Self.USER_ROLE_ACCESS_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_ROLE_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_ROLE_ACCESS_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_SITE">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GET_PART_NO_NAME_BY_BARCODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PART_NO" Type="varchar" MaxLength="100" />
+                <Property Name="PART_NAME" Type="varchar" MaxLength="200" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GET_QC_BARCODE_SERIAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICVE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="QTY" Type="int" Mode="In" />
+          <Parameter Name="PACK_SIZE" Type="int" Mode="In" />
+          <Parameter Name="PRIMARY_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="QC_BY" Type="int" Mode="In" />
+          <Parameter Name="QC_ON" Type="datetime" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="QC_BARCODE" Type="varchar" MaxLength="200" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="GET_SITE_NAME_BY_USER_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="USER_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_CHECK_IF_GRN_DONE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_BARCODE_SERIAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="Serial" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_GET_GRN_DATA_FOR_QC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_PALLET_LIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PALLET_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_QC_DATA_BY_ANOTICENO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_INSERT_QC_MST_DATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="QC_ACTION" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="GRN_DTL_ID" Type="int" Mode="In" />
+          <Parameter Name="PACK_SIZE" Type="int" Mode="In" />
+          <Parameter Name="QTY_APPROVED" Type="int" Mode="In" />
+          <Parameter Name="QTY_REJECTED" Type="int" Mode="In" />
+          <Parameter Name="QTY_SCRAPPED" Type="int" Mode="In" />
+          <Parameter Name="PRIMARY_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="QC_BY" Type="int" Mode="In" />
+          <Parameter Name="QC_ON" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_UPDATE_QC_MST_DTL_STATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="QC_BY" Type="int" Mode="In" />
+          <Parameter Name="STATUS" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="AI_BTS_DENSOModelStoreContainer">
+          <EntitySet Name="ACTIVE_MST" EntityType="Self.ACTIVE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIN_MST" EntityType="Self.BIN_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BIN_TYPE_MST" EntityType="Self.BIN_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORY_MST" EntityType="Self.CATEGORY_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTMENT_MST" EntityType="Self.DEPARTMENT_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FG_BOM" EntityType="Self.FG_BOM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FG_MST" EntityType="Self.FG_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRN_DTL" EntityType="Self.GRN_DTL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRN_LABEL_PRINTING" EntityType="Self.GRN_LABEL_PRINTING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRN_MST" EntityType="Self.GRN_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRN_TYPE_MST" EntityType="Self.GRN_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTORY_DTL" EntityType="Self.INVENTORY_DTL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INVENTORY_MST" EntityType="Self.INVENTORY_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LABEL_TYPE_MST" EntityType="Self.LABEL_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOCATION_MST" EntityType="Self.LOCATION_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MACHINE_MST" EntityType="Self.MACHINE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MACHINE_TYPE_MST" EntityType="Self.MACHINE_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIAL_MST" EntityType="Self.MATERIAL_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MATERIAL_TYPE_MST" EntityType="Self.MATERIAL_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MIXED_PALLET_STO" EntityType="Self.MIXED_PALLET_STO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MRN_MST" EntityType="Self.MRN_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PICKING_DTL" EntityType="Self.PICKING_DTL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROCESS_MST" EntityType="Self.PROCESS_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROCESS_TYPE_MST" EntityType="Self.PROCESS_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QC_DTL" EntityType="Self.QC_DTL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QC_LABEL_PRINTING" EntityType="Self.QC_LABEL_PRINTING" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QC_MST" EntityType="Self.QC_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QC_REJECTION_NOTE" EntityType="Self.QC_REJECTION_NOTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REASON_MST" EntityType="Self.REASON_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RECEPIE_MST" EntityType="Self.RECEPIE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REJECTION_DTL" EntityType="Self.REJECTION_DTL" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REJECTION_MST" EntityType="Self.REJECTION_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SCREEN_LIST" EntityType="Self.SCREEN_LIST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SERIAL_CONTROL_MST" EntityType="Self.SERIAL_CONTROL_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SITE_MST" EntityType="Self.SITE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STATUS_MST" EntityType="Self.STATUS_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="STO_MST" EntityType="Self.STO_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UOM_MST" EntityType="Self.UOM_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_MST" EntityType="Self.USER_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_ROLE_ACCESS_MST" EntityType="Self.USER_ROLE_ACCESS_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER_ROLE_MST" EntityType="Self.USER_ROLE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PICKING_MST" EntityType="Self.PICKING_MST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PICKING_MST].[PICK_MST_ID] AS [PICK_MST_ID], 
+    [PICKING_MST].[STO_MST_ID] AS [STO_MST_ID], 
+    [PICKING_MST].[PART_NO] AS [PART_NO], 
+    [PICKING_MST].[REQUESTED_QTY] AS [REQUESTED_QTY], 
+    [PICKING_MST].[STATUS] AS [STATUS], 
+    [PICKING_MST].[PICKED_QTY] AS [PICKED_QTY], 
+    [PICKING_MST].[PICKED_BY] AS [PICKED_BY], 
+    [PICKING_MST].[PICKED_ON] AS [PICKED_ON]
+    FROM [dbo].[PICKING_MST] AS [PICKING_MST]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__BIN_MST__STATUS__29572725" Association="Self.FK__BIN_MST__STATUS__29572725">
+            <End Role="BIN_TYPE_MST" EntitySet="BIN_TYPE_MST" />
+            <End Role="BIN_MST" EntitySet="BIN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DEPARTMEN__ACTIV__04E4BC85" Association="Self.FK__DEPARTMEN__ACTIV__04E4BC85">
+            <End Role="ACTIVE_MST" EntitySet="ACTIVE_MST" />
+            <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__37A5467C" Association="Self.FK__FG_BOM__INPUT_MA__37A5467C">
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+            <End Role="FG_BOM" EntitySet="FG_BOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__38996AB5" Association="Self.FK__FG_BOM__INPUT_MA__38996AB5">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="FG_BOM" EntitySet="FG_BOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_DTL__STATUS__6442E2C9" Association="Self.FK__GRN_DTL__STATUS__6442E2C9">
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__CREAT__7C1A6C5A" Association="Self.FK__GRN_LABEL__CREAT__7C1A6C5A">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__LABEL__7A3223E8" Association="Self.FK__GRN_LABEL__LABEL__7A3223E8">
+            <End Role="LABEL_TYPE_MST" EntitySet="LABEL_TYPE_MST" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__TODAY__793DFFAF" Association="Self.FK__GRN_LABEL__TODAY__793DFFAF">
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__CREATED__5629CD9C" Association="Self.FK__GRN_MST__CREATED__5629CD9C">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__CREATED__5812160E" Association="Self.FK__GRN_MST__CREATED__5812160E">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__GRN_TYP__571DF1D5" Association="Self.FK__GRN_MST__GRN_TYP__571DF1D5">
+            <End Role="GRN_TYPE_MST" EntitySet="GRN_TYPE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__CREAT__70A8B9AE" Association="Self.FK__INVENTORY__CREAT__70A8B9AE">
+            <End Role="QC_MST" EntitySet="QC_MST" />
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__INV_M__74794A92" Association="Self.FK__INVENTORY__INV_M__74794A92">
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+            <End Role="INVENTORY_DTL" EntitySet="INVENTORY_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__SITE___2116E6DF" Association="Self.FK__INVENTORY__SITE___2116E6DF">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__ACTIV__0D7A0286" Association="Self.FK__MACHINE_M__ACTIV__0D7A0286">
+            <End Role="MACHINE_TYPE_MST" EntitySet="MACHINE_TYPE_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__DEPAR__0E6E26BF" Association="Self.FK__MACHINE_M__DEPAR__0E6E26BF">
+            <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__PROCE__0F624AF8" Association="Self.FK__MACHINE_M__PROCE__0F624AF8">
+            <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MATERIAL___ACTIV__31EC6D26" Association="Self.FK__MATERIAL___ACTIV__31EC6D26">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MATERIAL___SECON__32E0915F" Association="Self.FK__MATERIAL___SECON__32E0915F">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PICKING_M__PICKE__318258D2" Association="Self.FK__PICKING_M__PICKE__318258D2">
+            <End Role="STO_MST" EntitySet="STO_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PICKING_M__PICKE__32767D0B" Association="Self.FK__PICKING_M__PICKE__32767D0B">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROCESS_M__ACTIV__3F466844" Association="Self.FK__PROCESS_M__ACTIV__3F466844">
+            <End Role="PROCESS_TYPE_MST" EntitySet="PROCESS_TYPE_MST" />
+            <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_DTL__STATUS__6AEFE058" Association="Self.FK__QC_DTL__STATUS__6AEFE058">
+            <End Role="QC_MST" EntitySet="QC_MST" />
+            <End Role="QC_DTL" EntitySet="QC_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_LABEL___QUANT__6DCC4D03" Association="Self.FK__QC_LABEL___QUANT__6DCC4D03">
+            <End Role="QC_DTL" EntitySet="QC_DTL" />
+            <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_MST__QC_BY__681373AD" Association="Self.FK__QC_MST__QC_BY__681373AD">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="QC_MST" EntitySet="QC_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_MST__STATUS__671F4F74" Association="Self.FK__QC_MST__STATUS__671F4F74">
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+            <End Role="QC_MST" EntitySet="QC_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_REJECT__CREAT__11158940" Association="Self.FK__QC_REJECT__CREAT__11158940">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RECEPIE_M__ACTIV__4F7CD00D" Association="Self.FK__RECEPIE_M__ACTIV__4F7CD00D">
+            <End Role="FG_MST" EntitySet="FG_MST" />
+            <End Role="RECEPIE_MST" EntitySet="RECEPIE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REJECTION__QC_BA__13F1F5EB" Association="Self.FK__REJECTION__QC_BA__13F1F5EB">
+            <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
+            <End Role="REJECTION_DTL" EntitySet="REJECTION_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STO_MST__SITE_ID__2EA5EC27" Association="Self.FK__STO_MST__SITE_ID__2EA5EC27">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="STO_MST" EntitySet="STO_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_MST__ACTIVE__4CA06362" Association="Self.FK__USER_MST__ACTIVE__4CA06362">
+            <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
+            <End Role="USER_MST" EntitySet="USER_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ROLE__DELET__7FB5F314" Association="Self.FK__USER_ROLE__DELET__7FB5F314">
+            <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
+            <End Role="USER_ROLE_ACCESS_MST" EntitySet="USER_ROLE_ACCESS_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_SITE" Association="Self.FK_USER_SITE">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="USER_MST" EntitySet="USER_MST" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AI_BTS_DENSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="GET_PART_NO_NAME_BY_BARCODE_Result">
+          <Property Name="PART_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PART_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <ComplexType Name="GET_QC_BARCODE_SERIAL_Result">
+          <Property Name="QC_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </ComplexType>
+        <EntityType Name="ACTIVE_MST">
+          <Key>
+            <PropertyRef Name="ACTIVE_MST_ID" />
+          </Key>
+          <Property Name="ACTIVE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ACTIVE_VALUE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__04E4BC85" FromRole="ACTIVE_MST" ToRole="DEPARTMENT_MST" />
+        </EntityType>
+        <EntityType Name="BIN_MST">
+          <Key>
+            <PropertyRef Name="BIN_MST_ID" />
+          </Key>
+          <Property Name="BIN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BIN_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BIN_TYPE_MST_ID" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <Property Name="STATUS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BIN_TYPE_MST" Relationship="Self.FK__BIN_MST__STATUS__29572725" FromRole="BIN_MST" ToRole="BIN_TYPE_MST" />
+        </EntityType>
+        <EntityType Name="BIN_TYPE_MST">
+          <Key>
+            <PropertyRef Name="BIN_TYPE_MST_ID" />
+          </Key>
+          <Property Name="BIN_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BIN_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BIN_MST" Relationship="Self.FK__BIN_MST__STATUS__29572725" FromRole="BIN_TYPE_MST" ToRole="BIN_MST" />
+        </EntityType>
+        <EntityType Name="CATEGORY_MST">
+          <Key>
+            <PropertyRef Name="CATEGORY_MST_ID" />
+          </Key>
+          <Property Name="CATEGORY_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CATEGORY_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DEPARTMENT_MST">
+          <Key>
+            <PropertyRef Name="DEPARTMENT_MST_ID" />
+          </Key>
+          <Property Name="DEPARTMENT_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DEPARTMENT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <NavigationProperty Name="ACTIVE_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__04E4BC85" FromRole="DEPARTMENT_MST" ToRole="ACTIVE_MST" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__DEPAR__0E6E26BF" FromRole="DEPARTMENT_MST" ToRole="MACHINE_MST" />
+        </EntityType>
+        <EntityType Name="FG_BOM">
+          <Key>
+            <PropertyRef Name="FG_BOM_MST_ID" />
+          </Key>
+          <Property Name="FG_BOM_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FG_MST_ID" Type="Int32" />
+          <Property Name="FG_QTY" Type="Int32" />
+          <Property Name="INPUT_MATERIAL_ID" Type="Int32" />
+          <Property Name="INPUT_MATERIAL_QTY" Type="Int32" />
+          <Property Name="INPUT_MATERIAL_UOM_ID" Type="Int32" />
+          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__37A5467C" FromRole="FG_BOM" ToRole="MATERIAL_MST" />
+          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__38996AB5" FromRole="FG_BOM" ToRole="UOM_MST" />
+        </EntityType>
+        <EntityType Name="FG_MST">
+          <Key>
+            <PropertyRef Name="FG_MST_ID" />
+          </Key>
+          <Property Name="FG_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FG_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FG_TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RECEPIE_MST" Relationship="Self.FK__RECEPIE_M__ACTIV__4F7CD00D" FromRole="FG_MST" ToRole="RECEPIE_MST" />
+        </EntityType>
+        <EntityType Name="GRN_DTL">
+          <Key>
+            <PropertyRef Name="GRN_DTL_ID" />
+          </Key>
+          <Property Name="GRN_DTL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRN_MST_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PART_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="SUPPLIER_BATCH_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_SIZE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="IS_BLOCK" Type="Int32" />
+          <Property Name="PALLETE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PALLET_SIZE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PART_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PALLETE_NO_BARCODE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_DTL__STATUS__6442E2C9" FromRole="GRN_DTL" ToRole="GRN_MST" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__TODAY__793DFFAF" FromRole="GRN_DTL" ToRole="GRN_LABEL_PRINTING" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__STATUS__671F4F74" FromRole="GRN_DTL" ToRole="QC_MST" />
+        </EntityType>
+        <EntityType Name="GRN_LABEL_PRINTING">
+          <Key>
+            <PropertyRef Name="LBL_PRN_CFM" />
+          </Key>
+          <Property Name="LBL_PRN_CFM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRN_DTL_ID" Type="Int32" />
+          <Property Name="PRIMARY_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BR_SERIAL" Type="Int32" Nullable="false" />
+          <Property Name="LABEL_TYPE_MST_ID" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BOX_QUANTITY" Type="Int32" />
+          <Property Name="PALLETE_NO_BARCODE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PRINT_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_LABEL__TODAY__793DFFAF" FromRole="GRN_LABEL_PRINTING" ToRole="GRN_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_LABEL__CREAT__7C1A6C5A" FromRole="GRN_LABEL_PRINTING" ToRole="USER_MST" />
+          <NavigationProperty Name="LABEL_TYPE_MST" Relationship="Self.FK__GRN_LABEL__LABEL__7A3223E8" FromRole="GRN_LABEL_PRINTING" ToRole="LABEL_TYPE_MST" />
+        </EntityType>
+        <EntityType Name="GRN_MST">
+          <Key>
+            <PropertyRef Name="GRN_MST_ID" />
+          </Key>
+          <Property Name="GRN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <Property Name="A_NOTICE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="A_NOTICE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="INVOICE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="INVOICE_DATE" Type="DateTime" Precision="3" />
+          <Property Name="GRN_TYPE_MST_ID" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
+          <Property Name="STO_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CONTAINER_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_DTL__STATUS__6442E2C9" FromRole="GRN_MST" ToRole="GRN_DTL" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__GRN_MST__CREATED__5629CD9C" FromRole="GRN_MST" ToRole="SITE_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_MST__CREATED__5812160E" FromRole="GRN_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="GRN_TYPE_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__571DF1D5" FromRole="GRN_MST" ToRole="GRN_TYPE_MST" />
+        </EntityType>
+        <EntityType Name="GRN_TYPE_MST">
+          <Key>
+            <PropertyRef Name="GRN_TYPE_MST_ID" />
+          </Key>
+          <Property Name="GRN_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRN_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__571DF1D5" FromRole="GRN_TYPE_MST" ToRole="GRN_MST" />
+        </EntityType>
+        <EntityType Name="INVENTORY_DTL">
+          <Key>
+            <PropertyRef Name="INVD_REC_ID" />
+          </Key>
+          <Property Name="INVD_REC_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="INV_MST_ID" Type="Int32" />
+          <Property Name="P_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="C_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="QUANTITY_ISSUED" Type="Int32" />
+          <Property Name="QUANTITY_REMAINING" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__INV_M__74794A92" FromRole="INVENTORY_DTL" ToRole="INVENTORY_MST" />
+        </EntityType>
+        <EntityType Name="INVENTORY_MST">
+          <Key>
+            <PropertyRef Name="INV_MST_ID" />
+          </Key>
+          <Property Name="INV_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QC_MST_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="QUANTITY_ISSUED" Type="Int32" />
+          <Property Name="QUANTITY_REMAINING" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <NavigationProperty Name="INVENTORY_DTL" Relationship="Self.FK__INVENTORY__INV_M__74794A92" FromRole="INVENTORY_MST" ToRole="INVENTORY_DTL" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__INVENTORY__CREAT__70A8B9AE" FromRole="INVENTORY_MST" ToRole="QC_MST" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__INVENTORY__SITE___2116E6DF" FromRole="INVENTORY_MST" ToRole="SITE_MST" />
+        </EntityType>
+        <EntityType Name="LABEL_TYPE_MST">
+          <Key>
+            <PropertyRef Name="LABEL_TYPE_MST_ID" />
+          </Key>
+          <Property Name="LABEL_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LABEL_TYPE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__LABEL__7A3223E8" FromRole="LABEL_TYPE_MST" ToRole="GRN_LABEL_PRINTING" />
+        </EntityType>
+        <EntityType Name="LOCATION_MST">
+          <Key>
+            <PropertyRef Name="LOCATION_MST_ID" />
+          </Key>
+          <Property Name="LOCATION_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOCATION_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MACHINE_MST">
+          <Key>
+            <PropertyRef Name="MACHINE_MST_ID" />
+          </Key>
+          <Property Name="MACHINE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MACHINE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MACHINE_TYPE_MST_ID" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PROCESS_MST_ID" Type="Int32" />
+          <Property Name="DEPARTMENT_MST_ID" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__MACHINE_M__DEPAR__0E6E26BF" FromRole="MACHINE_MST" ToRole="DEPARTMENT_MST" />
+          <NavigationProperty Name="MACHINE_TYPE_MST" Relationship="Self.FK__MACHINE_M__ACTIV__0D7A0286" FromRole="MACHINE_MST" ToRole="MACHINE_TYPE_MST" />
+          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__MACHINE_M__PROCE__0F624AF8" FromRole="MACHINE_MST" ToRole="PROCESS_MST" />
+        </EntityType>
+        <EntityType Name="MACHINE_TYPE_MST">
+          <Key>
+            <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+          </Key>
+          <Property Name="MACHINE_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MACHINE_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__ACTIV__0D7A0286" FromRole="MACHINE_TYPE_MST" ToRole="MACHINE_MST" />
+        </EntityType>
+        <EntityType Name="MATERIAL_MST">
+          <Key>
+            <PropertyRef Name="MATERIAL_MST_ID" />
+          </Key>
+          <Property Name="MATERIAL_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PART_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="MATERIAL_TYPE_MST_ID" Type="Int32" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PRIMARY_UOM_ID" Type="Int32" />
+          <Property Name="SECONDARY_UOM_ID" Type="Int32" />
+          <Property Name="PACK_SIZE" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <Property Name="CAGE_QTY" Type="Int32" />
+          <Property Name="BAG_QTY" Type="Int32" />
+          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__37A5467C" FromRole="MATERIAL_MST" ToRole="FG_BOM" />
+          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__MATERIAL___ACTIV__31EC6D26" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
+          <NavigationProperty Name="UOM_MST1" Relationship="Self.FK__MATERIAL___SECON__32E0915F" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
+        </EntityType>
+        <EntityType Name="MATERIAL_TYPE_MST">
+          <Key>
+            <PropertyRef Name="MATERIAL_TYPE_MST_ID" />
+          </Key>
+          <Property Name="MATERIAL_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MATERIAL_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MIXED_PALLET_STO">
+          <Key>
+            <PropertyRef Name="STO_MST_ID" />
+          </Key>
+          <Property Name="STO_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STO_NO" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MIXED_PALLET_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STO_TIME" Type="DateTime" Precision="3" />
+          <Property Name="GRN_PRINTING_TIME" Type="DateTime" Precision="3" />
+          <Property Name="GRN_DTL_ID" Type="Int32" />
+          <Property Name="IS_PICKED" Type="Int32" />
+          <Property Name="IS_DISPATCHED" Type="Int32" />
+        </EntityType>
+        <EntityType Name="MRN_MST">
+          <Key>
+            <PropertyRef Name="MRN_MST_ID" />
+          </Key>
+          <Property Name="MRN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MRN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PART_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <Property Name="DISPATCH_BY" Type="Int32" />
+          <Property Name="DISPATCH_ON" Type="DateTime" Precision="3" />
+          <Property Name="KANBAN_TEXT" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="PICKING_DTL">
+          <Key>
+            <PropertyRef Name="PICKING_DTL_ID" />
+          </Key>
+          <Property Name="PICKING_DTL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PICKING_MST_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_SIZE" Type="Int32" />
+          <Property Name="BOX_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="PICKED_BY" Type="Int32" />
+          <Property Name="PICKED_ON" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="PROCESS_MST">
+          <Key>
+            <PropertyRef Name="PROCESS_MST_ID" />
+          </Key>
+          <Property Name="PROCESS_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROCESS_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PROCESS_TYPE_MST_ID" Type="Int32" />
+          <Property Name="SEQUENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FG_MST_ID" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__PROCE__0F624AF8" FromRole="PROCESS_MST" ToRole="MACHINE_MST" />
+          <NavigationProperty Name="PROCESS_TYPE_MST" Relationship="Self.FK__PROCESS_M__ACTIV__3F466844" FromRole="PROCESS_MST" ToRole="PROCESS_TYPE_MST" />
+        </EntityType>
+        <EntityType Name="PROCESS_TYPE_MST">
+          <Key>
+            <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+          </Key>
+          <Property Name="PROCESS_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROCESS_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__PROCESS_M__ACTIV__3F466844" FromRole="PROCESS_TYPE_MST" ToRole="PROCESS_MST" />
+        </EntityType>
+        <EntityType Name="QC_DTL">
+          <Key>
+            <PropertyRef Name="QC_DTL_ID" />
+          </Key>
+          <Property Name="QC_DTL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QC_MST_ID" Type="Int32" />
+          <Property Name="PRIMARY_BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY_APPROVED" Type="Int32" />
+          <Property Name="QUANTITY_REJECTED" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="QUANTITY_SCRAPPED" Type="Int32" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_DTL__STATUS__6AEFE058" FromRole="QC_DTL" ToRole="QC_MST" />
+          <NavigationProperty Name="QC_LABEL_PRINTING" Relationship="Self.FK__QC_LABEL___QUANT__6DCC4D03" FromRole="QC_DTL" ToRole="QC_LABEL_PRINTING" />
+        </EntityType>
+        <EntityType Name="QC_LABEL_PRINTING">
+          <Key>
+            <PropertyRef Name="QC_LBL_ID" />
+          </Key>
+          <Property Name="QC_LBL_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QC_DTL_ID" Type="Int32" />
+          <Property Name="PARENT_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QC_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BARCODE_TYPE" Type="Int32" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="PACK_SIZE" Type="Int32" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="QC_ON" Type="DateTime" Precision="3" />
+          <Property Name="QC_BY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_LABEL___QUANT__6DCC4D03" FromRole="QC_LABEL_PRINTING" ToRole="QC_DTL" />
+        </EntityType>
+        <EntityType Name="QC_MST">
+          <Key>
+            <PropertyRef Name="QC_MST_ID" />
+          </Key>
+          <Property Name="QC_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRN_DTL_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="A_NOTICE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY_TOTAL" Type="Int32" />
+          <Property Name="QUANTITY_APPROVED" Type="Int32" />
+          <Property Name="QUANTITY_REJECTED" Type="Int32" />
+          <Property Name="QUANTITY_SCRAPPED" Type="Int32" />
+          <Property Name="SUPPLIER_BATCH_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QC_BY" Type="Int32" />
+          <Property Name="QC_ON" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="Int32" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__QC_MST__STATUS__671F4F74" FromRole="QC_MST" ToRole="GRN_DTL" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__CREAT__70A8B9AE" FromRole="QC_MST" ToRole="INVENTORY_MST" />
+          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_DTL__STATUS__6AEFE058" FromRole="QC_MST" ToRole="QC_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_MST__QC_BY__681373AD" FromRole="QC_MST" ToRole="USER_MST" />
+        </EntityType>
+        <EntityType Name="QC_REJECTION_NOTE">
+          <Key>
+            <PropertyRef Name="QC_NOTE_ID" />
+          </Key>
+          <Property Name="QC_NOTE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PART_NO" Type="Int32" />
+          <Property Name="PART_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_REJECT__CREAT__11158940" FromRole="QC_REJECTION_NOTE" ToRole="USER_MST" />
+          <NavigationProperty Name="REJECTION_DTL" Relationship="Self.FK__REJECTION__QC_BA__13F1F5EB" FromRole="QC_REJECTION_NOTE" ToRole="REJECTION_DTL" />
+        </EntityType>
+        <EntityType Name="REASON_MST">
+          <Key>
+            <PropertyRef Name="REASON_MST_ID" />
+          </Key>
+          <Property Name="REASON_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REASON_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="RECEPIE_MST">
+          <Key>
+            <PropertyRef Name="RECEPIE_ID" />
+          </Key>
+          <Property Name="RECEPIE_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RECEPIE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PROCESS_MST_ID" Type="Int32" />
+          <Property Name="OUTPUT_FG_MST_ID" Type="Int32" />
+          <Property Name="OUTPUT_FG_QTY" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <NavigationProperty Name="FG_MST" Relationship="Self.FK__RECEPIE_M__ACTIV__4F7CD00D" FromRole="RECEPIE_MST" ToRole="FG_MST" />
+        </EntityType>
+        <EntityType Name="REJECTION_DTL">
+          <Key>
+            <PropertyRef Name="WC_RJN_ID" />
+          </Key>
+          <Property Name="WC_RJN_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QC_NOTE_ID" Type="Int32" />
+          <Property Name="QC_BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__REJECTION__QC_BA__13F1F5EB" FromRole="REJECTION_DTL" ToRole="QC_REJECTION_NOTE" />
+        </EntityType>
+        <EntityType Name="REJECTION_MST">
+          <Key>
+            <PropertyRef Name="REJECTION_ID" />
+          </Key>
+          <Property Name="REJECTION_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="REJECTION_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SCREEN_LIST">
+          <Key>
+            <PropertyRef Name="SCREEN_MST_ID" />
+          </Key>
+          <Property Name="SCREEN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SCREEN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE" Type="Int32" />
+        </EntityType>
+        <EntityType Name="SERIAL_CONTROL_MST">
+          <Key>
+            <PropertyRef Name="SERIAL_MST_ID" />
+          </Key>
+          <Property Name="SERIAL_MST_ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SERIAL_DATE" Type="DateTime" Precision="0" />
+          <Property Name="TODAY_BARCODE_SERIAL" Type="Int64" />
+          <Property Name="TARGET_MST" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SITE_MST">
+          <Key>
+            <PropertyRef Name="SITE_MST_ID" />
+          </Key>
+          <Property Name="SITE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SITE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__CREATED__5629CD9C" FromRole="SITE_MST" ToRole="GRN_MST" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__SITE___2116E6DF" FromRole="SITE_MST" ToRole="INVENTORY_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK_USER_SITE" FromRole="SITE_MST" ToRole="USER_MST" />
+        </EntityType>
+        <EntityType Name="STATUS_MST">
+          <Key>
+            <PropertyRef Name="STATUS_MST_ID" />
+          </Key>
+          <Property Name="STATUS_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STATUS_TYPE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_VALUE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS_VALUE_ID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="STO_MST">
+          <Key>
+            <PropertyRef Name="MRN_MST_ID" />
+          </Key>
+          <Property Name="MRN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MRN_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="REFERENCE_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <Property Name="SITE_ID" Type="Int32" />
+          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK__PICKING_M__PICKE__318258D2" FromRole="STO_MST" ToRole="PICKING_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__STO_MST__SITE_ID__2EA5EC27" FromRole="STO_MST" ToRole="USER_MST" />
+        </EntityType>
+        <EntityType Name="UOM_MST">
+          <Key>
+            <PropertyRef Name="UOM_MST_ID" />
+          </Key>
+          <Property Name="UOM_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UOM_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__38996AB5" FromRole="UOM_MST" ToRole="FG_BOM" />
+          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__MATERIAL___ACTIV__31EC6D26" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
+          <NavigationProperty Name="MATERIAL_MST1" Relationship="Self.FK__MATERIAL___SECON__32E0915F" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
+        </EntityType>
+        <EntityType Name="USER_MST">
+          <Key>
+            <PropertyRef Name="USER_MST_ID" />
+          </Key>
+          <Property Name="USER_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOGIN_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="USER_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="USER_PASSWORD" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="USER_ROLE_MST_ID" Type="Int32" />
+          <Property Name="ACTIVE" Type="Int32" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__CREAT__7C1A6C5A" FromRole="USER_MST" ToRole="GRN_LABEL_PRINTING" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__CREATED__5812160E" FromRole="USER_MST" ToRole="GRN_MST" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__QC_BY__681373AD" FromRole="USER_MST" ToRole="QC_MST" />
+          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__QC_REJECT__CREAT__11158940" FromRole="USER_MST" ToRole="QC_REJECTION_NOTE" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK_USER_SITE" FromRole="USER_MST" ToRole="SITE_MST" />
+          <NavigationProperty Name="STO_MST" Relationship="Self.FK__STO_MST__SITE_ID__2EA5EC27" FromRole="USER_MST" ToRole="STO_MST" />
+          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK__PICKING_M__PICKE__32767D0B" FromRole="USER_MST" ToRole="PICKING_MST" />
+          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_MST__ACTIVE__4CA06362" FromRole="USER_MST" ToRole="USER_ROLE_MST" />
+        </EntityType>
+        <EntityType Name="USER_ROLE_ACCESS_MST">
+          <Key>
+            <PropertyRef Name="USER_ROLE_ACCESS_MST_ID" />
+          </Key>
+          <Property Name="USER_ROLE_ACCESS_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ROLE_MST_ID" Type="Int32" />
+          <Property Name="SCREEN_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="READ_ACCESS" Type="Int32" />
+          <Property Name="ADD_ACCESS" Type="Int32" />
+          <Property Name="DELETE_ACCESS" Type="Int32" />
+          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_ROLE__DELET__7FB5F314" FromRole="USER_ROLE_ACCESS_MST" ToRole="USER_ROLE_MST" />
+        </EntityType>
+        <EntityType Name="USER_ROLE_MST">
+          <Key>
+            <PropertyRef Name="USER_ROLE_MST_ID" />
+          </Key>
+          <Property Name="USER_ROLE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="USER_ROLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__USER_MST__ACTIVE__4CA06362" FromRole="USER_ROLE_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="USER_ROLE_ACCESS_MST" Relationship="Self.FK__USER_ROLE__DELET__7FB5F314" FromRole="USER_ROLE_MST" ToRole="USER_ROLE_ACCESS_MST" />
+        </EntityType>
+        <EntityType Name="PICKING_MST">
+          <Key>
+            <PropertyRef Name="PICK_MST_ID" />
+          </Key>
+          <Property Name="PICK_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STO_MST_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="REQUESTED_QTY" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <Property Name="PICKED_QTY" Type="Int32" />
+          <Property Name="PICKED_BY" Type="Int32" />
+          <Property Name="PICKED_ON" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="STO_MST" Relationship="Self.FK__PICKING_M__PICKE__318258D2" FromRole="PICKING_MST" ToRole="STO_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__PICKING_M__PICKE__32767D0B" FromRole="PICKING_MST" ToRole="USER_MST" />
+        </EntityType>
+        <Association Name="FK__DEPARTMEN__ACTIV__04E4BC85">
+          <End Role="ACTIVE_MST" Type="Self.ACTIVE_MST" Multiplicity="0..1" />
+          <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ACTIVE_MST">
+              <PropertyRef Name="ACTIVE_MST_ID" />
+            </Principal>
+            <Dependent Role="DEPARTMENT_MST">
+              <PropertyRef Name="ACTIVE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BIN_MST__STATUS__29572725">
+          <End Role="BIN_TYPE_MST" Type="Self.BIN_TYPE_MST" Multiplicity="0..1" />
+          <End Role="BIN_MST" Type="Self.BIN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BIN_TYPE_MST">
+              <PropertyRef Name="BIN_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="BIN_MST">
+              <PropertyRef Name="BIN_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__DEPAR__0E6E26BF">
+          <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPARTMENT_MST">
+              <PropertyRef Name="DEPARTMENT_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="DEPARTMENT_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FG_BOM__INPUT_MA__37A5467C">
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="0..1" />
+          <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MATERIAL_MST">
+              <PropertyRef Name="MATERIAL_MST_ID" />
+            </Principal>
+            <Dependent Role="FG_BOM">
+              <PropertyRef Name="INPUT_MATERIAL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FG_BOM__INPUT_MA__38996AB5">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="FG_BOM">
+              <PropertyRef Name="INPUT_MATERIAL_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__RECEPIE_M__ACTIV__4F7CD00D">
+          <End Role="FG_MST" Type="Self.FG_MST" Multiplicity="0..1" />
+          <End Role="RECEPIE_MST" Type="Self.RECEPIE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FG_MST">
+              <PropertyRef Name="FG_MST_ID" />
+            </Principal>
+            <Dependent Role="RECEPIE_MST">
+              <PropertyRef Name="OUTPUT_FG_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_DTL__STATUS__6442E2C9">
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="0..1" />
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_MST">
+              <PropertyRef Name="GRN_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_DTL">
+              <PropertyRef Name="GRN_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__TODAY__793DFFAF">
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_DTL">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_MST__STATUS__671F4F74">
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_DTL">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Principal>
+            <Dependent Role="QC_MST">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__CREAT__7C1A6C5A">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__LABEL__7A3223E8">
+          <End Role="LABEL_TYPE_MST" Type="Self.LABEL_TYPE_MST" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LABEL_TYPE_MST">
+              <PropertyRef Name="LABEL_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="LABEL_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__CREATED__5629CD9C">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__CREATED__5812160E">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_MST__GRN_TYP__571DF1D5">
+          <End Role="GRN_TYPE_MST" Type="Self.GRN_TYPE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_TYPE_MST">
+              <PropertyRef Name="GRN_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="GRN_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__INV_M__74794A92">
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_DTL" Type="Self.INVENTORY_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="INVENTORY_MST">
+              <PropertyRef Name="INV_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_DTL">
+              <PropertyRef Name="INV_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__CREAT__70A8B9AE">
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__SITE___2116E6DF">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__ACTIV__0D7A0286">
+          <End Role="MACHINE_TYPE_MST" Type="Self.MACHINE_TYPE_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINE_TYPE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__PROCE__0F624AF8">
+          <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESS_MST">
+              <PropertyRef Name="PROCESS_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="PROCESS_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MATERIAL___ACTIV__31EC6D26">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="MATERIAL_MST">
+              <PropertyRef Name="PRIMARY_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MATERIAL___SECON__32E0915F">
+          <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
+          <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UOM_MST">
+              <PropertyRef Name="UOM_MST_ID" />
+            </Principal>
+            <Dependent Role="MATERIAL_MST">
+              <PropertyRef Name="SECONDARY_UOM_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROCESS_M__ACTIV__3F466844">
+          <End Role="PROCESS_TYPE_MST" Type="Self.PROCESS_TYPE_MST" Multiplicity="0..1" />
+          <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROCESS_TYPE_MST">
+              <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="PROCESS_MST">
+              <PropertyRef Name="PROCESS_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_DTL__STATUS__6AEFE058">
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
+          <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_DTL">
+              <PropertyRef Name="QC_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_LABEL___QUANT__6DCC4D03">
+          <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="0..1" />
+          <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_DTL">
+              <PropertyRef Name="QC_DTL_ID" />
+            </Principal>
+            <Dependent Role="QC_LABEL_PRINTING">
+              <PropertyRef Name="QC_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_MST__QC_BY__681373AD">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_MST">
+              <PropertyRef Name="QC_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_REJECT__CREAT__11158940">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_REJECTION_NOTE">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__REJECTION__QC_BA__13F1F5EB">
+          <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="0..1" />
+          <End Role="REJECTION_DTL" Type="Self.REJECTION_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_REJECTION_NOTE">
+              <PropertyRef Name="QC_NOTE_ID" />
+            </Principal>
+            <Dependent Role="REJECTION_DTL">
+              <PropertyRef Name="QC_NOTE_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_SITE">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PICKING_M__PICKE__318258D2">
+          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STO_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="STO_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__STO_MST__SITE_ID__2EA5EC27">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="STO_MST">
+              <PropertyRef Name="CREATED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PICKING_M__PICKE__32767D0B">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="PICKED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_MST__ACTIVE__4CA06362">
+          <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_ROLE_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ROLE__DELET__7FB5F314">
+          <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
+          <End Role="USER_ROLE_ACCESS_MST" Type="Self.USER_ROLE_ACCESS_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_ROLE_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Principal>
+            <Dependent Role="USER_ROLE_ACCESS_MST">
+              <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AI_BTS_DENSOEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ACTIVE_MST" EntityType="Self.ACTIVE_MST" />
+          <EntitySet Name="BIN_MST" EntityType="Self.BIN_MST" />
+          <EntitySet Name="BIN_TYPE_MST" EntityType="Self.BIN_TYPE_MST" />
+          <EntitySet Name="CATEGORY_MST" EntityType="Self.CATEGORY_MST" />
+          <EntitySet Name="DEPARTMENT_MST" EntityType="Self.DEPARTMENT_MST" />
+          <EntitySet Name="FG_BOM" EntityType="Self.FG_BOM" />
+          <EntitySet Name="FG_MST" EntityType="Self.FG_MST" />
+          <EntitySet Name="GRN_DTL" EntityType="Self.GRN_DTL" />
+          <EntitySet Name="GRN_LABEL_PRINTING" EntityType="Self.GRN_LABEL_PRINTING" />
+          <EntitySet Name="GRN_MST" EntityType="Self.GRN_MST" />
+          <EntitySet Name="GRN_TYPE_MST" EntityType="Self.GRN_TYPE_MST" />
+          <EntitySet Name="INVENTORY_DTL" EntityType="Self.INVENTORY_DTL" />
+          <EntitySet Name="INVENTORY_MST" EntityType="Self.INVENTORY_MST" />
+          <EntitySet Name="LABEL_TYPE_MST" EntityType="Self.LABEL_TYPE_MST" />
+          <EntitySet Name="LOCATION_MST" EntityType="Self.LOCATION_MST" />
+          <EntitySet Name="MACHINE_MST" EntityType="Self.MACHINE_MST" />
+          <EntitySet Name="MACHINE_TYPE_MST" EntityType="Self.MACHINE_TYPE_MST" />
+          <EntitySet Name="MATERIAL_MST" EntityType="Self.MATERIAL_MST" />
+          <EntitySet Name="MATERIAL_TYPE_MST" EntityType="Self.MATERIAL_TYPE_MST" />
+          <EntitySet Name="MIXED_PALLET_STO" EntityType="Self.MIXED_PALLET_STO" />
+          <EntitySet Name="MRN_MST" EntityType="Self.MRN_MST" />
+          <EntitySet Name="PICKING_DTL" EntityType="Self.PICKING_DTL" />
+          <EntitySet Name="PROCESS_MST" EntityType="Self.PROCESS_MST" />
+          <EntitySet Name="PROCESS_TYPE_MST" EntityType="Self.PROCESS_TYPE_MST" />
+          <EntitySet Name="QC_DTL" EntityType="Self.QC_DTL" />
+          <EntitySet Name="QC_LABEL_PRINTING" EntityType="Self.QC_LABEL_PRINTING" />
+          <EntitySet Name="QC_MST" EntityType="Self.QC_MST" />
+          <EntitySet Name="QC_REJECTION_NOTE" EntityType="Self.QC_REJECTION_NOTE" />
+          <EntitySet Name="REASON_MST" EntityType="Self.REASON_MST" />
+          <EntitySet Name="RECEPIE_MST" EntityType="Self.RECEPIE_MST" />
+          <EntitySet Name="REJECTION_DTL" EntityType="Self.REJECTION_DTL" />
+          <EntitySet Name="REJECTION_MST" EntityType="Self.REJECTION_MST" />
+          <EntitySet Name="SCREEN_LIST" EntityType="Self.SCREEN_LIST" />
+          <EntitySet Name="SERIAL_CONTROL_MST" EntityType="Self.SERIAL_CONTROL_MST" />
+          <EntitySet Name="SITE_MST" EntityType="Self.SITE_MST" />
+          <EntitySet Name="STATUS_MST" EntityType="Self.STATUS_MST" />
+          <EntitySet Name="STO_MST" EntityType="Self.STO_MST" />
+          <EntitySet Name="UOM_MST" EntityType="Self.UOM_MST" />
+          <EntitySet Name="USER_MST" EntityType="Self.USER_MST" />
+          <EntitySet Name="USER_ROLE_ACCESS_MST" EntityType="Self.USER_ROLE_ACCESS_MST" />
+          <EntitySet Name="USER_ROLE_MST" EntityType="Self.USER_ROLE_MST" />
+          <EntitySet Name="PICKING_MST" EntityType="Self.PICKING_MST" />
+          <AssociationSet Name="FK__DEPARTMEN__ACTIV__04E4BC85" Association="Self.FK__DEPARTMEN__ACTIV__04E4BC85">
+            <End Role="ACTIVE_MST" EntitySet="ACTIVE_MST" />
+            <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BIN_MST__STATUS__29572725" Association="Self.FK__BIN_MST__STATUS__29572725">
+            <End Role="BIN_TYPE_MST" EntitySet="BIN_TYPE_MST" />
+            <End Role="BIN_MST" EntitySet="BIN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__DEPAR__0E6E26BF" Association="Self.FK__MACHINE_M__DEPAR__0E6E26BF">
+            <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__37A5467C" Association="Self.FK__FG_BOM__INPUT_MA__37A5467C">
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+            <End Role="FG_BOM" EntitySet="FG_BOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__38996AB5" Association="Self.FK__FG_BOM__INPUT_MA__38996AB5">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="FG_BOM" EntitySet="FG_BOM" />
+          </AssociationSet>
+          <AssociationSet Name="FK__RECEPIE_M__ACTIV__4F7CD00D" Association="Self.FK__RECEPIE_M__ACTIV__4F7CD00D">
+            <End Role="FG_MST" EntitySet="FG_MST" />
+            <End Role="RECEPIE_MST" EntitySet="RECEPIE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_DTL__STATUS__6442E2C9" Association="Self.FK__GRN_DTL__STATUS__6442E2C9">
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__TODAY__793DFFAF" Association="Self.FK__GRN_LABEL__TODAY__793DFFAF">
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_MST__STATUS__671F4F74" Association="Self.FK__QC_MST__STATUS__671F4F74">
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+            <End Role="QC_MST" EntitySet="QC_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__CREAT__7C1A6C5A" Association="Self.FK__GRN_LABEL__CREAT__7C1A6C5A">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__LABEL__7A3223E8" Association="Self.FK__GRN_LABEL__LABEL__7A3223E8">
+            <End Role="LABEL_TYPE_MST" EntitySet="LABEL_TYPE_MST" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__CREATED__5629CD9C" Association="Self.FK__GRN_MST__CREATED__5629CD9C">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__CREATED__5812160E" Association="Self.FK__GRN_MST__CREATED__5812160E">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_MST__GRN_TYP__571DF1D5" Association="Self.FK__GRN_MST__GRN_TYP__571DF1D5">
+            <End Role="GRN_TYPE_MST" EntitySet="GRN_TYPE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__INV_M__74794A92" Association="Self.FK__INVENTORY__INV_M__74794A92">
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+            <End Role="INVENTORY_DTL" EntitySet="INVENTORY_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__CREAT__70A8B9AE" Association="Self.FK__INVENTORY__CREAT__70A8B9AE">
+            <End Role="QC_MST" EntitySet="QC_MST" />
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__SITE___2116E6DF" Association="Self.FK__INVENTORY__SITE___2116E6DF">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__ACTIV__0D7A0286" Association="Self.FK__MACHINE_M__ACTIV__0D7A0286">
+            <End Role="MACHINE_TYPE_MST" EntitySet="MACHINE_TYPE_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__PROCE__0F624AF8" Association="Self.FK__MACHINE_M__PROCE__0F624AF8">
+            <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MATERIAL___ACTIV__31EC6D26" Association="Self.FK__MATERIAL___ACTIV__31EC6D26">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MATERIAL___SECON__32E0915F" Association="Self.FK__MATERIAL___SECON__32E0915F">
+            <End Role="UOM_MST" EntitySet="UOM_MST" />
+            <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROCESS_M__ACTIV__3F466844" Association="Self.FK__PROCESS_M__ACTIV__3F466844">
+            <End Role="PROCESS_TYPE_MST" EntitySet="PROCESS_TYPE_MST" />
+            <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_DTL__STATUS__6AEFE058" Association="Self.FK__QC_DTL__STATUS__6AEFE058">
+            <End Role="QC_MST" EntitySet="QC_MST" />
+            <End Role="QC_DTL" EntitySet="QC_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_LABEL___QUANT__6DCC4D03" Association="Self.FK__QC_LABEL___QUANT__6DCC4D03">
+            <End Role="QC_DTL" EntitySet="QC_DTL" />
+            <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_MST__QC_BY__681373AD" Association="Self.FK__QC_MST__QC_BY__681373AD">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="QC_MST" EntitySet="QC_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_REJECT__CREAT__11158940" Association="Self.FK__QC_REJECT__CREAT__11158940">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__REJECTION__QC_BA__13F1F5EB" Association="Self.FK__REJECTION__QC_BA__13F1F5EB">
+            <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
+            <End Role="REJECTION_DTL" EntitySet="REJECTION_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_SITE" Association="Self.FK_USER_SITE">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="USER_MST" EntitySet="USER_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PICKING_M__PICKE__318258D2" Association="Self.FK__PICKING_M__PICKE__318258D2">
+            <End Role="STO_MST" EntitySet="STO_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__STO_MST__SITE_ID__2EA5EC27" Association="Self.FK__STO_MST__SITE_ID__2EA5EC27">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="STO_MST" EntitySet="STO_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PICKING_M__PICKE__32767D0B" Association="Self.FK__PICKING_M__PICKE__32767D0B">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_MST__ACTIVE__4CA06362" Association="Self.FK__USER_MST__ACTIVE__4CA06362">
+            <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
+            <End Role="USER_MST" EntitySet="USER_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ROLE__DELET__7FB5F314" Association="Self.FK__USER_ROLE__DELET__7FB5F314">
+            <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
+            <End Role="USER_ROLE_ACCESS_MST" EntitySet="USER_ROLE_ACCESS_MST" />
+          </AssociationSet>
+          <FunctionImport Name="GET_PART_NO_NAME_BY_BARCODE" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_PART_NO_NAME_BY_BARCODE_Result)">
+          <Parameter Name="BARCODE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GET_QC_BARCODE_SERIAL" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_QC_BARCODE_SERIAL_Result)">
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICVE_NO" Mode="In" Type="String" />
+            <Parameter Name="QTY" Mode="In" Type="Int32" />
+            <Parameter Name="PACK_SIZE" Mode="In" Type="Int32" />
+            <Parameter Name="PRIMARY_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="SITE_NAME" Mode="In" Type="String" />
+            <Parameter Name="QC_BY" Mode="In" Type="Int32" />
+            <Parameter Name="QC_ON" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CHECK_IF_GRN_DONE" ReturnType="Collection(AI_BTS_DENSOModel.SP_CHECK_IF_GRN_DONE_Result)">
+            <Parameter Name="QC_TYPE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_BARCODE_SERIAL">
+            <Parameter Name="BARCODE_TYPE" Mode="In" Type="String" />
+            <Parameter Name="Serial" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_GRN_DATA_FOR_QC" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_GRN_DATA_FOR_QC_Result)">
+          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_PALLET_LIST" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_PALLET_LIST_Result)">
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="PALLET_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_QC_DATA_BY_ANOTICENO" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_QC_DATA_BY_ANOTICENO_Result)">
+          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_INSERT_QC_MST_DATA">
+            <Parameter Name="QC_TYPE" Mode="In" Type="String" />
+            <Parameter Name="QC_ACTION" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="GRN_DTL_ID" Mode="In" Type="Int32" />
+            <Parameter Name="PACK_SIZE" Mode="In" Type="Int32" />
+            <Parameter Name="QTY_APPROVED" Mode="In" Type="Int32" />
+            <Parameter Name="QTY_REJECTED" Mode="In" Type="Int32" />
+            <Parameter Name="QTY_SCRAPPED" Mode="In" Type="Int32" />
+            <Parameter Name="PRIMARY_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="QC_BY" Mode="In" Type="Int32" />
+            <Parameter Name="QC_ON" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS">
+            <Parameter Name="QC_TYPE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UPDATE_QC_MST_DTL_STATUS">
+            <Parameter Name="QC_TYPE" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="QC_BY" Mode="In" Type="Int32" />
+            <Parameter Name="STATUS" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_CHECK_IF_GRN_DONE_Result">
+          <Property Type="Int32" Name="GRN_MST_ID" Nullable="false" />
+          <Property Type="Int32" Name="SITE_MST_ID" Nullable="true" />
+          <Property Type="Int32" Name="GRN_TYPE_MST_ID" Nullable="true" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="A_NOTICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="INVOICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="INVOICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="GRN_DTL_ID" Nullable="false" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PACK_SIZE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SUPPLIER_BATCH_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
+          <Property Type="Int32" Name="STATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GET_GRN_DATA_FOR_QC_Result">
+          <Property Type="Int32" Name="GRN_MST_ID" Nullable="false" />
+          <Property Type="Int32" Name="SITE_MST_ID" Nullable="true" />
+          <Property Type="Int32" Name="GRN_TYPE_MST_ID" Nullable="true" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="A_NOTICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="INVOICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="INVOICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="GRN_DTL_ID" Nullable="false" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PACK_SIZE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SUPPLIER_BATCH_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
+          <Property Type="Int32" Name="STATUS" Nullable="true" />
+          <Property Type="Int32" Name="Is_Block" Nullable="true" />
+          <Property Type="String" Name="QC_Status" Nullable="true" MaxLength="8" />
+          <Property Type="Int32" Name="QUANTITY_REMAINING" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GET_PALLET_LIST_Result">
+          <Property Type="Int32" Name="GRN_MST_ID" Nullable="false" />
+          <Property Type="Int32" Name="SITE_MST_ID" Nullable="true" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="A_NOTICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="INVOICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="INVOICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="GRN_TYPE_MST_ID" Nullable="true" />
+          <Property Type="Int32" Name="CREATED_BY" Nullable="true" />
+          <Property Type="DateTime" Name="CREATED_DATE" Nullable="true" Precision="23" />
+          <Property Type="String" Name="STO_NO" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CONTAINER_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="GRN_DTL_ID" Nullable="false" />
+          <Property Type="Int32" Name="GRN_MST_ID1" Nullable="true" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
+          <Property Type="String" Name="SUPPLIER_BATCH_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PACK_SIZE" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="STATUS" Nullable="true" />
+          <Property Type="Int32" Name="IS_BLOCK" Nullable="true" />
+          <Property Type="String" Name="PALLETE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PALLET_SIZE" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PART_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PALLETE_NO_BARCODE" Nullable="true" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="SP_GET_QC_DATA_BY_ANOTICENO_Result">
+          <Property Type="Int32" Name="QC_MST_ID" Nullable="true" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="A_NOTICE_DATE" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="GRN_DTL_ID" Nullable="false" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PACK_SIZE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SUPPLIER_BATCH_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
+          <Property Type="Int32" Name="STATUS" Nullable="true" />
+          <Property Type="Int32" Name="QUANTITY_REMAINING" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AI_BTS_DENSOModelStoreContainer" CdmEntityContainer="AI_BTS_DENSOEntities1">
+          <EntitySetMapping Name="ACTIVE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.ACTIVE_MST">
+              <MappingFragment StoreEntitySet="ACTIVE_MST">
+                <ScalarProperty Name="ACTIVE_MST_ID" ColumnName="ACTIVE_MST_ID" />
+                <ScalarProperty Name="ACTIVE_VALUE" ColumnName="ACTIVE_VALUE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIN_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.BIN_MST">
+              <MappingFragment StoreEntitySet="BIN_MST">
+                <ScalarProperty Name="BIN_MST_ID" ColumnName="BIN_MST_ID" />
+                <ScalarProperty Name="BIN_NAME" ColumnName="BIN_NAME" />
+                <ScalarProperty Name="BIN_TYPE_MST_ID" ColumnName="BIN_TYPE_MST_ID" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BIN_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.BIN_TYPE_MST">
+              <MappingFragment StoreEntitySet="BIN_TYPE_MST">
+                <ScalarProperty Name="BIN_TYPE_MST_ID" ColumnName="BIN_TYPE_MST_ID" />
+                <ScalarProperty Name="BIN_TYPE_NAME" ColumnName="BIN_TYPE_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORY_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.CATEGORY_MST">
+              <MappingFragment StoreEntitySet="CATEGORY_MST">
+                <ScalarProperty Name="CATEGORY_MST_ID" ColumnName="CATEGORY_MST_ID" />
+                <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTMENT_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.DEPARTMENT_MST">
+              <MappingFragment StoreEntitySet="DEPARTMENT_MST">
+                <ScalarProperty Name="DEPARTMENT_MST_ID" ColumnName="DEPARTMENT_MST_ID" />
+                <ScalarProperty Name="DEPARTMENT_NAME" ColumnName="DEPARTMENT_NAME" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FG_BOM">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.FG_BOM">
+              <MappingFragment StoreEntitySet="FG_BOM">
+                <ScalarProperty Name="FG_BOM_MST_ID" ColumnName="FG_BOM_MST_ID" />
+                <ScalarProperty Name="FG_MST_ID" ColumnName="FG_MST_ID" />
+                <ScalarProperty Name="FG_QTY" ColumnName="FG_QTY" />
+                <ScalarProperty Name="INPUT_MATERIAL_ID" ColumnName="INPUT_MATERIAL_ID" />
+                <ScalarProperty Name="INPUT_MATERIAL_QTY" ColumnName="INPUT_MATERIAL_QTY" />
+                <ScalarProperty Name="INPUT_MATERIAL_UOM_ID" ColumnName="INPUT_MATERIAL_UOM_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FG_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.FG_MST">
+              <MappingFragment StoreEntitySet="FG_MST">
+                <ScalarProperty Name="FG_MST_ID" ColumnName="FG_MST_ID" />
+                <ScalarProperty Name="FG_NAME" ColumnName="FG_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="FG_TYPE" ColumnName="FG_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRN_DTL">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.GRN_DTL">
+              <MappingFragment StoreEntitySet="GRN_DTL">
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="IS_BLOCK" ColumnName="IS_BLOCK" />
+                <ScalarProperty Name="PALLETE_NO" ColumnName="PALLETE_NO" />
+                <ScalarProperty Name="PALLET_SIZE" ColumnName="PALLET_SIZE" />
+                <ScalarProperty Name="PART_TYPE" ColumnName="PART_TYPE" />
+                <ScalarProperty Name="PALLETE_NO_BARCODE" ColumnName="PALLETE_NO_BARCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRN_LABEL_PRINTING">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.GRN_LABEL_PRINTING">
+              <MappingFragment StoreEntitySet="GRN_LABEL_PRINTING">
+                <ScalarProperty Name="LBL_PRN_CFM" ColumnName="LBL_PRN_CFM" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="PRIMARY_BARCODE" ColumnName="PRIMARY_BARCODE" />
+                <ScalarProperty Name="BR_SERIAL" ColumnName="BR_SERIAL" />
+                <ScalarProperty Name="LABEL_TYPE_MST_ID" ColumnName="LABEL_TYPE_MST_ID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="TODAY_BARCODE_SERIAL" ColumnName="TODAY_BARCODE_SERIAL" />
+                <ScalarProperty Name="BOX_QUANTITY" ColumnName="BOX_QUANTITY" />
+                <ScalarProperty Name="PALLETE_NO_BARCODE" ColumnName="PALLETE_NO_BARCODE" />
+                <ScalarProperty Name="PRINT_TYPE" ColumnName="PRINT_TYPE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRN_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.GRN_MST">
+              <MappingFragment StoreEntitySet="GRN_MST">
+                <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="A_NOTICE_DATE" ColumnName="A_NOTICE_DATE" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="INVOICE_DATE" ColumnName="INVOICE_DATE" />
+                <ScalarProperty Name="GRN_TYPE_MST_ID" ColumnName="GRN_TYPE_MST_ID" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="STO_NO" ColumnName="STO_NO" />
+                <ScalarProperty Name="CONTAINER_NO" ColumnName="CONTAINER_NO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRN_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.GRN_TYPE_MST">
+              <MappingFragment StoreEntitySet="GRN_TYPE_MST">
+                <ScalarProperty Name="GRN_TYPE_MST_ID" ColumnName="GRN_TYPE_MST_ID" />
+                <ScalarProperty Name="GRN_TYPE_NAME" ColumnName="GRN_TYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTORY_DTL">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.INVENTORY_DTL">
+              <MappingFragment StoreEntitySet="INVENTORY_DTL">
+                <ScalarProperty Name="INVD_REC_ID" ColumnName="INVD_REC_ID" />
+                <ScalarProperty Name="INV_MST_ID" ColumnName="INV_MST_ID" />
+                <ScalarProperty Name="P_BARCODE" ColumnName="P_BARCODE" />
+                <ScalarProperty Name="C_BARCODE" ColumnName="C_BARCODE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="QUANTITY_ISSUED" ColumnName="QUANTITY_ISSUED" />
+                <ScalarProperty Name="QUANTITY_REMAINING" ColumnName="QUANTITY_REMAINING" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INVENTORY_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.INVENTORY_MST">
+              <MappingFragment StoreEntitySet="INVENTORY_MST">
+                <ScalarProperty Name="INV_MST_ID" ColumnName="INV_MST_ID" />
+                <ScalarProperty Name="QC_MST_ID" ColumnName="QC_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="QUANTITY_ISSUED" ColumnName="QUANTITY_ISSUED" />
+                <ScalarProperty Name="QUANTITY_REMAINING" ColumnName="QUANTITY_REMAINING" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LABEL_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.LABEL_TYPE_MST">
+              <MappingFragment StoreEntitySet="LABEL_TYPE_MST">
+                <ScalarProperty Name="LABEL_TYPE_MST_ID" ColumnName="LABEL_TYPE_MST_ID" />
+                <ScalarProperty Name="LABEL_TYPE_NAME" ColumnName="LABEL_TYPE_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOCATION_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.LOCATION_MST">
+              <MappingFragment StoreEntitySet="LOCATION_MST">
+                <ScalarProperty Name="LOCATION_MST_ID" ColumnName="LOCATION_MST_ID" />
+                <ScalarProperty Name="LOCATION_NAME" ColumnName="LOCATION_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MACHINE_MST">
+              <MappingFragment StoreEntitySet="MACHINE_MST">
+                <ScalarProperty Name="MACHINE_MST_ID" ColumnName="MACHINE_MST_ID" />
+                <ScalarProperty Name="MACHINE_NAME" ColumnName="MACHINE_NAME" />
+                <ScalarProperty Name="MACHINE_TYPE_MST_ID" ColumnName="MACHINE_TYPE_MST_ID" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PROCESS_MST_ID" ColumnName="PROCESS_MST_ID" />
+                <ScalarProperty Name="DEPARTMENT_MST_ID" ColumnName="DEPARTMENT_MST_ID" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MACHINE_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MACHINE_TYPE_MST">
+              <MappingFragment StoreEntitySet="MACHINE_TYPE_MST">
+                <ScalarProperty Name="MACHINE_TYPE_MST_ID" ColumnName="MACHINE_TYPE_MST_ID" />
+                <ScalarProperty Name="MACHINE_TYPE_NAME" ColumnName="MACHINE_TYPE_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIAL_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MATERIAL_MST">
+              <MappingFragment StoreEntitySet="MATERIAL_MST">
+                <ScalarProperty Name="MATERIAL_MST_ID" ColumnName="MATERIAL_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="MATERIAL_TYPE_MST_ID" ColumnName="MATERIAL_TYPE_MST_ID" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="PRIMARY_UOM_ID" ColumnName="PRIMARY_UOM_ID" />
+                <ScalarProperty Name="SECONDARY_UOM_ID" ColumnName="SECONDARY_UOM_ID" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="CAGE_QTY" ColumnName="CAGE_QTY" />
+                <ScalarProperty Name="BAG_QTY" ColumnName="BAG_QTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MATERIAL_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MATERIAL_TYPE_MST">
+              <MappingFragment StoreEntitySet="MATERIAL_TYPE_MST">
+                <ScalarProperty Name="MATERIAL_TYPE_MST_ID" ColumnName="MATERIAL_TYPE_MST_ID" />
+                <ScalarProperty Name="MATERIAL_TYPE_NAME" ColumnName="MATERIAL_TYPE_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MIXED_PALLET_STO">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MIXED_PALLET_STO">
+              <MappingFragment StoreEntitySet="MIXED_PALLET_STO">
+                <ScalarProperty Name="STO_MST_ID" ColumnName="STO_MST_ID" />
+                <ScalarProperty Name="STO_NO" ColumnName="STO_NO" />
+                <ScalarProperty Name="MIXED_PALLET_NO" ColumnName="MIXED_PALLET_NO" />
+                <ScalarProperty Name="STO_TIME" ColumnName="STO_TIME" />
+                <ScalarProperty Name="GRN_PRINTING_TIME" ColumnName="GRN_PRINTING_TIME" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="IS_PICKED" ColumnName="IS_PICKED" />
+                <ScalarProperty Name="IS_DISPATCHED" ColumnName="IS_DISPATCHED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MRN_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MRN_MST">
+              <MappingFragment StoreEntitySet="MRN_MST">
+                <ScalarProperty Name="KANBAN_TEXT" ColumnName="KANBAN_TEXT" />
+                <ScalarProperty Name="MRN_MST_ID" ColumnName="MRN_MST_ID" />
+                <ScalarProperty Name="MRN_NO" ColumnName="MRN_NO" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="DISPATCH_BY" ColumnName="DISPATCH_BY" />
+                <ScalarProperty Name="DISPATCH_ON" ColumnName="DISPATCH_ON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICKING_DTL">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.PICKING_DTL">
+              <MappingFragment StoreEntitySet="PICKING_DTL">
+                <ScalarProperty Name="PICKING_DTL_ID" ColumnName="PICKING_DTL_ID" />
+                <ScalarProperty Name="PICKING_MST_ID" ColumnName="PICKING_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="BOX_BARCODE" ColumnName="BOX_BARCODE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PICKED_BY" ColumnName="PICKED_BY" />
+                <ScalarProperty Name="PICKED_ON" ColumnName="PICKED_ON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROCESS_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.PROCESS_MST">
+              <MappingFragment StoreEntitySet="PROCESS_MST">
+                <ScalarProperty Name="PROCESS_MST_ID" ColumnName="PROCESS_MST_ID" />
+                <ScalarProperty Name="PROCESS_NAME" ColumnName="PROCESS_NAME" />
+                <ScalarProperty Name="PROCESS_TYPE_MST_ID" ColumnName="PROCESS_TYPE_MST_ID" />
+                <ScalarProperty Name="SEQUENCE" ColumnName="SEQUENCE" />
+                <ScalarProperty Name="FG_MST_ID" ColumnName="FG_MST_ID" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROCESS_TYPE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.PROCESS_TYPE_MST">
+              <MappingFragment StoreEntitySet="PROCESS_TYPE_MST">
+                <ScalarProperty Name="PROCESS_TYPE_MST_ID" ColumnName="PROCESS_TYPE_MST_ID" />
+                <ScalarProperty Name="PROCESS_TYPE_NAME" ColumnName="PROCESS_TYPE_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QC_DTL">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.QC_DTL">
+              <MappingFragment StoreEntitySet="QC_DTL">
+                <ScalarProperty Name="QC_DTL_ID" ColumnName="QC_DTL_ID" />
+                <ScalarProperty Name="QC_MST_ID" ColumnName="QC_MST_ID" />
+                <ScalarProperty Name="PRIMARY_BARCODE" ColumnName="PRIMARY_BARCODE" />
+                <ScalarProperty Name="QUANTITY_APPROVED" ColumnName="QUANTITY_APPROVED" />
+                <ScalarProperty Name="QUANTITY_REJECTED" ColumnName="QUANTITY_REJECTED" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="QUANTITY_SCRAPPED" ColumnName="QUANTITY_SCRAPPED" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QC_LABEL_PRINTING">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.QC_LABEL_PRINTING">
+              <MappingFragment StoreEntitySet="QC_LABEL_PRINTING">
+                <ScalarProperty Name="QC_LBL_ID" ColumnName="QC_LBL_ID" />
+                <ScalarProperty Name="QC_DTL_ID" ColumnName="QC_DTL_ID" />
+                <ScalarProperty Name="PARENT_BARCODE" ColumnName="PARENT_BARCODE" />
+                <ScalarProperty Name="QC_BARCODE" ColumnName="QC_BARCODE" />
+                <ScalarProperty Name="BARCODE_TYPE" ColumnName="BARCODE_TYPE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="TODAY_BARCODE_SERIAL" ColumnName="TODAY_BARCODE_SERIAL" />
+                <ScalarProperty Name="QC_ON" ColumnName="QC_ON" />
+                <ScalarProperty Name="QC_BY" ColumnName="QC_BY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QC_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.QC_MST">
+              <MappingFragment StoreEntitySet="QC_MST">
+                <ScalarProperty Name="QC_MST_ID" ColumnName="QC_MST_ID" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="QUANTITY_TOTAL" ColumnName="QUANTITY_TOTAL" />
+                <ScalarProperty Name="QUANTITY_APPROVED" ColumnName="QUANTITY_APPROVED" />
+                <ScalarProperty Name="QUANTITY_REJECTED" ColumnName="QUANTITY_REJECTED" />
+                <ScalarProperty Name="QUANTITY_SCRAPPED" ColumnName="QUANTITY_SCRAPPED" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="QC_BY" ColumnName="QC_BY" />
+                <ScalarProperty Name="QC_ON" ColumnName="QC_ON" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QC_REJECTION_NOTE">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.QC_REJECTION_NOTE">
+              <MappingFragment StoreEntitySet="QC_REJECTION_NOTE">
+                <ScalarProperty Name="QC_NOTE_ID" ColumnName="QC_NOTE_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REASON_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.REASON_MST">
+              <MappingFragment StoreEntitySet="REASON_MST">
+                <ScalarProperty Name="REASON_MST_ID" ColumnName="REASON_MST_ID" />
+                <ScalarProperty Name="REASON_NAME" ColumnName="REASON_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RECEPIE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.RECEPIE_MST">
+              <MappingFragment StoreEntitySet="RECEPIE_MST">
+                <ScalarProperty Name="RECEPIE_ID" ColumnName="RECEPIE_ID" />
+                <ScalarProperty Name="RECEPIE_NAME" ColumnName="RECEPIE_NAME" />
+                <ScalarProperty Name="PROCESS_MST_ID" ColumnName="PROCESS_MST_ID" />
+                <ScalarProperty Name="OUTPUT_FG_MST_ID" ColumnName="OUTPUT_FG_MST_ID" />
+                <ScalarProperty Name="OUTPUT_FG_QTY" ColumnName="OUTPUT_FG_QTY" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REJECTION_DTL">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.REJECTION_DTL">
+              <MappingFragment StoreEntitySet="REJECTION_DTL">
+                <ScalarProperty Name="WC_RJN_ID" ColumnName="WC_RJN_ID" />
+                <ScalarProperty Name="QC_NOTE_ID" ColumnName="QC_NOTE_ID" />
+                <ScalarProperty Name="QC_BARCODE" ColumnName="QC_BARCODE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REJECTION_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.REJECTION_MST">
+              <MappingFragment StoreEntitySet="REJECTION_MST">
+                <ScalarProperty Name="REJECTION_ID" ColumnName="REJECTION_ID" />
+                <ScalarProperty Name="REJECTION_NAME" ColumnName="REJECTION_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SCREEN_LIST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.SCREEN_LIST">
+              <MappingFragment StoreEntitySet="SCREEN_LIST">
+                <ScalarProperty Name="SCREEN_MST_ID" ColumnName="SCREEN_MST_ID" />
+                <ScalarProperty Name="SCREEN_NAME" ColumnName="SCREEN_NAME" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SERIAL_CONTROL_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.SERIAL_CONTROL_MST">
+              <MappingFragment StoreEntitySet="SERIAL_CONTROL_MST">
+                <ScalarProperty Name="SERIAL_MST_ID" ColumnName="SERIAL_MST_ID" />
+                <ScalarProperty Name="SERIAL_DATE" ColumnName="SERIAL_DATE" />
+                <ScalarProperty Name="TODAY_BARCODE_SERIAL" ColumnName="TODAY_BARCODE_SERIAL" />
+                <ScalarProperty Name="TARGET_MST" ColumnName="TARGET_MST" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SITE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.SITE_MST">
+              <MappingFragment StoreEntitySet="SITE_MST">
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="SITE_NAME" ColumnName="SITE_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STATUS_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.STATUS_MST">
+              <MappingFragment StoreEntitySet="STATUS_MST">
+                <ScalarProperty Name="STATUS_MST_ID" ColumnName="STATUS_MST_ID" />
+                <ScalarProperty Name="STATUS_TYPE" ColumnName="STATUS_TYPE" />
+                <ScalarProperty Name="STATUS_VALUE" ColumnName="STATUS_VALUE" />
+                <ScalarProperty Name="STATUS_VALUE_ID" ColumnName="STATUS_VALUE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="STO_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.STO_MST">
+              <MappingFragment StoreEntitySet="STO_MST">
+                <ScalarProperty Name="MRN_MST_ID" ColumnName="MRN_MST_ID" />
+                <ScalarProperty Name="MRN_NO" ColumnName="MRN_NO" />
+                <ScalarProperty Name="REFERENCE_NO" ColumnName="REFERENCE_NO" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+                <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UOM_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.UOM_MST">
+              <MappingFragment StoreEntitySet="UOM_MST">
+                <ScalarProperty Name="UOM_MST_ID" ColumnName="UOM_MST_ID" />
+                <ScalarProperty Name="UOM_NAME" ColumnName="UOM_NAME" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.USER_MST">
+              <MappingFragment StoreEntitySet="USER_MST">
+                <ScalarProperty Name="USER_MST_ID" ColumnName="USER_MST_ID" />
+                <ScalarProperty Name="LOGIN_ID" ColumnName="LOGIN_ID" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="USER_PASSWORD" ColumnName="USER_PASSWORD" />
+                <ScalarProperty Name="USER_ROLE_MST_ID" ColumnName="USER_ROLE_MST_ID" />
+                <ScalarProperty Name="ACTIVE" ColumnName="ACTIVE" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ROLE_ACCESS_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.USER_ROLE_ACCESS_MST">
+              <MappingFragment StoreEntitySet="USER_ROLE_ACCESS_MST">
+                <ScalarProperty Name="USER_ROLE_ACCESS_MST_ID" ColumnName="USER_ROLE_ACCESS_MST_ID" />
+                <ScalarProperty Name="USER_ROLE_MST_ID" ColumnName="USER_ROLE_MST_ID" />
+                <ScalarProperty Name="SCREEN_NAME" ColumnName="SCREEN_NAME" />
+                <ScalarProperty Name="READ_ACCESS" ColumnName="READ_ACCESS" />
+                <ScalarProperty Name="ADD_ACCESS" ColumnName="ADD_ACCESS" />
+                <ScalarProperty Name="DELETE_ACCESS" ColumnName="DELETE_ACCESS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER_ROLE_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.USER_ROLE_MST">
+              <MappingFragment StoreEntitySet="USER_ROLE_MST">
+                <ScalarProperty Name="USER_ROLE_MST_ID" ColumnName="USER_ROLE_MST_ID" />
+                <ScalarProperty Name="USER_ROLE" ColumnName="USER_ROLE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICKING_MST">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.PICKING_MST">
+              <MappingFragment StoreEntitySet="PICKING_MST">
+                <ScalarProperty Name="PICK_MST_ID" ColumnName="PICK_MST_ID" />
+                <ScalarProperty Name="STO_MST_ID" ColumnName="STO_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="REQUESTED_QTY" ColumnName="REQUESTED_QTY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PICKED_QTY" ColumnName="PICKED_QTY" />
+                <ScalarProperty Name="PICKED_BY" ColumnName="PICKED_BY" />
+                <ScalarProperty Name="PICKED_ON" ColumnName="PICKED_ON" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="AI_BTS_DENSOModel.Store.GET_PART_NO_NAME_BY_BARCODE" FunctionImportName="GET_PART_NO_NAME_BY_BARCODE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.GET_PART_NO_NAME_BY_BARCODE_Result">
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="AI_BTS_DENSOModel.Store.GET_QC_BARCODE_SERIAL" FunctionImportName="GET_QC_BARCODE_SERIAL">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.GET_QC_BARCODE_SERIAL_Result">
+                <ScalarProperty Name="QC_BARCODE" ColumnName="QC_BARCODE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CHECK_IF_GRN_DONE" FunctionName="AI_BTS_DENSOModel.Store.SP_CHECK_IF_GRN_DONE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_CHECK_IF_GRN_DONE_Result">
+                <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="GRN_TYPE_MST_ID" ColumnName="GRN_TYPE_MST_ID" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="A_NOTICE_DATE" ColumnName="A_NOTICE_DATE" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="INVOICE_DATE" ColumnName="INVOICE_DATE" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_BARCODE_SERIAL" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_BARCODE_SERIAL" />
+          <FunctionImportMapping FunctionImportName="SP_GET_GRN_DATA_FOR_QC" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_GRN_DATA_FOR_QC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_GRN_DATA_FOR_QC_Result">
+                <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="GRN_TYPE_MST_ID" ColumnName="GRN_TYPE_MST_ID" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="A_NOTICE_DATE" ColumnName="A_NOTICE_DATE" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="INVOICE_DATE" ColumnName="INVOICE_DATE" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="Is_Block" ColumnName="Is_Block" />
+                <ScalarProperty Name="QC_Status" ColumnName="QC_Status" />
+                <ScalarProperty Name="QUANTITY_REMAINING" ColumnName="QUANTITY_REMAINING" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_PALLET_LIST" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_PALLET_LIST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_PALLET_LIST_Result">
+                <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="A_NOTICE_DATE" ColumnName="A_NOTICE_DATE" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="INVOICE_DATE" ColumnName="INVOICE_DATE" />
+                <ScalarProperty Name="GRN_TYPE_MST_ID" ColumnName="GRN_TYPE_MST_ID" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_DATE" ColumnName="CREATED_DATE" />
+                <ScalarProperty Name="STO_NO" ColumnName="STO_NO" />
+                <ScalarProperty Name="CONTAINER_NO" ColumnName="CONTAINER_NO" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="GRN_MST_ID1" ColumnName="GRN_MST_ID1" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="IS_BLOCK" ColumnName="IS_BLOCK" />
+                <ScalarProperty Name="PALLETE_NO" ColumnName="PALLETE_NO" />
+                <ScalarProperty Name="PALLET_SIZE" ColumnName="PALLET_SIZE" />
+                <ScalarProperty Name="PART_TYPE" ColumnName="PART_TYPE" />
+                <ScalarProperty Name="PALLETE_NO_BARCODE" ColumnName="PALLETE_NO_BARCODE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_QC_DATA_BY_ANOTICENO" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_QC_DATA_BY_ANOTICENO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_QC_DATA_BY_ANOTICENO_Result">
+                <ScalarProperty Name="QC_MST_ID" ColumnName="QC_MST_ID" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="A_NOTICE_DATE" ColumnName="A_NOTICE_DATE" />
+                <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="SUPPLIER_BATCH_NO" ColumnName="SUPPLIER_BATCH_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="QUANTITY_REMAINING" ColumnName="QUANTITY_REMAINING" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_INSERT_QC_MST_DATA" FunctionName="AI_BTS_DENSOModel.Store.SP_INSERT_QC_MST_DATA" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" FunctionName="AI_BTS_DENSOModel.Store.SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" />
+          <FunctionImportMapping FunctionImportName="SP_UPDATE_QC_MST_DTL_STATUS" FunctionName="AI_BTS_DENSOModel.Store.SP_UPDATE_QC_MST_DTL_STATUS" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bd871e8eaa8b43ca942406c5e50a252b" Name="Diagram1">
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.ACTIVE_MST" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.BIN_MST" Width="1.5" PointX="18" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.BIN_TYPE_MST" Width="1.5" PointX="15.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.CATEGORY_MST" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.DEPARTMENT_MST" Width="1.5" PointX="3" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.FG_BOM" Width="1.5" PointX="17.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.FG_MST" Width="1.5" PointX="14.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.GRN_DTL" Width="1.5" PointX="5.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.GRN_LABEL_PRINTING" Width="1.5" PointX="11.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.GRN_MST" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.GRN_TYPE_MST" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.INVENTORY_DTL" Width="1.5" PointX="15.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.INVENTORY_MST" Width="1.5" PointX="13.5" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.LABEL_TYPE_MST" Width="1.5" PointX="9" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.LOCATION_MST" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MACHINE_MST" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MACHINE_TYPE_MST" Width="1.5" PointX="3" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MATERIAL_MST" Width="1.5" PointX="15" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MATERIAL_TYPE_MST" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MIXED_PALLET_STO" Width="1.5" PointX="17.75" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.MRN_MST" Width="1.5" PointX="15.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.PICKING_DTL" Width="1.5" PointX="17.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.PROCESS_MST" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.PROCESS_TYPE_MST" Width="1.5" PointX="0.75" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.QC_DTL" Width="1.5" PointX="10.5" PointY="21" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.QC_LABEL_PRINTING" Width="1.5" PointX="12.75" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.QC_MST" Width="1.5" PointX="8.25" PointY="16.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.QC_REJECTION_NOTE" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.REASON_MST" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.RECEPIE_MST" Width="1.5" PointX="17" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.REJECTION_DTL" Width="1.5" PointX="10.5" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.REJECTION_MST" Width="1.5" PointX="10.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.SCREEN_LIST" Width="1.5" PointX="19.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.SERIAL_CONTROL_MST" Width="1.5" PointX="19.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.SITE_MST" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.STATUS_MST" Width="1.5" PointX="19.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.STO_MST" Width="1.5" PointX="8.25" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.UOM_MST" Width="1.5" PointX="12.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.USER_MST" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.USER_ROLE_ACCESS_MST" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.USER_ROLE_MST" Width="1.5" PointX="3.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AI_BTS_DENSOModel.PICKING_MST" Width="1.5" PointX="13.5" PointY="10.875" IsExpanded="true" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__DEPARTMEN__ACTIV__04E4BC85" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__BIN_MST__STATUS__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__MACHINE_M__DEPAR__0E6E26BF" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__FG_BOM__INPUT_MA__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__FG_BOM__INPUT_MA__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__RECEPIE_M__ACTIV__4F7CD00D" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_DTL__STATUS__6442E2C9" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_LABEL__TODAY__793DFFAF" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__QC_MST__STATUS__671F4F74" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_LABEL__CREAT__7C1A6C5A" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_LABEL__LABEL__7A3223E8" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_MST__CREATED__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_MST__CREATED__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__GRN_MST__GRN_TYP__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__INVENTORY__INV_M__74794A92" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__INVENTORY__CREAT__70A8B9AE" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__INVENTORY__SITE___2116E6DF" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__MACHINE_M__ACTIV__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__MACHINE_M__PROCE__0F624AF8" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__MATERIAL___ACTIV__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__MATERIAL___SECON__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__PROCESS_M__ACTIV__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__QC_DTL__STATUS__6AEFE058" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__QC_LABEL___QUANT__6DCC4D03" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__QC_MST__QC_BY__681373AD" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__QC_REJECT__CREAT__11158940" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__REJECTION__QC_BA__13F1F5EB" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK_USER_SITE" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__PICKING_M__PICKE__318258D2" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__STO_MST__SITE_ID__2EA5EC27" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__PICKING_M__PICKE__32767D0B" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__USER_MST__ACTIVE__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="AI_BTS_DENSOModel.FK__USER_ROLE__DELET__7FB5F314" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
