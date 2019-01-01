@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSTO));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
@@ -54,6 +54,11 @@
             this.label7 = new System.Windows.Forms.Label();
             this.pnlGridControl = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.headerPanel2 = new AccessPark.HeaderPanel();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnDel = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnFormSave = new System.Windows.Forms.Button();
             this.pnlDgv = new System.Windows.Forms.Panel();
@@ -84,15 +89,10 @@
             this.btnCancelPendingMRN = new System.Windows.Forms.Button();
             this.panel5 = new System.Windows.Forms.Panel();
             this.dgvPendingMRN = new System.Windows.Forms.DataGridView();
-            this.lblAssetLastModifiedDate = new System.Windows.Forms.Label();
-            this.headerPanel2 = new AccessPark.HeaderPanel();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnDel = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
             this.MRN_NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MRN_Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IS_MRN_Picked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblAssetLastModifiedDate = new System.Windows.Forms.Label();
             this.pnlMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -105,6 +105,7 @@
             this.pnlTop.SuspendLayout();
             this.pnlGridControl.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.headerPanel2.SuspendLayout();
             this.pnlDgv.SuspendLayout();
             this.pnlPartList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartList)).BeginInit();
@@ -118,7 +119,6 @@
             this.panel6.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendingMRN)).BeginInit();
-            this.headerPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -216,8 +216,8 @@
             // 
             this.dgvMixPallet.AllowUserToAddRows = false;
             this.dgvMixPallet.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvMixPallet.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvMixPallet.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvMixPallet.BackgroundColor = System.Drawing.Color.White;
             this.dgvMixPallet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMixPallet.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -320,7 +320,7 @@
             this.lblMRNNo.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lblMRNNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMRNNo.ForeColor = System.Drawing.Color.Navy;
-            this.lblMRNNo.Location = new System.Drawing.Point(83, 11);
+            this.lblMRNNo.Location = new System.Drawing.Point(86, 11);
             this.lblMRNNo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblMRNNo.Name = "lblMRNNo";
             this.lblMRNNo.Size = new System.Drawing.Size(186, 30);
@@ -335,9 +335,9 @@
             this.label7.Location = new System.Drawing.Point(10, 16);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 20);
+            this.label7.Size = new System.Drawing.Size(73, 20);
             this.label7.TabIndex = 18;
-            this.label7.Text = "STO No";
+            this.label7.Text = "MRN No.";
             // 
             // pnlGridControl
             // 
@@ -366,6 +366,72 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(509, 55);
             this.panel2.TabIndex = 13;
+            // 
+            // headerPanel2
+            // 
+            this.headerPanel2.BackColor = System.Drawing.Color.Silver;
+            this.headerPanel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("headerPanel2.BackgroundImage")));
+            this.headerPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.headerPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.headerPanel2.Controls.Add(this.btnSave);
+            this.headerPanel2.Controls.Add(this.btnDel);
+            this.headerPanel2.Controls.Add(this.btnAdd);
+            this.headerPanel2.Controls.Add(this.label3);
+            this.headerPanel2.Location = new System.Drawing.Point(0, -1);
+            this.headerPanel2.Name = "headerPanel2";
+            this.headerPanel2.Size = new System.Drawing.Size(148, 52);
+            this.headerPanel2.TabIndex = 16;
+            // 
+            // btnSave
+            // 
+            this.btnSave.BackColor = System.Drawing.Color.Transparent;
+            this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
+            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnSave.Location = new System.Drawing.Point(96, 0);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(48, 48);
+            this.btnSave.TabIndex = 6;
+            this.btnSave.UseVisualStyleBackColor = false;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnDel
+            // 
+            this.btnDel.BackColor = System.Drawing.Color.White;
+            this.btnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDel.BackgroundImage")));
+            this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnDel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnDel.Location = new System.Drawing.Point(48, 0);
+            this.btnDel.Name = "btnDel";
+            this.btnDel.Size = new System.Drawing.Size(48, 48);
+            this.btnDel.TabIndex = 8;
+            this.btnDel.UseVisualStyleBackColor = false;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackColor = System.Drawing.Color.White;
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
+            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btnAdd.Location = new System.Drawing.Point(0, 0);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(48, 48);
+            this.btnAdd.TabIndex = 7;
+            this.btnAdd.UseVisualStyleBackColor = false;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
+            this.label3.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(-311, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(0, 15);
+            this.label3.TabIndex = 26;
             // 
             // btnCancel
             // 
@@ -408,7 +474,6 @@
             this.pnlPartList.Name = "pnlPartList";
             this.pnlPartList.Size = new System.Drawing.Size(249, 393);
             this.pnlPartList.TabIndex = 1;
-            this.pnlPartList.Visible = false;
             // 
             // dgvPartList
             // 
@@ -438,8 +503,8 @@
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.dgvData.BackgroundColor = System.Drawing.Color.White;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -506,9 +571,9 @@
             this.label4.Location = new System.Drawing.Point(8, 18);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(89, 20);
+            this.label4.Size = new System.Drawing.Size(88, 20);
             this.label4.TabIndex = 22;
-            this.label4.Text = "Canban No";
+            this.label4.Text = "Kanban No";
             // 
             // txtCanban
             // 
@@ -611,8 +676,8 @@
             // 
             this.dgvPendingSTO.AllowUserToAddRows = false;
             this.dgvPendingSTO.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvPendingSTO.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvPendingSTO.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
             this.dgvPendingSTO.BackgroundColor = System.Drawing.Color.White;
             this.dgvPendingSTO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPendingSTO.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -695,8 +760,8 @@
             // 
             this.dgvPendingMRN.AllowUserToAddRows = false;
             this.dgvPendingMRN.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvPendingMRN.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvPendingMRN.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvPendingMRN.BackgroundColor = System.Drawing.Color.White;
             this.dgvPendingMRN.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPendingMRN.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -709,85 +774,6 @@
             this.dgvPendingMRN.ReadOnly = true;
             this.dgvPendingMRN.Size = new System.Drawing.Size(496, 537);
             this.dgvPendingMRN.TabIndex = 1;
-            // 
-            // lblAssetLastModifiedDate
-            // 
-            this.lblAssetLastModifiedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssetLastModifiedDate.AutoSize = true;
-            this.lblAssetLastModifiedDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblAssetLastModifiedDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssetLastModifiedDate.ForeColor = System.Drawing.Color.Navy;
-            this.lblAssetLastModifiedDate.Location = new System.Drawing.Point(-359, 8);
-            this.lblAssetLastModifiedDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAssetLastModifiedDate.Name = "lblAssetLastModifiedDate";
-            this.lblAssetLastModifiedDate.Size = new System.Drawing.Size(0, 15);
-            this.lblAssetLastModifiedDate.TabIndex = 26;
-            // 
-            // headerPanel2
-            // 
-            this.headerPanel2.BackColor = System.Drawing.Color.Silver;
-            this.headerPanel2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("headerPanel2.BackgroundImage")));
-            this.headerPanel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.headerPanel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.headerPanel2.Controls.Add(this.btnSave);
-            this.headerPanel2.Controls.Add(this.btnDel);
-            this.headerPanel2.Controls.Add(this.btnAdd);
-            this.headerPanel2.Controls.Add(this.label3);
-            this.headerPanel2.Location = new System.Drawing.Point(0, -1);
-            this.headerPanel2.Name = "headerPanel2";
-            this.headerPanel2.Size = new System.Drawing.Size(148, 52);
-            this.headerPanel2.TabIndex = 16;
-            // 
-            // btnSave
-            // 
-            this.btnSave.BackColor = System.Drawing.Color.Transparent;
-            this.btnSave.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnSave.BackgroundImage")));
-            this.btnSave.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnSave.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnSave.Location = new System.Drawing.Point(96, 0);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(48, 48);
-            this.btnSave.TabIndex = 6;
-            this.btnSave.UseVisualStyleBackColor = false;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnDel
-            // 
-            this.btnDel.BackColor = System.Drawing.Color.White;
-            this.btnDel.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnDel.BackgroundImage")));
-            this.btnDel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnDel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnDel.Location = new System.Drawing.Point(48, 0);
-            this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(48, 48);
-            this.btnDel.TabIndex = 8;
-            this.btnDel.UseVisualStyleBackColor = false;
-            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.BackColor = System.Drawing.Color.White;
-            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
-            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAdd.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btnAdd.Location = new System.Drawing.Point(0, 0);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(48, 48);
-            this.btnAdd.TabIndex = 7;
-            this.btnAdd.UseVisualStyleBackColor = false;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // label3
-            // 
-            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(-311, 5);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(0, 15);
-            this.label3.TabIndex = 26;
             // 
             // MRN_NO
             // 
@@ -813,6 +799,19 @@
             this.IS_MRN_Picked.HeaderText = "Picked";
             this.IS_MRN_Picked.Name = "IS_MRN_Picked";
             this.IS_MRN_Picked.ReadOnly = true;
+            // 
+            // lblAssetLastModifiedDate
+            // 
+            this.lblAssetLastModifiedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAssetLastModifiedDate.AutoSize = true;
+            this.lblAssetLastModifiedDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblAssetLastModifiedDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssetLastModifiedDate.ForeColor = System.Drawing.Color.Navy;
+            this.lblAssetLastModifiedDate.Location = new System.Drawing.Point(-359, 8);
+            this.lblAssetLastModifiedDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAssetLastModifiedDate.Name = "lblAssetLastModifiedDate";
+            this.lblAssetLastModifiedDate.Size = new System.Drawing.Size(0, 15);
+            this.lblAssetLastModifiedDate.TabIndex = 26;
             // 
             // frmSTO
             // 
@@ -845,6 +844,8 @@
             this.pnlTop.PerformLayout();
             this.pnlGridControl.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.headerPanel2.ResumeLayout(false);
+            this.headerPanel2.PerformLayout();
             this.pnlDgv.ResumeLayout(false);
             this.pnlPartList.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartList)).EndInit();
@@ -859,8 +860,6 @@
             this.panel6.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPendingMRN)).EndInit();
-            this.headerPanel2.ResumeLayout(false);
-            this.headerPanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }

@@ -142,7 +142,7 @@ namespace AI_BTS_DENSO
             {
                 if (lstrCurrPartNo == "")
                 {
-                    ClsMessage.ShowError("Please enter the valid Part Name");
+                    ClsMessage.ShowError("Please enter the valid Part No.");
                     txtPart_No.Focus();
                 }
                 else if (!common.IsNumeric(txtQty.Text))
@@ -191,7 +191,7 @@ namespace AI_BTS_DENSO
                             if (max_mrn_no != null)
                             {
                                 if (common.ReplaceNullString(max_mrn_no.MRN_NO) != "")
-                                    lstrMRNNO = "MRN-" + (Convert.ToInt64(lstrMRNNO.Substring(lstrMRNNO.IndexOf("MRN-") + 4)) + 1).ToString();
+                                    lstrMRNNO = "MRN-" + (Convert.ToInt64(max_mrn_no.MRN_NO.ToString().Substring(lstrMRNNO.IndexOf("MRN-") + 4))+1).ToString();
                             }
                             #endregion
                             foreach (DataGridViewRow currRow in dgvData.Rows)
