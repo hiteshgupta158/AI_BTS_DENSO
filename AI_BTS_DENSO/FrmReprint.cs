@@ -42,7 +42,7 @@ namespace AI_BTS_DENSO
         private void frmReprint_Load(object sender, EventArgs e)
         {
             common.GetUserAccessForCurrentScreen(this, "Reprint");
-            common.AddHeaderCheckBoxToDataGrid(ref dgvPartList,45,8);
+            //common.AddHeaderCheckBoxToDataGrid(ref dgvPartList,45,8);
             txtANoticeNo.Focus();
         }
 
@@ -166,6 +166,8 @@ namespace AI_BTS_DENSO
             pnlPartList.Visible = true;
             using (AI_BTS_DENSOEntities1 db = new AI_BTS_DENSOEntities1())
             {
+                DataGridViewSelectedRowCollection lstSelectedPartList = dgvPartList.SelectedRows;
+
                 dgvPartList.AutoGenerateColumns = false;
                 long lstrGRN_DTL_ID = Convert.ToInt64(common.ReplaceNullString(pCurrRow.Cells["GRN_DTL_ID"].Value));
                 List<GRN_LABEL_PRINTING> lstGrn_LBL_DTL = db.GRN_LABEL_PRINTING.Where(x => x.GRN_DTL_ID == lstrGRN_DTL_ID && x.STATUS > 0).ToList();
@@ -177,19 +179,38 @@ namespace AI_BTS_DENSO
 
                 //if this function is called due to selection of Print All option then select 
                 //all boxes of part list grid view by default
-                foreach (DataGridViewRow currRow in dgvPartList.Rows)
+                DataGridViewRowCollection lstGridViewRows;
+
+                if (optAll.Checked)
                 {
-                    //if (optAll.Checked)
-                    //{
+                    foreach (DataGridViewRow currRow in dgvPartList.Rows)
+                    {
                         //select only those rows whose labels are remaining for printing and which are not blocked
                         if (currRow.DefaultCellStyle.BackColor != Color.Yellow && currRow.DefaultCellStyle.BackColor != Color.Orange)
                         {
-                            currRow.Cells[dgvPartList.CurrentCell.OwningColumn.Name].Value = true;
+                            //currRow.Cells[dgvPartList.CurrentCell.OwningColumn.Name].Value = true;
+                            currRow.Selected = true;
                         }
-                    //}
+                    }
                 }
-                CheckBox chkHeader = (CheckBox)dgvPartList.Controls["chkHeader"];
-                chkHeader.Checked = true;
+                else
+                {
+                    //in case user selected some rows manually to print and checkALL option is not checked
+                    if(lstSelectedPartList.Count>0)
+                    {
+                        for(int currPart=0;currPart <lstSelectedPartList.Count;currPart++)
+                        {
+                            //select only those rows whose labels are remaining for printing and which are not blocked
+                            if (lstSelectedPartList[currPart].DefaultCellStyle.BackColor != Color.Yellow && lstSelectedPartList[currPart].DefaultCellStyle.BackColor != Color.Orange)
+                            {
+                                //currRow.Cells[dgvPartList.CurrentCell.OwningColumn.Name].Value = true;
+                                lstSelectedPartList[currPart].Selected = true;
+                            }
+                        }
+                    }
+                }
+                //CheckBox chkHeader = (CheckBox)dgvPartList.Controls["chkHeader"];
+                //chkHeader.Checked = true;
             }
             if (optAll.Checked)
                 pnlPartList.Visible = false;
@@ -381,29 +402,29 @@ namespace AI_BTS_DENSO
         {
             try
             {
-                if (e.RowIndex >= 0)
-                {
-                    if (dgvPartList.CurrentRow.Cells["LBL_PRN_CFM"].Value != null)
-                    {
-                        if (dgvPartList.CurrentCell.OwningColumn.Name.ToUpper() == "CHKPRINT")
-                        {
-                            long lngLBL_PRN_CFM = Convert.ToInt64(dgvPartList.CurrentRow.Cells["LBL_PRN_CFM"].Value.ToString());
-                            string lstrCurrPrintType = "Individual";
-                            if (optMixedPalletPrint.Checked)
-                                lstrCurrPrintType = "Mix Pallet";
+                //if (e.RowIndex >= 0)
+                //{
+                //    if (dgvPartList.CurrentRow.Cells["LBL_PRN_CFM"].Value != null)
+                //    {
+                //        if (dgvPartList.CurrentCell.OwningColumn.Name.ToUpper() == "CHKPRINT")
+                //        {
+                //            long lngLBL_PRN_CFM = Convert.ToInt64(dgvPartList.CurrentRow.Cells["LBL_PRN_CFM"].Value.ToString());
+                //            string lstrCurrPrintType = "Individual";
+                //            if (optMixedPalletPrint.Checked)
+                //                lstrCurrPrintType = "Mix Pallet";
 
-                            if (dgvPartList.CurrentRow.Cells["Print_Type"].Value.ToString().ToUpper() != lstrCurrPrintType.ToUpper())
-                            {
-                                ClsMessage.ShowError("You cannot print the " + lstrCurrPrintType + " label for selected item as "
-                                    + common.ReplaceNullString(dgvPartList.CurrentRow.Cells["Print_Type"].Value) + " label has already printed for it.");
+                //            if (dgvPartList.CurrentRow.Cells["Print_Type"].Value.ToString().ToUpper() != lstrCurrPrintType.ToUpper())
+                //            {
+                //                ClsMessage.ShowError("You cannot print the " + lstrCurrPrintType + " label for selected item as "
+                //                    + common.ReplaceNullString(dgvPartList.CurrentRow.Cells["Print_Type"].Value) + " label has already printed for it.");
 
-                                 dgvPartList.CurrentCell.Value = Boolean.Parse(dgvPartList.CurrentCell.Value.ToString());
-                            }
-                            else
-                                dgvPartList.CurrentCell.Value = !common.ReplaceNullBoolean(dgvPartList.CurrentCell.Value);
-                        }
-                    }
-                }
+                //                 dgvPartList.CurrentCell.Value = Boolean.Parse(dgvPartList.CurrentCell.Value.ToString());
+                //            }
+                //            else
+                //                dgvPartList.CurrentCell.Value = !common.ReplaceNullBoolean(dgvPartList.CurrentCell.Value);
+                //        }
+                //    }
+                //}
             }
             catch (Exception ex)
             {
@@ -450,7 +471,7 @@ namespace AI_BTS_DENSO
                         //Print label only for Individual part
                         if (common.ReplaceNullString(dgvData.CurrentRow.Cells["PALLETE_NO"].Value) == "" || IsIndividualLabelPrinted(dgvData.CurrentRow))
                         {
-                            LoadLabelList(dgvData.CurrentRow);
+                            //LoadLabelList(dgvData.CurrentRow);
                             PrintIndividualPart(dgvData.CurrentRow);
                         }
                         else
@@ -483,7 +504,7 @@ namespace AI_BTS_DENSO
                                 {
                                     if (common.ReplaceNullString(currRow.Cells["PALLETE_NO"].Value) == "" || IsIndividualLabelPrinted(currRow))
                                     {
-                                        LoadLabelList(currRow);
+                                        //LoadLabelList(currRow);
                                         PrintIndividualPart(currRow);
                                     }
                                     else
@@ -528,7 +549,8 @@ namespace AI_BTS_DENSO
         {
             try
             {
-                if (common.IsAnyRowSelected(dgvPartList, "chkPrint"))
+                //if (common.IsAnyRowSelected(dgvPartList, "chkPrint"))
+                if(dgvPartList.SelectedRows.Count>0)
                 {
                     int lintNoOfBox = 1;
                     lintNoOfBox = lintQuantity / lintPackSize;
@@ -536,10 +558,15 @@ namespace AI_BTS_DENSO
                     if (lintOpenBox > 0)
                         lintNoOfBox += 1;
 
-                    foreach (DataGridViewRow currLabel in dgvPartList.Rows)
+                    if(optAll.Checked)
                     {
-                        if (common.ReplaceNullBoolean(currLabel.Cells["CHKPRINT"].Value) == true)
-                        {
+                        dgvPartList.SelectAll();
+                    }
+
+                    foreach (DataGridViewRow currLabel in dgvPartList.SelectedRows)
+                    {
+                        //if (common.ReplaceNullBoolean(currLabel.Cells["CHKPRINT"].Value) == true)
+                        //{
                             //Printing individual Barcode
                             string lstrBoxQty = common.ReplaceNullString(currLabel.Cells["Box_Quantity"].Value);
                             string lstrTodaySerialNumber = common.ReplaceNullString(currLabel.Cells["TODAY_BARCODE_SERIAL"].Value);
@@ -550,7 +577,7 @@ namespace AI_BTS_DENSO
                                     lstrBoxQty, lstrTodaySerialNumber, (lstrBRSerial + "/" + lintNoOfBox).ToString(),
                                     clsCurrentUser.Site_Name.ToString()
                                 );
-                        }
+                        //}
                     }
                 }
                 else

@@ -44,16 +44,7 @@
             this.pnlDgv = new System.Windows.Forms.Panel();
             this.pnlPartList = new System.Windows.Forms.Panel();
             this.dgvPartList = new System.Windows.Forms.DataGridView();
-            this.chkPrint = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.TODAY_BARCODE_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BR_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Primary_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pallete_No_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Print_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LBL_PRN_CFM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Box_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.lblAssetLastModifiedDate = new System.Windows.Forms.Label();
             this.GRN_DTL_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.STATUS = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Is_Block = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +56,14 @@
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Printed_Label_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Is_Reprinted = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblAssetLastModifiedDate = new System.Windows.Forms.Label();
+            this.TODAY_BARCODE_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BR_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Primary_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pallete_No_Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Print_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LBL_PRN_CFM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Box_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMain.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -249,7 +248,6 @@
             this.dgvPartList.AllowUserToAddRows = false;
             this.dgvPartList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.chkPrint,
             this.TODAY_BARCODE_SERIAL,
             this.BR_SERIAL,
             this.Primary_Barcode,
@@ -270,71 +268,6 @@
             this.dgvPartList.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.dgvPartList_KeyPress);
             this.dgvPartList.KeyUp += new System.Windows.Forms.KeyEventHandler(this.dgvPartList_KeyUp);
             this.dgvPartList.Leave += new System.EventHandler(this.dgvPartList_Leave);
-            // 
-            // chkPrint
-            // 
-            this.chkPrint.HeaderText = "";
-            this.chkPrint.Name = "chkPrint";
-            this.chkPrint.ReadOnly = true;
-            this.chkPrint.Width = 20;
-            // 
-            // TODAY_BARCODE_SERIAL
-            // 
-            this.TODAY_BARCODE_SERIAL.DataPropertyName = "TODAY_BARCODE_SERIAL";
-            this.TODAY_BARCODE_SERIAL.HeaderText = "Today Barcode Serial";
-            this.TODAY_BARCODE_SERIAL.Name = "TODAY_BARCODE_SERIAL";
-            this.TODAY_BARCODE_SERIAL.ReadOnly = true;
-            this.TODAY_BARCODE_SERIAL.Width = 250;
-            // 
-            // BR_SERIAL
-            // 
-            this.BR_SERIAL.DataPropertyName = "BR_SERIAL";
-            this.BR_SERIAL.HeaderText = "BR SERIAL";
-            this.BR_SERIAL.Name = "BR_SERIAL";
-            this.BR_SERIAL.ReadOnly = true;
-            this.BR_SERIAL.Visible = false;
-            // 
-            // Primary_Barcode
-            // 
-            this.Primary_Barcode.DataPropertyName = "Primary_Barcode";
-            this.Primary_Barcode.HeaderText = "Primary Barcode";
-            this.Primary_Barcode.Name = "Primary_Barcode";
-            this.Primary_Barcode.ReadOnly = true;
-            this.Primary_Barcode.Visible = false;
-            this.Primary_Barcode.Width = 290;
-            // 
-            // Pallete_No_Barcode
-            // 
-            this.Pallete_No_Barcode.DataPropertyName = "Pallete_No_Barcode";
-            this.Pallete_No_Barcode.HeaderText = "Pallet Barcode";
-            this.Pallete_No_Barcode.Name = "Pallete_No_Barcode";
-            this.Pallete_No_Barcode.ReadOnly = true;
-            this.Pallete_No_Barcode.Visible = false;
-            this.Pallete_No_Barcode.Width = 290;
-            // 
-            // Print_Type
-            // 
-            this.Print_Type.DataPropertyName = "Print_Type";
-            this.Print_Type.HeaderText = "Print Type";
-            this.Print_Type.Name = "Print_Type";
-            this.Print_Type.ReadOnly = true;
-            this.Print_Type.Visible = false;
-            // 
-            // LBL_PRN_CFM
-            // 
-            this.LBL_PRN_CFM.DataPropertyName = "LBL_PRN_CFM";
-            this.LBL_PRN_CFM.HeaderText = "LBL PRN CFM";
-            this.LBL_PRN_CFM.Name = "LBL_PRN_CFM";
-            this.LBL_PRN_CFM.ReadOnly = true;
-            this.LBL_PRN_CFM.Visible = false;
-            // 
-            // Box_Quantity
-            // 
-            this.Box_Quantity.DataPropertyName = "Box_Quantity";
-            this.Box_Quantity.HeaderText = "Box Quantity";
-            this.Box_Quantity.Name = "Box_Quantity";
-            this.Box_Quantity.ReadOnly = true;
-            this.Box_Quantity.Visible = false;
             // 
             // dgvData
             // 
@@ -367,19 +300,6 @@
             this.dgvData.TabIndex = 0;
             this.dgvData.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellDoubleClick);
             this.dgvData.Enter += new System.EventHandler(this.dgvData_Enter);
-            // 
-            // lblAssetLastModifiedDate
-            // 
-            this.lblAssetLastModifiedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblAssetLastModifiedDate.AutoSize = true;
-            this.lblAssetLastModifiedDate.BackColor = System.Drawing.Color.Transparent;
-            this.lblAssetLastModifiedDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAssetLastModifiedDate.ForeColor = System.Drawing.Color.Navy;
-            this.lblAssetLastModifiedDate.Location = new System.Drawing.Point(-359, 8);
-            this.lblAssetLastModifiedDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.lblAssetLastModifiedDate.Name = "lblAssetLastModifiedDate";
-            this.lblAssetLastModifiedDate.Size = new System.Drawing.Size(0, 15);
-            this.lblAssetLastModifiedDate.TabIndex = 26;
             // 
             // GRN_DTL_ID
             // 
@@ -469,6 +389,77 @@
             this.Is_Reprinted.ReadOnly = true;
             this.Is_Reprinted.Visible = false;
             // 
+            // lblAssetLastModifiedDate
+            // 
+            this.lblAssetLastModifiedDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblAssetLastModifiedDate.AutoSize = true;
+            this.lblAssetLastModifiedDate.BackColor = System.Drawing.Color.Transparent;
+            this.lblAssetLastModifiedDate.Font = new System.Drawing.Font("Cambria", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAssetLastModifiedDate.ForeColor = System.Drawing.Color.Navy;
+            this.lblAssetLastModifiedDate.Location = new System.Drawing.Point(-359, 8);
+            this.lblAssetLastModifiedDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblAssetLastModifiedDate.Name = "lblAssetLastModifiedDate";
+            this.lblAssetLastModifiedDate.Size = new System.Drawing.Size(0, 15);
+            this.lblAssetLastModifiedDate.TabIndex = 26;
+            // 
+            // TODAY_BARCODE_SERIAL
+            // 
+            this.TODAY_BARCODE_SERIAL.DataPropertyName = "TODAY_BARCODE_SERIAL";
+            this.TODAY_BARCODE_SERIAL.HeaderText = "Today Barcode Serial";
+            this.TODAY_BARCODE_SERIAL.Name = "TODAY_BARCODE_SERIAL";
+            this.TODAY_BARCODE_SERIAL.ReadOnly = true;
+            this.TODAY_BARCODE_SERIAL.Width = 250;
+            // 
+            // BR_SERIAL
+            // 
+            this.BR_SERIAL.DataPropertyName = "BR_SERIAL";
+            this.BR_SERIAL.HeaderText = "BR SERIAL";
+            this.BR_SERIAL.Name = "BR_SERIAL";
+            this.BR_SERIAL.ReadOnly = true;
+            this.BR_SERIAL.Visible = false;
+            // 
+            // Primary_Barcode
+            // 
+            this.Primary_Barcode.DataPropertyName = "Primary_Barcode";
+            this.Primary_Barcode.HeaderText = "Primary Barcode";
+            this.Primary_Barcode.Name = "Primary_Barcode";
+            this.Primary_Barcode.ReadOnly = true;
+            this.Primary_Barcode.Visible = false;
+            this.Primary_Barcode.Width = 290;
+            // 
+            // Pallete_No_Barcode
+            // 
+            this.Pallete_No_Barcode.DataPropertyName = "Pallete_No_Barcode";
+            this.Pallete_No_Barcode.HeaderText = "Pallet Barcode";
+            this.Pallete_No_Barcode.Name = "Pallete_No_Barcode";
+            this.Pallete_No_Barcode.ReadOnly = true;
+            this.Pallete_No_Barcode.Visible = false;
+            this.Pallete_No_Barcode.Width = 290;
+            // 
+            // Print_Type
+            // 
+            this.Print_Type.DataPropertyName = "Print_Type";
+            this.Print_Type.HeaderText = "Print Type";
+            this.Print_Type.Name = "Print_Type";
+            this.Print_Type.ReadOnly = true;
+            this.Print_Type.Visible = false;
+            // 
+            // LBL_PRN_CFM
+            // 
+            this.LBL_PRN_CFM.DataPropertyName = "LBL_PRN_CFM";
+            this.LBL_PRN_CFM.HeaderText = "LBL PRN CFM";
+            this.LBL_PRN_CFM.Name = "LBL_PRN_CFM";
+            this.LBL_PRN_CFM.ReadOnly = true;
+            this.LBL_PRN_CFM.Visible = false;
+            // 
+            // Box_Quantity
+            // 
+            this.Box_Quantity.DataPropertyName = "Box_Quantity";
+            this.Box_Quantity.HeaderText = "Box Quantity";
+            this.Box_Quantity.Name = "Box_Quantity";
+            this.Box_Quantity.ReadOnly = true;
+            this.Box_Quantity.Visible = false;
+            // 
             // frmReprint
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -520,14 +511,6 @@
         private System.Windows.Forms.RadioButton optMixedPalletPrint;
         private System.Windows.Forms.RadioButton optIndividualPrint;
         private System.Windows.Forms.RadioButton optAll;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn chkPrint;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TODAY_BARCODE_SERIAL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BR_SERIAL;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Primary_Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pallete_No_Barcode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Print_Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn LBL_PRN_CFM;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Box_Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn GRN_DTL_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn STATUS;
         private System.Windows.Forms.DataGridViewTextBoxColumn Is_Block;
@@ -539,5 +522,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Printed_Label_Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn Is_Reprinted;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TODAY_BARCODE_SERIAL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BR_SERIAL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Primary_Barcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pallete_No_Barcode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Print_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LBL_PRN_CFM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Box_Quantity;
     }
 }
