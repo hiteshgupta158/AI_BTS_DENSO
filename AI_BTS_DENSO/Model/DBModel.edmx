@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AI_BTS_DENSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AI_BTS_DENSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACTIVE_MST">
           <Key>
             <PropertyRef Name="ACTIVE_MST_ID" />
@@ -37,6 +37,17 @@
           <Property Name="CATEGORY_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CATEGORY_NAME" Type="varchar" MaxLength="200" />
           <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="COIL_QC_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QC_LBL_ID" Type="int" />
+          <Property Name="LOT_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PALET_NO" Type="int" />
+          <Property Name="SERIAL_NO" Type="int" />
+          <Property Name="WEIGHT" Type="int" />
         </EntityType>
         <EntityType Name="DEPARTMENT_MST">
           <Key>
@@ -136,6 +147,8 @@
           <Property Name="QUANTITY_ISSUED" Type="int" />
           <Property Name="QUANTITY_REMAINING" Type="int" />
           <Property Name="STATUS" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
         </EntityType>
         <EntityType Name="INVENTORY_MST">
           <Key>
@@ -187,6 +200,18 @@
           <Property Name="MACHINE_TYPE_NAME" Type="varchar" MaxLength="200" />
           <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="MAT_MOVEMENT_LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOCATION_MST_ID" Type="int" />
+          <Property Name="MAT_BARCODE" Type="varchar" MaxLength="50" />
+          <Property Name="CREATED_BY" Type="varchar" MaxLength="50" />
+          <Property Name="CREATED_ON" Type="datetime" />
+          <Property Name="SITE_MST_ID" Type="int" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
         <EntityType Name="MATERIAL_MST">
           <Key>
             <PropertyRef Name="MATERIAL_MST_ID" />
@@ -223,6 +248,8 @@
           <Property Name="GRN_DTL_ID" Type="int" />
           <Property Name="IS_PICKED" Type="int" />
           <Property Name="IS_DISPATCHED" Type="int" />
+          <Property Name="DISPATCH_BY" Type="int" />
+          <Property Name="DISPATCH_ON" Type="datetime" />
         </EntityType>
         <EntityType Name="MRN_MST">
           <Key>
@@ -239,6 +266,7 @@
           <Property Name="SITE_MST_ID" Type="int" />
           <Property Name="DISPATCH_BY" Type="int" />
           <Property Name="DISPATCH_ON" Type="datetime" />
+          <Property Name="IS_PICKED" Type="int" />
         </EntityType>
         <EntityType Name="PICKING_DTL">
           <Key>
@@ -248,6 +276,8 @@
           <Property Name="PICKING_MST_ID" Type="int" />
           <Property Name="PART_NO" Type="varchar" MaxLength="50" />
           <Property Name="PACK_SIZE" Type="int" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="LOCATION_MST_ID" Type="int" />
           <Property Name="BOX_BARCODE" Type="varchar" MaxLength="200" />
           <Property Name="STATUS" Type="int" />
           <Property Name="PICKED_BY" Type="int" />
@@ -267,6 +297,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PICKED_QTY" Type="int" />
           <Property Name="PICKED_BY" Type="int" />
           <Property Name="PICKED_ON" Type="datetime" />
+          <Property Name="PALET_NO" Type="varchar" MaxLength="100" />
+          <Property Name="MRN_MST_ID" Type="int" />
         </EntityType>
         <EntityType Name="PROCESS_MST">
           <Key>
@@ -287,6 +319,21 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PROCESS_TYPE_NAME" Type="varchar" MaxLength="200" />
           <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
         </EntityType>
+        <EntityType Name="PUT_AWAY">
+          <Key>
+            <PropertyRef Name="PUT_ID" />
+          </Key>
+          <Property Name="PUT_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LOCATION_MST_ID" Type="int" />
+          <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+          <Property Name="A_NOTICE_NO" Type="varchar" MaxLength="50" />
+          <Property Name="QUANTITY" Type="int" />
+          <Property Name="MAT_BARCODE" Type="varchar" MaxLength="100" />
+          <Property Name="SITE_MST_ID" Type="int" />
+          <Property Name="CREATED_BY" Type="int" />
+          <Property Name="CREATED_ON" Type="datetime" />
+          <Property Name="STATUS" Type="int" />
+        </EntityType>
         <EntityType Name="QC_DTL">
           <Key>
             <PropertyRef Name="QC_DTL_ID" />
@@ -299,6 +346,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="STATUS" Type="int" />
           <Property Name="QUANTITY" Type="int" />
           <Property Name="QUANTITY_SCRAPPED" Type="int" />
+          <Property Name="QUANTITY_PICKED" Type="int" />
+          <Property Name="QUANTITY_RETURN" Type="int" />
         </EntityType>
         <EntityType Name="QC_LABEL_PRINTING">
           <Key>
@@ -418,10 +467,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
         </EntityType>
         <EntityType Name="STO_MST">
           <Key>
-            <PropertyRef Name="MRN_MST_ID" />
+            <PropertyRef Name="STO_MST_ID" />
           </Key>
-          <Property Name="MRN_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="MRN_NO" Type="varchar" MaxLength="200" />
+          <Property Name="STO_MST_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="STO_NO" Type="varchar" MaxLength="200" />
           <Property Name="REFERENCE_NO" Type="varchar" MaxLength="200" />
           <Property Name="PART_NO" Type="varchar" MaxLength="50" />
           <Property Name="QUANTITY" Type="int" />
@@ -429,6 +478,17 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="CREATED_BY" Type="int" />
           <Property Name="CREATED_ON" Type="datetime" />
           <Property Name="SITE_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="TempColiQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BARCODE" Type="varchar" MaxLength="100" />
+          <Property Name="LOT_NO" Type="varchar" MaxLength="50" />
+          <Property Name="PALET_NO" Type="int" />
+          <Property Name="SERIAL_NO" Type="int" />
+          <Property Name="WEIGHT" Type="int" />
         </EntityType>
         <EntityType Name="UOM_MST">
           <Key>
@@ -469,7 +529,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="USER_ROLE" Type="varchar" MaxLength="200" />
           <Property Name="DESCRIPTION" Type="varchar" MaxLength="250" />
         </EntityType>
-        <Association Name="FK__BIN_MST__STATUS__29572725">
+        <Association Name="FK__BIN_MST__BIN_TYP__1EA48E88">
           <End Role="BIN_TYPE_MST" Type="Self.BIN_TYPE_MST" Multiplicity="0..1" />
           <End Role="BIN_MST" Type="Self.BIN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -481,7 +541,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__DEPARTMEN__ACTIV__04E4BC85">
+        <Association Name="FK__DEPARTMEN__ACTIV__208CD6FA">
           <End Role="ACTIVE_MST" Type="Self.ACTIVE_MST" Multiplicity="0..1" />
           <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -493,7 +553,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FG_BOM__INPUT_MA__37A5467C">
+        <Association Name="FK__FG_BOM__INPUT_MA__2180FB33">
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="0..1" />
           <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -505,7 +565,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FG_BOM__INPUT_MA__38996AB5">
+        <Association Name="FK__FG_BOM__INPUT_MA__22751F6C">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -517,7 +577,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_DTL__STATUS__6442E2C9">
+        <Association Name="FK__GRN_DTL__GRN_MST__236943A5">
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="0..1" />
           <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -529,7 +589,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__CREAT__7C1A6C5A">
+        <Association Name="FK__GRN_LABEL__CREAT__245D67DE">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -541,7 +601,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__LABEL__7A3223E8">
+        <Association Name="FK__GRN_LABEL__GRN_D__25518C17">
+          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
+          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRN_DTL">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Principal>
+            <Dependent Role="GRN_LABEL_PRINTING">
+              <PropertyRef Name="GRN_DTL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__GRN_LABEL__LABEL__2645B050">
           <End Role="LABEL_TYPE_MST" Type="Self.LABEL_TYPE_MST" Multiplicity="0..1" />
           <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -553,31 +625,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__TODAY__793DFFAF">
-          <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
-          <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="GRN_DTL">
-              <PropertyRef Name="GRN_DTL_ID" />
-            </Principal>
-            <Dependent Role="GRN_LABEL_PRINTING">
-              <PropertyRef Name="GRN_DTL_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GRN_MST__CREATED__5629CD9C">
-          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
-          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SITE_MST">
-              <PropertyRef Name="SITE_MST_ID" />
-            </Principal>
-            <Dependent Role="GRN_MST">
-              <PropertyRef Name="SITE_MST_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GRN_MST__CREATED__5812160E">
+        <Association Name="FK__GRN_MST__CREATED__2739D489">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -589,7 +637,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_MST__GRN_TYP__571DF1D5">
+        <Association Name="FK__GRN_MST__GRN_TYP__282DF8C2">
           <End Role="GRN_TYPE_MST" Type="Self.GRN_TYPE_MST" Multiplicity="0..1" />
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -601,19 +649,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__CREAT__70A8B9AE">
-          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
-          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+        <Association Name="FK__GRN_MST__SITE_MS__29221CFB">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="QC_MST">
-              <PropertyRef Name="QC_MST_ID" />
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
             </Principal>
-            <Dependent Role="INVENTORY_MST">
-              <PropertyRef Name="QC_MST_ID" />
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="SITE_MST_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__INV_M__74794A92">
+        <Association Name="FK__INVENTORY__INV_M__2A164134">
           <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="0..1" />
           <End Role="INVENTORY_DTL" Type="Self.INVENTORY_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -625,7 +673,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__SITE___2116E6DF">
+        <Association Name="FK__INVENTORY__QC_MS__2B0A656D">
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
+          <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Principal>
+            <Dependent Role="INVENTORY_MST">
+              <PropertyRef Name="QC_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__SITE___2BFE89A6">
           <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
           <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -637,19 +697,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MACHINE_M__ACTIV__0D7A0286">
-          <End Role="MACHINE_TYPE_MST" Type="Self.MACHINE_TYPE_MST" Multiplicity="0..1" />
-          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="MACHINE_TYPE_MST">
-              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
-            </Principal>
-            <Dependent Role="MACHINE_MST">
-              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__MACHINE_M__DEPAR__0E6E26BF">
+        <Association Name="FK__MACHINE_M__DEPAR__2CF2ADDF">
           <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="0..1" />
           <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -661,7 +709,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MACHINE_M__PROCE__0F624AF8">
+        <Association Name="FK__MACHINE_M__MACHI__2DE6D218">
+          <End Role="MACHINE_TYPE_MST" Type="Self.MACHINE_TYPE_MST" Multiplicity="0..1" />
+          <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MACHINE_TYPE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Principal>
+            <Dependent Role="MACHINE_MST">
+              <PropertyRef Name="MACHINE_TYPE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__PROCE__2EDAF651">
           <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="0..1" />
           <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -673,7 +733,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATERIAL___ACTIV__31EC6D26">
+        <Association Name="FK__MATERIAL___PRIMA__30C33EC3">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -685,7 +745,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATERIAL___SECON__32E0915F">
+        <Association Name="FK__MATERIAL___SECON__31B762FC">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -697,31 +757,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PICKING_M__PICKE__318258D2">
-          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="0..1" />
-          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+        <Association Name="FK__PICKING_D__LOCAT__32AB8735">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="PICKING_DTL" Type="Self.PICKING_DTL" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="STO_MST">
-              <PropertyRef Name="MRN_MST_ID" />
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
             </Principal>
-            <Dependent Role="PICKING_MST">
-              <PropertyRef Name="STO_MST_ID" />
+            <Dependent Role="PICKING_DTL">
+              <PropertyRef Name="LOCATION_MST_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PICKING_M__PICKE__32767D0B">
-          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
-          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER_MST">
-              <PropertyRef Name="USER_MST_ID" />
-            </Principal>
-            <Dependent Role="PICKING_MST">
-              <PropertyRef Name="PICKED_BY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PROCESS_M__ACTIV__3F466844">
+        <Association Name="FK__PROCESS_M__PROCE__367C1819">
           <End Role="PROCESS_TYPE_MST" Type="Self.PROCESS_TYPE_MST" Multiplicity="0..1" />
           <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -733,7 +781,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_DTL__STATUS__6AEFE058">
+        <Association Name="FK__QC_DTL__QC_MST_I__395884C4">
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
           <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -745,7 +793,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_LABEL___QUANT__6DCC4D03">
+        <Association Name="FK__QC_LABEL___QC_DT__3A4CA8FD">
           <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="0..1" />
           <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -757,19 +805,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_MST__QC_BY__681373AD">
-          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
-          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER_MST">
-              <PropertyRef Name="USER_MST_ID" />
-            </Principal>
-            <Dependent Role="QC_MST">
-              <PropertyRef Name="QC_BY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__QC_MST__STATUS__671F4F74">
+        <Association Name="FK__QC_MST__GRN_DTL___3B40CD36">
           <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -781,7 +817,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_REJECT__CREAT__11158940">
+        <Association Name="FK__QC_MST__QC_BY__3C34F16F">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="QC_MST">
+              <PropertyRef Name="QC_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_REJECT__CREAT__3D2915A8">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -793,7 +841,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RECEPIE_M__ACTIV__4F7CD00D">
+        <Association Name="FK__RECEPIE_M__OUTPU__3E1D39E1">
           <End Role="FG_MST" Type="Self.FG_MST" Multiplicity="0..1" />
           <End Role="RECEPIE_MST" Type="Self.RECEPIE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -805,7 +853,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__REJECTION__QC_BA__13F1F5EB">
+        <Association Name="FK__REJECTION__QC_NO__3F115E1A">
           <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="0..1" />
           <End Role="REJECTION_DTL" Type="Self.REJECTION_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -817,7 +865,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__STO_MST__SITE_ID__2EA5EC27">
+        <Association Name="FK__STO_MST__CREATED__40058253">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -829,7 +877,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USER_MST__ACTIVE__4CA06362">
+        <Association Name="FK__USER_MST__USER_R__40F9A68C">
           <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -841,7 +889,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USER_ROLE__DELET__7FB5F314">
+        <Association Name="FK__USER_ROLE__USER___42E1EEFE">
           <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
           <End Role="USER_ROLE_ACCESS_MST" Type="Self.USER_ROLE_ACCESS_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -850,6 +898,90 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Principal>
             <Dependent Role="USER_ROLE_ACCESS_MST">
               <PropertyRef Name="USER_ROLE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_COIL_QC_DETAILS_QC_LABEL_PRINTING">
+          <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="0..1" />
+          <End Role="COIL_QC_DETAILS" Type="Self.COIL_QC_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_LABEL_PRINTING">
+              <PropertyRef Name="QC_LBL_ID" />
+            </Principal>
+            <Dependent Role="COIL_QC_DETAILS">
+              <PropertyRef Name="QC_LBL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAT_MOVEMENT_LOG_LOCATION_MST">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="MAT_MOVEMENT_LOG" Type="Self.MAT_MOVEMENT_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Principal>
+            <Dependent Role="MAT_MOVEMENT_LOG">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID">
+          <End Role="MRN_MST" Type="Self.MRN_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MRN_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="PICKED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID">
+          <End Role="MIXED_PALLET_STO" Type="Self.MIXED_PALLET_STO" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MIXED_PALLET_STO">
+              <PropertyRef Name="STO_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="STO_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUT_AWAY_LOCATION_MST1">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="PUT_AWAY" Type="Self.PUT_AWAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Principal>
+            <Dependent Role="PUT_AWAY">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUT_AWAY_SITE_MST">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="PUT_AWAY" Type="Self.PUT_AWAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="PUT_AWAY">
+              <PropertyRef Name="SITE_MST_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -865,6 +997,20 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="FN_GET_PART_DETAILS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="INV_MST_ID" Type="int" />
+                <Property Name="INVD_REC_ID" Type="int" Nullable="false" />
+                <Property Name="PART_NO" Type="varchar" MaxLength="50" />
+                <Property Name="PACK_SIZE" Type="int" />
+                <Property Name="QUANTITY" Type="int" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="GET_PART_NO_NAME_BY_BARCODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BARCODE" Type="varchar" Mode="In" />
           <ReturnType>
@@ -896,23 +1042,110 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
         <Function Name="GET_SITE_NAME_BY_USER_ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="USER_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_APPROVE_QC_BY_PART" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GRN_DTL_ID" Type="int" Mode="In" />
+          <Parameter Name="QC_MST_ID" Type="int" Mode="In" />
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="QC_BY" Type="int" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_CHANGE_QC_LABEL_PRINTING_STATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="PARENT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE_TYPE" Type="int" Mode="In" />
+          <Parameter Name="TOTALBARCODES" Type="int" Mode="InOut" />
+          <Parameter Name="PRINTEDBARCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="SP_CHECK_IF_GRN_DONE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
           <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_COIL_QC_DONE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_DISPATCH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+          <Parameter Name="MAT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="DISPATCHED_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_GENERATE_QC_LABELS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="QC_DTL_ID" Type="int" Mode="In" />
+          <Parameter Name="INV_MST_ID" Type="int" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE_TYPE" Type="int" Mode="In" />
+          <Parameter Name="QUANTITY" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="int" Mode="In" />
+          <Parameter Name="LOT_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PALETNO" Type="int" Mode="In" />
+          <Parameter Name="WEIGHT" Type="decimal" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
         </Function>
         <Function Name="SP_GET_BARCODE_SERIAL" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="BARCODE_TYPE" Type="varchar" Mode="In" />
           <Parameter Name="Serial" Type="varchar" Mode="InOut" />
         </Function>
+        <Function Name="SP_GET_DISPATCH_LIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_GET_GRN_DATA_FOR_QC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_GRN_DETAILS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="InOut" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="GRN_DTL_ID" Type="int" Mode="InOut" />
+          <Parameter Name="PART_NO" Type="varchar" Mode="InOut" />
+          <Parameter Name="PART_QTY" Type="int" Mode="InOut" />
+          <Parameter Name="BOX_QTY" Type="int" Mode="InOut" />
+          <Parameter Name="PICKED_QTY" Type="int" Mode="InOut" />
+          <Parameter Name="SUPPLIER_BATCH_NO" Type="varchar" Mode="InOut" />
+          <Parameter Name="PALETNO" Type="int" Mode="InOut" />
+          <Parameter Name="PART_TYPE" Type="varchar" Mode="InOut" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+          <Parameter Name="LOTNO" Type="varchar" Mode="InOut" />
+          <Parameter Name="NOOFLABELS" Type="int" Mode="InOut" />
+          <Parameter Name="APPROVEQTY" Type="int" Mode="InOut" />
+          <Parameter Name="REJECTQTY" Type="int" Mode="InOut" />
+          <Parameter Name="SCRAPQTY" Type="int" Mode="InOut" />
         </Function>
         <Function Name="SP_GET_PALLET_LIST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
           <Parameter Name="PALLET_NO" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_GET_QC_BARCODE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="QTY" Type="int" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="TARGET_MST" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="SP_GET_QC_DATA_BY_ANOTICENO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_QC_LABELS_TO_PRINT" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_REPACKING_LABELS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MAT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="NO_OF_LABELS" Type="int" Mode="In" />
+          <Parameter Name="SITE_MST_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_GET_SITES" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GET_STO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MODE" Type="varchar" Mode="In" />
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_INSERT_QC_MST_DATA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
@@ -927,6 +1160,60 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Parameter Name="QC_BY" Type="int" Mode="In" />
           <Parameter Name="QC_ON" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="SP_PICKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+          <Parameter Name="LOC_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="MAT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="PICKED_BY" Type="varchar" Mode="In" />
+          <Parameter Name="PART_NO" Type="varchar" Mode="InOut" />
+          <Parameter Name="PICKED_QTY" Type="int" Mode="InOut" />
+          <Parameter Name="STATUS" Type="int" Mode="InOut" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_PUT_AWAY" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PART_NO" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="QUANTITY" Type="int" Mode="In" />
+          <Parameter Name="MAT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="LOC_NAME" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="MODE" Type="varchar" Mode="In" />
+          <Parameter Name="CREATED_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_QC_DONE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="QC_MODE" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar(max)" Mode="InOut" />
+        </Function>
+        <Function Name="SP_REPACKING" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MAT_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="PACKSIZE" Type="int" Mode="In" />
+          <Parameter Name="SITE" Type="varchar" Mode="In" />
+          <Parameter Name="CREATED_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MODE" Type="varchar" Mode="In" />
+          <Parameter Name="NO_OF_LABELS" Type="int" Mode="InOut" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_START_COIL_QC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PICKED_QTY" Type="int" Mode="In" />
+          <Parameter Name="NO_OF_LBLS" Type="int" Mode="In" />
+          <Parameter Name="LOT_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PALET_NO" Type="int" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SP_START_QC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="A_NOTICE_NO" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+          <Parameter Name="QC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="QC_TYPE" Type="varchar" Mode="In" />
           <Parameter Name="BARCODE" Type="varchar" Mode="In" />
@@ -940,11 +1227,47 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Parameter Name="QC_BY" Type="int" Mode="In" />
           <Parameter Name="STATUS" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UserLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="SiteId" Type="int" Mode="In" />
+          <Parameter Name="Usertype" Type="varchar" Mode="InOut" />
+          <Parameter Name="msg" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="UDP_CHANGE_GRN_LABEL_PRINTING_STATUS" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="TOTALBARCODES" Type="int" Mode="InOut" />
+          <Parameter Name="PRINTEDBARCODE" Type="int" Mode="InOut" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="UDP_GET_DETAILS_FOR_COIL_QC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="SITE_CODE" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UDP_GET_GRN_LABELS_TO_PRINT_BY_STO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UDP_GET_STO_TO_RECEIVE" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UDP_MIX_PALET_DISPATCH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+          <Parameter Name="PALET_BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="DISPATCH_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="UDP_RECEIVE_STO" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="STO_NO" Type="varchar" Mode="In" />
+          <Parameter Name="BARCODE" Type="varchar" Mode="In" />
+          <Parameter Name="REC_BY" Type="varchar" Mode="In" />
+          <Parameter Name="MSG" Type="varchar" Mode="InOut" />
+        </Function>
         <EntityContainer Name="AI_BTS_DENSOModelStoreContainer">
           <EntitySet Name="ACTIVE_MST" EntityType="Self.ACTIVE_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BIN_MST" EntityType="Self.BIN_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BIN_TYPE_MST" EntityType="Self.BIN_TYPE_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CATEGORY_MST" EntityType="Self.CATEGORY_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="COIL_QC_DETAILS" EntityType="Self.COIL_QC_DETAILS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DEPARTMENT_MST" EntityType="Self.DEPARTMENT_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FG_BOM" EntityType="Self.FG_BOM" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FG_MST" EntityType="Self.FG_MST" Schema="dbo" store:Type="Tables" />
@@ -958,6 +1281,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="LOCATION_MST" EntityType="Self.LOCATION_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MACHINE_MST" EntityType="Self.MACHINE_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MACHINE_TYPE_MST" EntityType="Self.MACHINE_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAT_MOVEMENT_LOG" EntityType="Self.MAT_MOVEMENT_LOG" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MATERIAL_MST" EntityType="Self.MATERIAL_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MATERIAL_TYPE_MST" EntityType="Self.MATERIAL_TYPE_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MIXED_PALLET_STO" EntityType="Self.MIXED_PALLET_STO" Schema="dbo" store:Type="Tables" />
@@ -965,6 +1289,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="PICKING_DTL" EntityType="Self.PICKING_DTL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROCESS_MST" EntityType="Self.PROCESS_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PROCESS_TYPE_MST" EntityType="Self.PROCESS_TYPE_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PUT_AWAY" EntityType="Self.PUT_AWAY" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QC_DTL" EntityType="Self.QC_DTL" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QC_LABEL_PRINTING" EntityType="Self.QC_LABEL_PRINTING" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QC_MST" EntityType="Self.QC_MST" Schema="dbo" store:Type="Tables" />
@@ -978,6 +1303,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="SITE_MST" EntityType="Self.SITE_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STATUS_MST" EntityType="Self.STATUS_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="STO_MST" EntityType="Self.STO_MST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempColiQC" EntityType="Self.TempColiQC" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UOM_MST" EntityType="Self.UOM_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_MST" EntityType="Self.USER_MST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USER_ROLE_ACCESS_MST" EntityType="Self.USER_ROLE_ACCESS_MST" Schema="dbo" store:Type="Tables" />
@@ -991,146 +1317,180 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
     [PICKING_MST].[STATUS] AS [STATUS], 
     [PICKING_MST].[PICKED_QTY] AS [PICKED_QTY], 
     [PICKING_MST].[PICKED_BY] AS [PICKED_BY], 
-    [PICKING_MST].[PICKED_ON] AS [PICKED_ON]
+    [PICKING_MST].[PICKED_ON] AS [PICKED_ON], 
+    [PICKING_MST].[PALET_NO] AS [PALET_NO], 
+    [PICKING_MST].[MRN_MST_ID] AS [MRN_MST_ID]
     FROM [dbo].[PICKING_MST] AS [PICKING_MST]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__BIN_MST__STATUS__29572725" Association="Self.FK__BIN_MST__STATUS__29572725">
+          <AssociationSet Name="FK__BIN_MST__BIN_TYP__1EA48E88" Association="Self.FK__BIN_MST__BIN_TYP__1EA48E88">
             <End Role="BIN_TYPE_MST" EntitySet="BIN_TYPE_MST" />
             <End Role="BIN_MST" EntitySet="BIN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__DEPARTMEN__ACTIV__04E4BC85" Association="Self.FK__DEPARTMEN__ACTIV__04E4BC85">
+          <AssociationSet Name="FK__DEPARTMEN__ACTIV__208CD6FA" Association="Self.FK__DEPARTMEN__ACTIV__208CD6FA">
             <End Role="ACTIVE_MST" EntitySet="ACTIVE_MST" />
             <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__FG_BOM__INPUT_MA__37A5467C" Association="Self.FK__FG_BOM__INPUT_MA__37A5467C">
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__2180FB33" Association="Self.FK__FG_BOM__INPUT_MA__2180FB33">
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
             <End Role="FG_BOM" EntitySet="FG_BOM" />
           </AssociationSet>
-          <AssociationSet Name="FK__FG_BOM__INPUT_MA__38996AB5" Association="Self.FK__FG_BOM__INPUT_MA__38996AB5">
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__22751F6C" Association="Self.FK__FG_BOM__INPUT_MA__22751F6C">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="FG_BOM" EntitySet="FG_BOM" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_DTL__STATUS__6442E2C9" Association="Self.FK__GRN_DTL__STATUS__6442E2C9">
+          <AssociationSet Name="FK__GRN_DTL__GRN_MST__236943A5" Association="Self.FK__GRN_DTL__GRN_MST__236943A5">
             <End Role="GRN_MST" EntitySet="GRN_MST" />
             <End Role="GRN_DTL" EntitySet="GRN_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__CREAT__7C1A6C5A" Association="Self.FK__GRN_LABEL__CREAT__7C1A6C5A">
+          <AssociationSet Name="FK__GRN_LABEL__CREAT__245D67DE" Association="Self.FK__GRN_LABEL__CREAT__245D67DE">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__LABEL__7A3223E8" Association="Self.FK__GRN_LABEL__LABEL__7A3223E8">
+          <AssociationSet Name="FK__GRN_LABEL__GRN_D__25518C17" Association="Self.FK__GRN_LABEL__GRN_D__25518C17">
+            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
+            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
+          </AssociationSet>
+          <AssociationSet Name="FK__GRN_LABEL__LABEL__2645B050" Association="Self.FK__GRN_LABEL__LABEL__2645B050">
             <End Role="LABEL_TYPE_MST" EntitySet="LABEL_TYPE_MST" />
             <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__TODAY__793DFFAF" Association="Self.FK__GRN_LABEL__TODAY__793DFFAF">
-            <End Role="GRN_DTL" EntitySet="GRN_DTL" />
-            <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__CREATED__5629CD9C" Association="Self.FK__GRN_MST__CREATED__5629CD9C">
-            <End Role="SITE_MST" EntitySet="SITE_MST" />
-            <End Role="GRN_MST" EntitySet="GRN_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__CREATED__5812160E" Association="Self.FK__GRN_MST__CREATED__5812160E">
+          <AssociationSet Name="FK__GRN_MST__CREATED__2739D489" Association="Self.FK__GRN_MST__CREATED__2739D489">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="GRN_MST" EntitySet="GRN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__GRN_TYP__571DF1D5" Association="Self.FK__GRN_MST__GRN_TYP__571DF1D5">
+          <AssociationSet Name="FK__GRN_MST__GRN_TYP__282DF8C2" Association="Self.FK__GRN_MST__GRN_TYP__282DF8C2">
             <End Role="GRN_TYPE_MST" EntitySet="GRN_TYPE_MST" />
             <End Role="GRN_MST" EntitySet="GRN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__CREAT__70A8B9AE" Association="Self.FK__INVENTORY__CREAT__70A8B9AE">
-            <End Role="QC_MST" EntitySet="QC_MST" />
-            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          <AssociationSet Name="FK__GRN_MST__SITE_MS__29221CFB" Association="Self.FK__GRN_MST__SITE_MS__29221CFB">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__INV_M__74794A92" Association="Self.FK__INVENTORY__INV_M__74794A92">
+          <AssociationSet Name="FK__INVENTORY__INV_M__2A164134" Association="Self.FK__INVENTORY__INV_M__2A164134">
             <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
             <End Role="INVENTORY_DTL" EntitySet="INVENTORY_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__SITE___2116E6DF" Association="Self.FK__INVENTORY__SITE___2116E6DF">
+          <AssociationSet Name="FK__INVENTORY__QC_MS__2B0A656D" Association="Self.FK__INVENTORY__QC_MS__2B0A656D">
+            <End Role="QC_MST" EntitySet="QC_MST" />
+            <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__SITE___2BFE89A6" Association="Self.FK__INVENTORY__SITE___2BFE89A6">
             <End Role="SITE_MST" EntitySet="SITE_MST" />
             <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__ACTIV__0D7A0286" Association="Self.FK__MACHINE_M__ACTIV__0D7A0286">
-            <End Role="MACHINE_TYPE_MST" EntitySet="MACHINE_TYPE_MST" />
-            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__DEPAR__0E6E26BF" Association="Self.FK__MACHINE_M__DEPAR__0E6E26BF">
+          <AssociationSet Name="FK__MACHINE_M__DEPAR__2CF2ADDF" Association="Self.FK__MACHINE_M__DEPAR__2CF2ADDF">
             <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
             <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__PROCE__0F624AF8" Association="Self.FK__MACHINE_M__PROCE__0F624AF8">
+          <AssociationSet Name="FK__MACHINE_M__MACHI__2DE6D218" Association="Self.FK__MACHINE_M__MACHI__2DE6D218">
+            <End Role="MACHINE_TYPE_MST" EntitySet="MACHINE_TYPE_MST" />
+            <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__PROCE__2EDAF651" Association="Self.FK__MACHINE_M__PROCE__2EDAF651">
             <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
             <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATERIAL___ACTIV__31EC6D26" Association="Self.FK__MATERIAL___ACTIV__31EC6D26">
+          <AssociationSet Name="FK__MATERIAL___PRIMA__30C33EC3" Association="Self.FK__MATERIAL___PRIMA__30C33EC3">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATERIAL___SECON__32E0915F" Association="Self.FK__MATERIAL___SECON__32E0915F">
+          <AssociationSet Name="FK__MATERIAL___SECON__31B762FC" Association="Self.FK__MATERIAL___SECON__31B762FC">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__PICKING_M__PICKE__318258D2" Association="Self.FK__PICKING_M__PICKE__318258D2">
-            <End Role="STO_MST" EntitySet="STO_MST" />
-            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          <AssociationSet Name="FK__PICKING_D__LOCAT__32AB8735" Association="Self.FK__PICKING_D__LOCAT__32AB8735">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="PICKING_DTL" EntitySet="PICKING_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__PICKING_M__PICKE__32767D0B" Association="Self.FK__PICKING_M__PICKE__32767D0B">
-            <End Role="USER_MST" EntitySet="USER_MST" />
-            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PROCESS_M__ACTIV__3F466844" Association="Self.FK__PROCESS_M__ACTIV__3F466844">
+          <AssociationSet Name="FK__PROCESS_M__PROCE__367C1819" Association="Self.FK__PROCESS_M__PROCE__367C1819">
             <End Role="PROCESS_TYPE_MST" EntitySet="PROCESS_TYPE_MST" />
             <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_DTL__STATUS__6AEFE058" Association="Self.FK__QC_DTL__STATUS__6AEFE058">
+          <AssociationSet Name="FK__QC_DTL__QC_MST_I__395884C4" Association="Self.FK__QC_DTL__QC_MST_I__395884C4">
             <End Role="QC_MST" EntitySet="QC_MST" />
             <End Role="QC_DTL" EntitySet="QC_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_LABEL___QUANT__6DCC4D03" Association="Self.FK__QC_LABEL___QUANT__6DCC4D03">
+          <AssociationSet Name="FK__QC_LABEL___QC_DT__3A4CA8FD" Association="Self.FK__QC_LABEL___QC_DT__3A4CA8FD">
             <End Role="QC_DTL" EntitySet="QC_DTL" />
             <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_MST__QC_BY__681373AD" Association="Self.FK__QC_MST__QC_BY__681373AD">
-            <End Role="USER_MST" EntitySet="USER_MST" />
-            <End Role="QC_MST" EntitySet="QC_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__QC_MST__STATUS__671F4F74" Association="Self.FK__QC_MST__STATUS__671F4F74">
+          <AssociationSet Name="FK__QC_MST__GRN_DTL___3B40CD36" Association="Self.FK__QC_MST__GRN_DTL___3B40CD36">
             <End Role="GRN_DTL" EntitySet="GRN_DTL" />
             <End Role="QC_MST" EntitySet="QC_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_REJECT__CREAT__11158940" Association="Self.FK__QC_REJECT__CREAT__11158940">
+          <AssociationSet Name="FK__QC_MST__QC_BY__3C34F16F" Association="Self.FK__QC_MST__QC_BY__3C34F16F">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="QC_MST" EntitySet="QC_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_REJECT__CREAT__3D2915A8" Association="Self.FK__QC_REJECT__CREAT__3D2915A8">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
           </AssociationSet>
-          <AssociationSet Name="FK__RECEPIE_M__ACTIV__4F7CD00D" Association="Self.FK__RECEPIE_M__ACTIV__4F7CD00D">
+          <AssociationSet Name="FK__RECEPIE_M__OUTPU__3E1D39E1" Association="Self.FK__RECEPIE_M__OUTPU__3E1D39E1">
             <End Role="FG_MST" EntitySet="FG_MST" />
             <End Role="RECEPIE_MST" EntitySet="RECEPIE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__REJECTION__QC_BA__13F1F5EB" Association="Self.FK__REJECTION__QC_BA__13F1F5EB">
+          <AssociationSet Name="FK__REJECTION__QC_NO__3F115E1A" Association="Self.FK__REJECTION__QC_NO__3F115E1A">
             <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
             <End Role="REJECTION_DTL" EntitySet="REJECTION_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__STO_MST__SITE_ID__2EA5EC27" Association="Self.FK__STO_MST__SITE_ID__2EA5EC27">
+          <AssociationSet Name="FK__STO_MST__CREATED__40058253" Association="Self.FK__STO_MST__CREATED__40058253">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="STO_MST" EntitySet="STO_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__USER_MST__ACTIVE__4CA06362" Association="Self.FK__USER_MST__ACTIVE__4CA06362">
+          <AssociationSet Name="FK__USER_MST__USER_R__40F9A68C" Association="Self.FK__USER_MST__USER_R__40F9A68C">
             <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
             <End Role="USER_MST" EntitySet="USER_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__USER_ROLE__DELET__7FB5F314" Association="Self.FK__USER_ROLE__DELET__7FB5F314">
+          <AssociationSet Name="FK__USER_ROLE__USER___42E1EEFE" Association="Self.FK__USER_ROLE__USER___42E1EEFE">
             <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
             <End Role="USER_ROLE_ACCESS_MST" EntitySet="USER_ROLE_ACCESS_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_COIL_QC_DETAILS_QC_LABEL_PRINTING" Association="Self.FK_COIL_QC_DETAILS_QC_LABEL_PRINTING">
+            <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
+            <End Role="COIL_QC_DETAILS" EntitySet="COIL_QC_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAT_MOVEMENT_LOG_LOCATION_MST" Association="Self.FK_MAT_MOVEMENT_LOG_LOCATION_MST">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="MAT_MOVEMENT_LOG" EntitySet="MAT_MOVEMENT_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID" Association="Self.FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID">
+            <End Role="MRN_MST" EntitySet="MRN_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID" Association="Self.FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID" Association="Self.FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID">
+            <End Role="MIXED_PALLET_STO" EntitySet="MIXED_PALLET_STO" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUT_AWAY_LOCATION_MST1" Association="Self.FK_PUT_AWAY_LOCATION_MST1">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="PUT_AWAY" EntitySet="PUT_AWAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUT_AWAY_SITE_MST" Association="Self.FK_PUT_AWAY_SITE_MST">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="PUT_AWAY" EntitySet="PUT_AWAY" />
           </AssociationSet>
           <AssociationSet Name="FK_USER_SITE" Association="Self.FK_USER_SITE">
             <End Role="SITE_MST" EntitySet="SITE_MST" />
             <End Role="USER_MST" EntitySet="USER_MST" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AI_BTS_DENSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="FN_GET_PART_DETAILS_Result">
+          <Property Name="INV_MST_ID" Type="Int32" />
+          <Property Name="INVD_REC_ID" Type="Int32" Nullable="false" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PACK_SIZE" Type="Int32" />
+          <Property Name="QUANTITY" Type="Int32" />
+        </ComplexType>
         <ComplexType Name="GET_PART_NO_NAME_BY_BARCODE_Result">
           <Property Name="PART_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="PART_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
@@ -1144,7 +1504,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           </Key>
           <Property Name="ACTIVE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ACTIVE_VALUE" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__04E4BC85" FromRole="ACTIVE_MST" ToRole="DEPARTMENT_MST" />
+          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__208CD6FA" FromRole="ACTIVE_MST" ToRole="DEPARTMENT_MST" />
         </EntityType>
         <EntityType Name="BIN_MST">
           <Key>
@@ -1155,7 +1515,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="BIN_TYPE_MST_ID" Type="Int32" />
           <Property Name="ACTIVE" Type="Int32" />
           <Property Name="STATUS" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BIN_TYPE_MST" Relationship="Self.FK__BIN_MST__STATUS__29572725" FromRole="BIN_MST" ToRole="BIN_TYPE_MST" />
+          <NavigationProperty Name="BIN_TYPE_MST" Relationship="Self.FK__BIN_MST__BIN_TYP__1EA48E88" FromRole="BIN_MST" ToRole="BIN_TYPE_MST" />
         </EntityType>
         <EntityType Name="BIN_TYPE_MST">
           <Key>
@@ -1164,7 +1524,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="BIN_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BIN_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="BIN_MST" Relationship="Self.FK__BIN_MST__STATUS__29572725" FromRole="BIN_TYPE_MST" ToRole="BIN_MST" />
+          <NavigationProperty Name="BIN_MST" Relationship="Self.FK__BIN_MST__BIN_TYP__1EA48E88" FromRole="BIN_TYPE_MST" ToRole="BIN_MST" />
         </EntityType>
         <EntityType Name="CATEGORY_MST">
           <Key>
@@ -1174,6 +1534,18 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="CATEGORY_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="COIL_QC_DETAILS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QC_LBL_ID" Type="Int32" />
+          <Property Name="LOT_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PALET_NO" Type="Int32" />
+          <Property Name="SERIAL_NO" Type="Int32" />
+          <Property Name="WEIGHT" Type="Int32" />
+          <NavigationProperty Name="QC_LABEL_PRINTING" Relationship="Self.FK_COIL_QC_DETAILS_QC_LABEL_PRINTING" FromRole="COIL_QC_DETAILS" ToRole="QC_LABEL_PRINTING" />
+        </EntityType>
         <EntityType Name="DEPARTMENT_MST">
           <Key>
             <PropertyRef Name="DEPARTMENT_MST_ID" />
@@ -1181,8 +1553,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="DEPARTMENT_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DEPARTMENT_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVE" Type="Int32" />
-          <NavigationProperty Name="ACTIVE_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__04E4BC85" FromRole="DEPARTMENT_MST" ToRole="ACTIVE_MST" />
-          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__DEPAR__0E6E26BF" FromRole="DEPARTMENT_MST" ToRole="MACHINE_MST" />
+          <NavigationProperty Name="ACTIVE_MST" Relationship="Self.FK__DEPARTMEN__ACTIV__208CD6FA" FromRole="DEPARTMENT_MST" ToRole="ACTIVE_MST" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__DEPAR__2CF2ADDF" FromRole="DEPARTMENT_MST" ToRole="MACHINE_MST" />
         </EntityType>
         <EntityType Name="FG_BOM">
           <Key>
@@ -1194,8 +1566,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="INPUT_MATERIAL_ID" Type="Int32" />
           <Property Name="INPUT_MATERIAL_QTY" Type="Int32" />
           <Property Name="INPUT_MATERIAL_UOM_ID" Type="Int32" />
-          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__37A5467C" FromRole="FG_BOM" ToRole="MATERIAL_MST" />
-          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__38996AB5" FromRole="FG_BOM" ToRole="UOM_MST" />
+          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__2180FB33" FromRole="FG_BOM" ToRole="MATERIAL_MST" />
+          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__FG_BOM__INPUT_MA__22751F6C" FromRole="FG_BOM" ToRole="UOM_MST" />
         </EntityType>
         <EntityType Name="FG_MST">
           <Key>
@@ -1205,7 +1577,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="FG_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="FG_TYPE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="RECEPIE_MST" Relationship="Self.FK__RECEPIE_M__ACTIV__4F7CD00D" FromRole="FG_MST" ToRole="RECEPIE_MST" />
+          <NavigationProperty Name="RECEPIE_MST" Relationship="Self.FK__RECEPIE_M__OUTPU__3E1D39E1" FromRole="FG_MST" ToRole="RECEPIE_MST" />
         </EntityType>
         <EntityType Name="GRN_DTL">
           <Key>
@@ -1224,9 +1596,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PALLET_SIZE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="PART_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PALLETE_NO_BARCODE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_DTL__STATUS__6442E2C9" FromRole="GRN_DTL" ToRole="GRN_MST" />
-          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__TODAY__793DFFAF" FromRole="GRN_DTL" ToRole="GRN_LABEL_PRINTING" />
-          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__STATUS__671F4F74" FromRole="GRN_DTL" ToRole="QC_MST" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_DTL__GRN_MST__236943A5" FromRole="GRN_DTL" ToRole="GRN_MST" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__GRN_D__25518C17" FromRole="GRN_DTL" ToRole="GRN_LABEL_PRINTING" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__GRN_DTL___3B40CD36" FromRole="GRN_DTL" ToRole="QC_MST" />
         </EntityType>
         <EntityType Name="GRN_LABEL_PRINTING">
           <Key>
@@ -1244,9 +1616,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="BOX_QUANTITY" Type="Int32" />
           <Property Name="PALLETE_NO_BARCODE" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="PRINT_TYPE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_LABEL__TODAY__793DFFAF" FromRole="GRN_LABEL_PRINTING" ToRole="GRN_DTL" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_LABEL__CREAT__7C1A6C5A" FromRole="GRN_LABEL_PRINTING" ToRole="USER_MST" />
-          <NavigationProperty Name="LABEL_TYPE_MST" Relationship="Self.FK__GRN_LABEL__LABEL__7A3223E8" FromRole="GRN_LABEL_PRINTING" ToRole="LABEL_TYPE_MST" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_LABEL__GRN_D__25518C17" FromRole="GRN_LABEL_PRINTING" ToRole="GRN_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_LABEL__CREAT__245D67DE" FromRole="GRN_LABEL_PRINTING" ToRole="USER_MST" />
+          <NavigationProperty Name="LABEL_TYPE_MST" Relationship="Self.FK__GRN_LABEL__LABEL__2645B050" FromRole="GRN_LABEL_PRINTING" ToRole="LABEL_TYPE_MST" />
         </EntityType>
         <EntityType Name="GRN_MST">
           <Key>
@@ -1263,10 +1635,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="CREATED_DATE" Type="DateTime" Precision="3" />
           <Property Name="STO_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="CONTAINER_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_DTL__STATUS__6442E2C9" FromRole="GRN_MST" ToRole="GRN_DTL" />
-          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__GRN_MST__CREATED__5629CD9C" FromRole="GRN_MST" ToRole="SITE_MST" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_MST__CREATED__5812160E" FromRole="GRN_MST" ToRole="USER_MST" />
-          <NavigationProperty Name="GRN_TYPE_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__571DF1D5" FromRole="GRN_MST" ToRole="GRN_TYPE_MST" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__GRN_DTL__GRN_MST__236943A5" FromRole="GRN_MST" ToRole="GRN_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__GRN_MST__CREATED__2739D489" FromRole="GRN_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="GRN_TYPE_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__282DF8C2" FromRole="GRN_MST" ToRole="GRN_TYPE_MST" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__GRN_MST__SITE_MS__29221CFB" FromRole="GRN_MST" ToRole="SITE_MST" />
         </EntityType>
         <EntityType Name="GRN_TYPE_MST">
           <Key>
@@ -1274,7 +1646,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           </Key>
           <Property Name="GRN_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GRN_TYPE_NAME" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__571DF1D5" FromRole="GRN_TYPE_MST" ToRole="GRN_MST" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__GRN_TYP__282DF8C2" FromRole="GRN_TYPE_MST" ToRole="GRN_MST" />
         </EntityType>
         <EntityType Name="INVENTORY_DTL">
           <Key>
@@ -1288,7 +1660,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="QUANTITY_ISSUED" Type="Int32" />
           <Property Name="QUANTITY_REMAINING" Type="Int32" />
           <Property Name="STATUS" Type="Int32" />
-          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__INV_M__74794A92" FromRole="INVENTORY_DTL" ToRole="INVENTORY_MST" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__INV_M__2A164134" FromRole="INVENTORY_DTL" ToRole="INVENTORY_MST" />
         </EntityType>
         <EntityType Name="INVENTORY_MST">
           <Key>
@@ -1304,9 +1678,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="CREATED_BY" Type="Int32" />
           <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
           <Property Name="SITE_MST_ID" Type="Int32" />
-          <NavigationProperty Name="INVENTORY_DTL" Relationship="Self.FK__INVENTORY__INV_M__74794A92" FromRole="INVENTORY_MST" ToRole="INVENTORY_DTL" />
-          <NavigationProperty Name="QC_MST" Relationship="Self.FK__INVENTORY__CREAT__70A8B9AE" FromRole="INVENTORY_MST" ToRole="QC_MST" />
-          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__INVENTORY__SITE___2116E6DF" FromRole="INVENTORY_MST" ToRole="SITE_MST" />
+          <NavigationProperty Name="INVENTORY_DTL" Relationship="Self.FK__INVENTORY__INV_M__2A164134" FromRole="INVENTORY_MST" ToRole="INVENTORY_DTL" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__INVENTORY__QC_MS__2B0A656D" FromRole="INVENTORY_MST" ToRole="QC_MST" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK__INVENTORY__SITE___2BFE89A6" FromRole="INVENTORY_MST" ToRole="SITE_MST" />
         </EntityType>
         <EntityType Name="LABEL_TYPE_MST">
           <Key>
@@ -1314,7 +1688,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           </Key>
           <Property Name="LABEL_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LABEL_TYPE_NAME" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__LABEL__7A3223E8" FromRole="LABEL_TYPE_MST" ToRole="GRN_LABEL_PRINTING" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__LABEL__2645B050" FromRole="LABEL_TYPE_MST" ToRole="GRN_LABEL_PRINTING" />
         </EntityType>
         <EntityType Name="LOCATION_MST">
           <Key>
@@ -1323,6 +1697,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="LOCATION_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="LOCATION_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PICKING_DTL" Relationship="Self.FK__PICKING_D__LOCAT__32AB8735" FromRole="LOCATION_MST" ToRole="PICKING_DTL" />
+          <NavigationProperty Name="MAT_MOVEMENT_LOG" Relationship="Self.FK_MAT_MOVEMENT_LOG_LOCATION_MST" FromRole="LOCATION_MST" ToRole="MAT_MOVEMENT_LOG" />
+          <NavigationProperty Name="PUT_AWAY" Relationship="Self.FK_PUT_AWAY_LOCATION_MST1" FromRole="LOCATION_MST" ToRole="PUT_AWAY" />
         </EntityType>
         <EntityType Name="MACHINE_MST">
           <Key>
@@ -1335,9 +1712,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PROCESS_MST_ID" Type="Int32" />
           <Property Name="DEPARTMENT_MST_ID" Type="Int32" />
           <Property Name="ACTIVE" Type="Int32" />
-          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__MACHINE_M__DEPAR__0E6E26BF" FromRole="MACHINE_MST" ToRole="DEPARTMENT_MST" />
-          <NavigationProperty Name="MACHINE_TYPE_MST" Relationship="Self.FK__MACHINE_M__ACTIV__0D7A0286" FromRole="MACHINE_MST" ToRole="MACHINE_TYPE_MST" />
-          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__MACHINE_M__PROCE__0F624AF8" FromRole="MACHINE_MST" ToRole="PROCESS_MST" />
+          <NavigationProperty Name="DEPARTMENT_MST" Relationship="Self.FK__MACHINE_M__DEPAR__2CF2ADDF" FromRole="MACHINE_MST" ToRole="DEPARTMENT_MST" />
+          <NavigationProperty Name="MACHINE_TYPE_MST" Relationship="Self.FK__MACHINE_M__MACHI__2DE6D218" FromRole="MACHINE_MST" ToRole="MACHINE_TYPE_MST" />
+          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__MACHINE_M__PROCE__2EDAF651" FromRole="MACHINE_MST" ToRole="PROCESS_MST" />
         </EntityType>
         <EntityType Name="MACHINE_TYPE_MST">
           <Key>
@@ -1346,7 +1723,20 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="MACHINE_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MACHINE_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__ACTIV__0D7A0286" FromRole="MACHINE_TYPE_MST" ToRole="MACHINE_MST" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__MACHI__2DE6D218" FromRole="MACHINE_TYPE_MST" ToRole="MACHINE_MST" />
+        </EntityType>
+        <EntityType Name="MAT_MOVEMENT_LOG">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOCATION_MST_ID" Type="Int32" />
+          <Property Name="MAT_BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_BY" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <Property Name="STATUS" Type="Int32" />
+          <NavigationProperty Name="LOCATION_MST" Relationship="Self.FK_MAT_MOVEMENT_LOG_LOCATION_MST" FromRole="MAT_MOVEMENT_LOG" ToRole="LOCATION_MST" />
         </EntityType>
         <EntityType Name="MATERIAL_MST">
           <Key>
@@ -1363,9 +1753,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="ACTIVE" Type="Int32" />
           <Property Name="CAGE_QTY" Type="Int32" />
           <Property Name="BAG_QTY" Type="Int32" />
-          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__37A5467C" FromRole="MATERIAL_MST" ToRole="FG_BOM" />
-          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__MATERIAL___ACTIV__31EC6D26" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
-          <NavigationProperty Name="UOM_MST1" Relationship="Self.FK__MATERIAL___SECON__32E0915F" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
+          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__2180FB33" FromRole="MATERIAL_MST" ToRole="FG_BOM" />
+          <NavigationProperty Name="UOM_MST" Relationship="Self.FK__MATERIAL___PRIMA__30C33EC3" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
+          <NavigationProperty Name="UOM_MST1" Relationship="Self.FK__MATERIAL___SECON__31B762FC" FromRole="MATERIAL_MST" ToRole="UOM_MST" />
         </EntityType>
         <EntityType Name="MATERIAL_TYPE_MST">
           <Key>
@@ -1387,6 +1777,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="GRN_DTL_ID" Type="Int32" />
           <Property Name="IS_PICKED" Type="Int32" />
           <Property Name="IS_DISPATCHED" Type="Int32" />
+          <Property Name="DISPATCH_BY" Type="Int32" />
+          <Property Name="DISPATCH_ON" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID" FromRole="MIXED_PALLET_STO" ToRole="PICKING_MST" />
         </EntityType>
         <EntityType Name="MRN_MST">
           <Key>
@@ -1396,13 +1789,15 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="MRN_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PART_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="KANBAN_TEXT" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="Int32" />
           <Property Name="CREATED_BY" Type="Int32" />
           <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
           <Property Name="SITE_MST_ID" Type="Int32" />
           <Property Name="DISPATCH_BY" Type="Int32" />
           <Property Name="DISPATCH_ON" Type="DateTime" Precision="3" />
-          <Property Name="KANBAN_TEXT" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="IS_PICKED" Type="Int32" />
+          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID" FromRole="MRN_MST" ToRole="PICKING_MST" />
         </EntityType>
         <EntityType Name="PICKING_DTL">
           <Key>
@@ -1412,10 +1807,13 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PICKING_MST_ID" Type="Int32" />
           <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PACK_SIZE" Type="Int32" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="LOCATION_MST_ID" Type="Int32" />
           <Property Name="BOX_BARCODE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="Int32" />
           <Property Name="PICKED_BY" Type="Int32" />
           <Property Name="PICKED_ON" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="LOCATION_MST" Relationship="Self.FK__PICKING_D__LOCAT__32AB8735" FromRole="PICKING_DTL" ToRole="LOCATION_MST" />
         </EntityType>
         <EntityType Name="PROCESS_MST">
           <Key>
@@ -1427,8 +1825,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="SEQUENCE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FG_MST_ID" Type="Int32" />
           <Property Name="ACTIVE" Type="Int32" />
-          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__PROCE__0F624AF8" FromRole="PROCESS_MST" ToRole="MACHINE_MST" />
-          <NavigationProperty Name="PROCESS_TYPE_MST" Relationship="Self.FK__PROCESS_M__ACTIV__3F466844" FromRole="PROCESS_MST" ToRole="PROCESS_TYPE_MST" />
+          <NavigationProperty Name="MACHINE_MST" Relationship="Self.FK__MACHINE_M__PROCE__2EDAF651" FromRole="PROCESS_MST" ToRole="MACHINE_MST" />
+          <NavigationProperty Name="PROCESS_TYPE_MST" Relationship="Self.FK__PROCESS_M__PROCE__367C1819" FromRole="PROCESS_MST" ToRole="PROCESS_TYPE_MST" />
         </EntityType>
         <EntityType Name="PROCESS_TYPE_MST">
           <Key>
@@ -1437,7 +1835,24 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PROCESS_TYPE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PROCESS_TYPE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__PROCESS_M__ACTIV__3F466844" FromRole="PROCESS_TYPE_MST" ToRole="PROCESS_MST" />
+          <NavigationProperty Name="PROCESS_MST" Relationship="Self.FK__PROCESS_M__PROCE__367C1819" FromRole="PROCESS_TYPE_MST" ToRole="PROCESS_MST" />
+        </EntityType>
+        <EntityType Name="PUT_AWAY">
+          <Key>
+            <PropertyRef Name="PUT_ID" />
+          </Key>
+          <Property Name="PUT_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LOCATION_MST_ID" Type="Int32" />
+          <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="A_NOTICE_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QUANTITY" Type="Int32" />
+          <Property Name="MAT_BARCODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SITE_MST_ID" Type="Int32" />
+          <Property Name="CREATED_BY" Type="Int32" />
+          <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
+          <Property Name="STATUS" Type="Int32" />
+          <NavigationProperty Name="LOCATION_MST" Relationship="Self.FK_PUT_AWAY_LOCATION_MST1" FromRole="PUT_AWAY" ToRole="LOCATION_MST" />
+          <NavigationProperty Name="SITE_MST" Relationship="Self.FK_PUT_AWAY_SITE_MST" FromRole="PUT_AWAY" ToRole="SITE_MST" />
         </EntityType>
         <EntityType Name="QC_DTL">
           <Key>
@@ -1451,8 +1866,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="STATUS" Type="Int32" />
           <Property Name="QUANTITY" Type="Int32" />
           <Property Name="QUANTITY_SCRAPPED" Type="Int32" />
-          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_DTL__STATUS__6AEFE058" FromRole="QC_DTL" ToRole="QC_MST" />
-          <NavigationProperty Name="QC_LABEL_PRINTING" Relationship="Self.FK__QC_LABEL___QUANT__6DCC4D03" FromRole="QC_DTL" ToRole="QC_LABEL_PRINTING" />
+          <Property Name="QUANTITY_PICKED" Type="Int32" />
+          <Property Name="QUANTITY_RETURN" Type="Int32" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_DTL__QC_MST_I__395884C4" FromRole="QC_DTL" ToRole="QC_MST" />
+          <NavigationProperty Name="QC_LABEL_PRINTING" Relationship="Self.FK__QC_LABEL___QC_DT__3A4CA8FD" FromRole="QC_DTL" ToRole="QC_LABEL_PRINTING" />
         </EntityType>
         <EntityType Name="QC_LABEL_PRINTING">
           <Key>
@@ -1469,7 +1886,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="QC_ON" Type="DateTime" Precision="3" />
           <Property Name="QC_BY" Type="Int32" />
           <Property Name="STATUS" Type="Int32" />
-          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_LABEL___QUANT__6DCC4D03" FromRole="QC_LABEL_PRINTING" ToRole="QC_DTL" />
+          <NavigationProperty Name="COIL_QC_DETAILS" Relationship="Self.FK_COIL_QC_DETAILS_QC_LABEL_PRINTING" FromRole="QC_LABEL_PRINTING" ToRole="COIL_QC_DETAILS" />
+          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_LABEL___QC_DT__3A4CA8FD" FromRole="QC_LABEL_PRINTING" ToRole="QC_DTL" />
         </EntityType>
         <EntityType Name="QC_MST">
           <Key>
@@ -1487,10 +1905,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="QC_BY" Type="Int32" />
           <Property Name="QC_ON" Type="DateTime" Precision="3" />
           <Property Name="STATUS" Type="Int32" />
-          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__QC_MST__STATUS__671F4F74" FromRole="QC_MST" ToRole="GRN_DTL" />
-          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__CREAT__70A8B9AE" FromRole="QC_MST" ToRole="INVENTORY_MST" />
-          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_DTL__STATUS__6AEFE058" FromRole="QC_MST" ToRole="QC_DTL" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_MST__QC_BY__681373AD" FromRole="QC_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="GRN_DTL" Relationship="Self.FK__QC_MST__GRN_DTL___3B40CD36" FromRole="QC_MST" ToRole="GRN_DTL" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__QC_MS__2B0A656D" FromRole="QC_MST" ToRole="INVENTORY_MST" />
+          <NavigationProperty Name="QC_DTL" Relationship="Self.FK__QC_DTL__QC_MST_I__395884C4" FromRole="QC_MST" ToRole="QC_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_MST__QC_BY__3C34F16F" FromRole="QC_MST" ToRole="USER_MST" />
         </EntityType>
         <EntityType Name="QC_REJECTION_NOTE">
           <Key>
@@ -1503,8 +1921,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="STATUS" Type="Int32" />
           <Property Name="CREATED_BY" Type="Int32" />
           <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_REJECT__CREAT__11158940" FromRole="QC_REJECTION_NOTE" ToRole="USER_MST" />
-          <NavigationProperty Name="REJECTION_DTL" Relationship="Self.FK__REJECTION__QC_BA__13F1F5EB" FromRole="QC_REJECTION_NOTE" ToRole="REJECTION_DTL" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__QC_REJECT__CREAT__3D2915A8" FromRole="QC_REJECTION_NOTE" ToRole="USER_MST" />
+          <NavigationProperty Name="REJECTION_DTL" Relationship="Self.FK__REJECTION__QC_NO__3F115E1A" FromRole="QC_REJECTION_NOTE" ToRole="REJECTION_DTL" />
         </EntityType>
         <EntityType Name="REASON_MST">
           <Key>
@@ -1525,7 +1943,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="OUTPUT_FG_MST_ID" Type="Int32" />
           <Property Name="OUTPUT_FG_QTY" Type="Int32" />
           <Property Name="ACTIVE" Type="Int32" />
-          <NavigationProperty Name="FG_MST" Relationship="Self.FK__RECEPIE_M__ACTIV__4F7CD00D" FromRole="RECEPIE_MST" ToRole="FG_MST" />
+          <NavigationProperty Name="FG_MST" Relationship="Self.FK__RECEPIE_M__OUTPU__3E1D39E1" FromRole="RECEPIE_MST" ToRole="FG_MST" />
         </EntityType>
         <EntityType Name="REJECTION_DTL">
           <Key>
@@ -1534,7 +1952,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="WC_RJN_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="QC_NOTE_ID" Type="Int32" />
           <Property Name="QC_BARCODE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__REJECTION__QC_BA__13F1F5EB" FromRole="REJECTION_DTL" ToRole="QC_REJECTION_NOTE" />
+          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__REJECTION__QC_NO__3F115E1A" FromRole="REJECTION_DTL" ToRole="QC_REJECTION_NOTE" />
         </EntityType>
         <EntityType Name="REJECTION_MST">
           <Key>
@@ -1569,8 +1987,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="SITE_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="ACTIVE" Type="Int32" />
-          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__CREATED__5629CD9C" FromRole="SITE_MST" ToRole="GRN_MST" />
-          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__SITE___2116E6DF" FromRole="SITE_MST" ToRole="INVENTORY_MST" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__SITE_MS__29221CFB" FromRole="SITE_MST" ToRole="GRN_MST" />
+          <NavigationProperty Name="INVENTORY_MST" Relationship="Self.FK__INVENTORY__SITE___2BFE89A6" FromRole="SITE_MST" ToRole="INVENTORY_MST" />
+          <NavigationProperty Name="PUT_AWAY" Relationship="Self.FK_PUT_AWAY_SITE_MST" FromRole="SITE_MST" ToRole="PUT_AWAY" />
           <NavigationProperty Name="USER_MST" Relationship="Self.FK_USER_SITE" FromRole="SITE_MST" ToRole="USER_MST" />
         </EntityType>
         <EntityType Name="STATUS_MST">
@@ -1584,10 +2003,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
         </EntityType>
         <EntityType Name="STO_MST">
           <Key>
-            <PropertyRef Name="MRN_MST_ID" />
+            <PropertyRef Name="STO_MST_ID" />
           </Key>
-          <Property Name="MRN_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="MRN_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="STO_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="STO_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="REFERENCE_NO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="PART_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="QUANTITY" Type="Int32" />
@@ -1595,8 +2014,18 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="CREATED_BY" Type="Int32" />
           <Property Name="CREATED_ON" Type="DateTime" Precision="3" />
           <Property Name="SITE_ID" Type="Int32" />
-          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK__PICKING_M__PICKE__318258D2" FromRole="STO_MST" ToRole="PICKING_MST" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__STO_MST__SITE_ID__2EA5EC27" FromRole="STO_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__STO_MST__CREATED__40058253" FromRole="STO_MST" ToRole="USER_MST" />
+        </EntityType>
+        <EntityType Name="TempColiQC">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BARCODE" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LOT_NO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PALET_NO" Type="Int32" />
+          <Property Name="SERIAL_NO" Type="Int32" />
+          <Property Name="WEIGHT" Type="Int32" />
         </EntityType>
         <EntityType Name="UOM_MST">
           <Key>
@@ -1605,9 +2034,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="UOM_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="UOM_NAME" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__38996AB5" FromRole="UOM_MST" ToRole="FG_BOM" />
-          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__MATERIAL___ACTIV__31EC6D26" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
-          <NavigationProperty Name="MATERIAL_MST1" Relationship="Self.FK__MATERIAL___SECON__32E0915F" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
+          <NavigationProperty Name="FG_BOM" Relationship="Self.FK__FG_BOM__INPUT_MA__22751F6C" FromRole="UOM_MST" ToRole="FG_BOM" />
+          <NavigationProperty Name="MATERIAL_MST" Relationship="Self.FK__MATERIAL___PRIMA__30C33EC3" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
+          <NavigationProperty Name="MATERIAL_MST1" Relationship="Self.FK__MATERIAL___SECON__31B762FC" FromRole="UOM_MST" ToRole="MATERIAL_MST" />
         </EntityType>
         <EntityType Name="USER_MST">
           <Key>
@@ -1620,14 +2049,14 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="USER_ROLE_MST_ID" Type="Int32" />
           <Property Name="ACTIVE" Type="Int32" />
           <Property Name="SITE_MST_ID" Type="Int32" />
-          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__CREAT__7C1A6C5A" FromRole="USER_MST" ToRole="GRN_LABEL_PRINTING" />
-          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__CREATED__5812160E" FromRole="USER_MST" ToRole="GRN_MST" />
-          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__QC_BY__681373AD" FromRole="USER_MST" ToRole="QC_MST" />
-          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__QC_REJECT__CREAT__11158940" FromRole="USER_MST" ToRole="QC_REJECTION_NOTE" />
+          <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__CREAT__245D67DE" FromRole="USER_MST" ToRole="GRN_LABEL_PRINTING" />
+          <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_MST__CREATED__2739D489" FromRole="USER_MST" ToRole="GRN_MST" />
+          <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__QC_BY__3C34F16F" FromRole="USER_MST" ToRole="QC_MST" />
+          <NavigationProperty Name="QC_REJECTION_NOTE" Relationship="Self.FK__QC_REJECT__CREAT__3D2915A8" FromRole="USER_MST" ToRole="QC_REJECTION_NOTE" />
           <NavigationProperty Name="SITE_MST" Relationship="Self.FK_USER_SITE" FromRole="USER_MST" ToRole="SITE_MST" />
-          <NavigationProperty Name="STO_MST" Relationship="Self.FK__STO_MST__SITE_ID__2EA5EC27" FromRole="USER_MST" ToRole="STO_MST" />
-          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK__PICKING_M__PICKE__32767D0B" FromRole="USER_MST" ToRole="PICKING_MST" />
-          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_MST__ACTIVE__4CA06362" FromRole="USER_MST" ToRole="USER_ROLE_MST" />
+          <NavigationProperty Name="STO_MST" Relationship="Self.FK__STO_MST__CREATED__40058253" FromRole="USER_MST" ToRole="STO_MST" />
+          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_MST__USER_R__40F9A68C" FromRole="USER_MST" ToRole="USER_ROLE_MST" />
+          <NavigationProperty Name="PICKING_MST" Relationship="Self.FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID" FromRole="USER_MST" ToRole="PICKING_MST" />
         </EntityType>
         <EntityType Name="USER_ROLE_ACCESS_MST">
           <Key>
@@ -1639,7 +2068,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="READ_ACCESS" Type="Int32" />
           <Property Name="ADD_ACCESS" Type="Int32" />
           <Property Name="DELETE_ACCESS" Type="Int32" />
-          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_ROLE__DELET__7FB5F314" FromRole="USER_ROLE_ACCESS_MST" ToRole="USER_ROLE_MST" />
+          <NavigationProperty Name="USER_ROLE_MST" Relationship="Self.FK__USER_ROLE__USER___42E1EEFE" FromRole="USER_ROLE_ACCESS_MST" ToRole="USER_ROLE_MST" />
         </EntityType>
         <EntityType Name="USER_ROLE_MST">
           <Key>
@@ -1648,8 +2077,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="USER_ROLE_MST_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="USER_ROLE" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__USER_MST__ACTIVE__4CA06362" FromRole="USER_ROLE_MST" ToRole="USER_MST" />
-          <NavigationProperty Name="USER_ROLE_ACCESS_MST" Relationship="Self.FK__USER_ROLE__DELET__7FB5F314" FromRole="USER_ROLE_MST" ToRole="USER_ROLE_ACCESS_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK__USER_MST__USER_R__40F9A68C" FromRole="USER_ROLE_MST" ToRole="USER_MST" />
+          <NavigationProperty Name="USER_ROLE_ACCESS_MST" Relationship="Self.FK__USER_ROLE__USER___42E1EEFE" FromRole="USER_ROLE_MST" ToRole="USER_ROLE_ACCESS_MST" />
         </EntityType>
         <EntityType Name="PICKING_MST">
           <Key>
@@ -1663,10 +2092,13 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Name="PICKED_QTY" Type="Int32" />
           <Property Name="PICKED_BY" Type="Int32" />
           <Property Name="PICKED_ON" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="STO_MST" Relationship="Self.FK__PICKING_M__PICKE__318258D2" FromRole="PICKING_MST" ToRole="STO_MST" />
-          <NavigationProperty Name="USER_MST" Relationship="Self.FK__PICKING_M__PICKE__32767D0B" FromRole="PICKING_MST" ToRole="USER_MST" />
+          <Property Name="PALET_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MRN_MST_ID" Type="Int32" />
+          <NavigationProperty Name="MIXED_PALLET_STO" Relationship="Self.FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID" FromRole="PICKING_MST" ToRole="MIXED_PALLET_STO" />
+          <NavigationProperty Name="MRN_MST" Relationship="Self.FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID" FromRole="PICKING_MST" ToRole="MRN_MST" />
+          <NavigationProperty Name="USER_MST" Relationship="Self.FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID" FromRole="PICKING_MST" ToRole="USER_MST" />
         </EntityType>
-        <Association Name="FK__DEPARTMEN__ACTIV__04E4BC85">
+        <Association Name="FK__DEPARTMEN__ACTIV__208CD6FA">
           <End Role="ACTIVE_MST" Type="Self.ACTIVE_MST" Multiplicity="0..1" />
           <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1678,7 +2110,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BIN_MST__STATUS__29572725">
+        <Association Name="FK__BIN_MST__BIN_TYP__1EA48E88">
           <End Role="BIN_TYPE_MST" Type="Self.BIN_TYPE_MST" Multiplicity="0..1" />
           <End Role="BIN_MST" Type="Self.BIN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1690,7 +2122,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MACHINE_M__DEPAR__0E6E26BF">
+        <Association Name="FK_COIL_QC_DETAILS_QC_LABEL_PRINTING">
+          <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="0..1" />
+          <End Role="COIL_QC_DETAILS" Type="Self.COIL_QC_DETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QC_LABEL_PRINTING">
+              <PropertyRef Name="QC_LBL_ID" />
+            </Principal>
+            <Dependent Role="COIL_QC_DETAILS">
+              <PropertyRef Name="QC_LBL_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__DEPAR__2CF2ADDF">
           <End Role="DEPARTMENT_MST" Type="Self.DEPARTMENT_MST" Multiplicity="0..1" />
           <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1702,7 +2146,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FG_BOM__INPUT_MA__37A5467C">
+        <Association Name="FK__FG_BOM__INPUT_MA__2180FB33">
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="0..1" />
           <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1714,7 +2158,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__FG_BOM__INPUT_MA__38996AB5">
+        <Association Name="FK__FG_BOM__INPUT_MA__22751F6C">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="FG_BOM" Type="Self.FG_BOM" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1726,7 +2170,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__RECEPIE_M__ACTIV__4F7CD00D">
+        <Association Name="FK__RECEPIE_M__OUTPU__3E1D39E1">
           <End Role="FG_MST" Type="Self.FG_MST" Multiplicity="0..1" />
           <End Role="RECEPIE_MST" Type="Self.RECEPIE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1738,7 +2182,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_DTL__STATUS__6442E2C9">
+        <Association Name="FK__GRN_DTL__GRN_MST__236943A5">
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="0..1" />
           <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1750,7 +2194,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__TODAY__793DFFAF">
+        <Association Name="FK__GRN_LABEL__GRN_D__25518C17">
           <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
           <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1762,7 +2206,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_MST__STATUS__671F4F74">
+        <Association Name="FK__QC_MST__GRN_DTL___3B40CD36">
           <End Role="GRN_DTL" Type="Self.GRN_DTL" Multiplicity="0..1" />
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1774,7 +2218,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__CREAT__7C1A6C5A">
+        <Association Name="FK__GRN_LABEL__CREAT__245D67DE">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1786,7 +2230,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_LABEL__LABEL__7A3223E8">
+        <Association Name="FK__GRN_LABEL__LABEL__2645B050">
           <End Role="LABEL_TYPE_MST" Type="Self.LABEL_TYPE_MST" Multiplicity="0..1" />
           <End Role="GRN_LABEL_PRINTING" Type="Self.GRN_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1798,19 +2242,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_MST__CREATED__5629CD9C">
-          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
-          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SITE_MST">
-              <PropertyRef Name="SITE_MST_ID" />
-            </Principal>
-            <Dependent Role="GRN_MST">
-              <PropertyRef Name="SITE_MST_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__GRN_MST__CREATED__5812160E">
+        <Association Name="FK__GRN_MST__CREATED__2739D489">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1822,7 +2254,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GRN_MST__GRN_TYP__571DF1D5">
+        <Association Name="FK__GRN_MST__GRN_TYP__282DF8C2">
           <End Role="GRN_TYPE_MST" Type="Self.GRN_TYPE_MST" Multiplicity="0..1" />
           <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1834,7 +2266,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__INV_M__74794A92">
+        <Association Name="FK__GRN_MST__SITE_MS__29221CFB">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="GRN_MST" Type="Self.GRN_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="GRN_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__INVENTORY__INV_M__2A164134">
           <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="0..1" />
           <End Role="INVENTORY_DTL" Type="Self.INVENTORY_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1846,7 +2290,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__CREAT__70A8B9AE">
+        <Association Name="FK__INVENTORY__QC_MS__2B0A656D">
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
           <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1858,7 +2302,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__INVENTORY__SITE___2116E6DF">
+        <Association Name="FK__INVENTORY__SITE___2BFE89A6">
           <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
           <End Role="INVENTORY_MST" Type="Self.INVENTORY_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1870,7 +2314,43 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MACHINE_M__ACTIV__0D7A0286">
+        <Association Name="FK__PICKING_D__LOCAT__32AB8735">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="PICKING_DTL" Type="Self.PICKING_DTL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_DTL">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAT_MOVEMENT_LOG_LOCATION_MST">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="MAT_MOVEMENT_LOG" Type="Self.MAT_MOVEMENT_LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Principal>
+            <Dependent Role="MAT_MOVEMENT_LOG">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PUT_AWAY_LOCATION_MST1">
+          <End Role="LOCATION_MST" Type="Self.LOCATION_MST" Multiplicity="0..1" />
+          <End Role="PUT_AWAY" Type="Self.PUT_AWAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOCATION_MST">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Principal>
+            <Dependent Role="PUT_AWAY">
+              <PropertyRef Name="LOCATION_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__MACHINE_M__MACHI__2DE6D218">
           <End Role="MACHINE_TYPE_MST" Type="Self.MACHINE_TYPE_MST" Multiplicity="0..1" />
           <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1882,7 +2362,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MACHINE_M__PROCE__0F624AF8">
+        <Association Name="FK__MACHINE_M__PROCE__2EDAF651">
           <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="0..1" />
           <End Role="MACHINE_MST" Type="Self.MACHINE_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1894,7 +2374,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATERIAL___ACTIV__31EC6D26">
+        <Association Name="FK__MATERIAL___PRIMA__30C33EC3">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1906,7 +2386,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__MATERIAL___SECON__32E0915F">
+        <Association Name="FK__MATERIAL___SECON__31B762FC">
           <End Role="UOM_MST" Type="Self.UOM_MST" Multiplicity="0..1" />
           <End Role="MATERIAL_MST" Type="Self.MATERIAL_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1918,7 +2398,31 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PROCESS_M__ACTIV__3F466844">
+        <Association Name="FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID">
+          <End Role="MIXED_PALLET_STO" Type="Self.MIXED_PALLET_STO" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MIXED_PALLET_STO">
+              <PropertyRef Name="STO_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="STO_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID">
+          <End Role="MRN_MST" Type="Self.MRN_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MRN_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="MRN_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROCESS_M__PROCE__367C1819">
           <End Role="PROCESS_TYPE_MST" Type="Self.PROCESS_TYPE_MST" Multiplicity="0..1" />
           <End Role="PROCESS_MST" Type="Self.PROCESS_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1930,7 +2434,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_DTL__STATUS__6AEFE058">
+        <Association Name="FK_PUT_AWAY_SITE_MST">
+          <End Role="SITE_MST" Type="Self.SITE_MST" Multiplicity="0..1" />
+          <End Role="PUT_AWAY" Type="Self.PUT_AWAY" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SITE_MST">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Principal>
+            <Dependent Role="PUT_AWAY">
+              <PropertyRef Name="SITE_MST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__QC_DTL__QC_MST_I__395884C4">
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="0..1" />
           <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1942,7 +2458,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_LABEL___QUANT__6DCC4D03">
+        <Association Name="FK__QC_LABEL___QC_DT__3A4CA8FD">
           <End Role="QC_DTL" Type="Self.QC_DTL" Multiplicity="0..1" />
           <End Role="QC_LABEL_PRINTING" Type="Self.QC_LABEL_PRINTING" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1954,7 +2470,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_MST__QC_BY__681373AD">
+        <Association Name="FK__QC_MST__QC_BY__3C34F16F">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="QC_MST" Type="Self.QC_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1966,7 +2482,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__QC_REJECT__CREAT__11158940">
+        <Association Name="FK__QC_REJECT__CREAT__3D2915A8">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1978,7 +2494,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__REJECTION__QC_BA__13F1F5EB">
+        <Association Name="FK__REJECTION__QC_NO__3F115E1A">
           <End Role="QC_REJECTION_NOTE" Type="Self.QC_REJECTION_NOTE" Multiplicity="0..1" />
           <End Role="REJECTION_DTL" Type="Self.REJECTION_DTL" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2002,19 +2518,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PICKING_M__PICKE__318258D2">
-          <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="0..1" />
-          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="STO_MST">
-              <PropertyRef Name="MRN_MST_ID" />
-            </Principal>
-            <Dependent Role="PICKING_MST">
-              <PropertyRef Name="STO_MST_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__STO_MST__SITE_ID__2EA5EC27">
+        <Association Name="FK__STO_MST__CREATED__40058253">
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
           <End Role="STO_MST" Type="Self.STO_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2026,19 +2530,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PICKING_M__PICKE__32767D0B">
-          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
-          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="USER_MST">
-              <PropertyRef Name="USER_MST_ID" />
-            </Principal>
-            <Dependent Role="PICKING_MST">
-              <PropertyRef Name="PICKED_BY" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__USER_MST__ACTIVE__4CA06362">
+        <Association Name="FK__USER_MST__USER_R__40F9A68C">
           <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
           <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2050,7 +2542,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__USER_ROLE__DELET__7FB5F314">
+        <Association Name="FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID">
+          <End Role="USER_MST" Type="Self.USER_MST" Multiplicity="0..1" />
+          <End Role="PICKING_MST" Type="Self.PICKING_MST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER_MST">
+              <PropertyRef Name="USER_MST_ID" />
+            </Principal>
+            <Dependent Role="PICKING_MST">
+              <PropertyRef Name="PICKED_BY" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USER_ROLE__USER___42E1EEFE">
           <End Role="USER_ROLE_MST" Type="Self.USER_ROLE_MST" Multiplicity="0..1" />
           <End Role="USER_ROLE_ACCESS_MST" Type="Self.USER_ROLE_ACCESS_MST" Multiplicity="*" />
           <ReferentialConstraint>
@@ -2067,6 +2571,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="BIN_MST" EntityType="Self.BIN_MST" />
           <EntitySet Name="BIN_TYPE_MST" EntityType="Self.BIN_TYPE_MST" />
           <EntitySet Name="CATEGORY_MST" EntityType="Self.CATEGORY_MST" />
+          <EntitySet Name="COIL_QC_DETAILS" EntityType="Self.COIL_QC_DETAILS" />
           <EntitySet Name="DEPARTMENT_MST" EntityType="Self.DEPARTMENT_MST" />
           <EntitySet Name="FG_BOM" EntityType="Self.FG_BOM" />
           <EntitySet Name="FG_MST" EntityType="Self.FG_MST" />
@@ -2080,6 +2585,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="LOCATION_MST" EntityType="Self.LOCATION_MST" />
           <EntitySet Name="MACHINE_MST" EntityType="Self.MACHINE_MST" />
           <EntitySet Name="MACHINE_TYPE_MST" EntityType="Self.MACHINE_TYPE_MST" />
+          <EntitySet Name="MAT_MOVEMENT_LOG" EntityType="Self.MAT_MOVEMENT_LOG" />
           <EntitySet Name="MATERIAL_MST" EntityType="Self.MATERIAL_MST" />
           <EntitySet Name="MATERIAL_TYPE_MST" EntityType="Self.MATERIAL_TYPE_MST" />
           <EntitySet Name="MIXED_PALLET_STO" EntityType="Self.MIXED_PALLET_STO" />
@@ -2087,6 +2593,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="PICKING_DTL" EntityType="Self.PICKING_DTL" />
           <EntitySet Name="PROCESS_MST" EntityType="Self.PROCESS_MST" />
           <EntitySet Name="PROCESS_TYPE_MST" EntityType="Self.PROCESS_TYPE_MST" />
+          <EntitySet Name="PUT_AWAY" EntityType="Self.PUT_AWAY" />
           <EntitySet Name="QC_DTL" EntityType="Self.QC_DTL" />
           <EntitySet Name="QC_LABEL_PRINTING" EntityType="Self.QC_LABEL_PRINTING" />
           <EntitySet Name="QC_MST" EntityType="Self.QC_MST" />
@@ -2100,116 +2607,145 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySet Name="SITE_MST" EntityType="Self.SITE_MST" />
           <EntitySet Name="STATUS_MST" EntityType="Self.STATUS_MST" />
           <EntitySet Name="STO_MST" EntityType="Self.STO_MST" />
+          <EntitySet Name="TempColiQCs" EntityType="Self.TempColiQC" />
           <EntitySet Name="UOM_MST" EntityType="Self.UOM_MST" />
           <EntitySet Name="USER_MST" EntityType="Self.USER_MST" />
           <EntitySet Name="USER_ROLE_ACCESS_MST" EntityType="Self.USER_ROLE_ACCESS_MST" />
           <EntitySet Name="USER_ROLE_MST" EntityType="Self.USER_ROLE_MST" />
           <EntitySet Name="PICKING_MST" EntityType="Self.PICKING_MST" />
-          <AssociationSet Name="FK__DEPARTMEN__ACTIV__04E4BC85" Association="Self.FK__DEPARTMEN__ACTIV__04E4BC85">
+          <AssociationSet Name="FK__DEPARTMEN__ACTIV__208CD6FA" Association="Self.FK__DEPARTMEN__ACTIV__208CD6FA">
             <End Role="ACTIVE_MST" EntitySet="ACTIVE_MST" />
             <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__BIN_MST__STATUS__29572725" Association="Self.FK__BIN_MST__STATUS__29572725">
+          <AssociationSet Name="FK__BIN_MST__BIN_TYP__1EA48E88" Association="Self.FK__BIN_MST__BIN_TYP__1EA48E88">
             <End Role="BIN_TYPE_MST" EntitySet="BIN_TYPE_MST" />
             <End Role="BIN_MST" EntitySet="BIN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__DEPAR__0E6E26BF" Association="Self.FK__MACHINE_M__DEPAR__0E6E26BF">
+          <AssociationSet Name="FK_COIL_QC_DETAILS_QC_LABEL_PRINTING" Association="Self.FK_COIL_QC_DETAILS_QC_LABEL_PRINTING">
+            <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
+            <End Role="COIL_QC_DETAILS" EntitySet="COIL_QC_DETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__DEPAR__2CF2ADDF" Association="Self.FK__MACHINE_M__DEPAR__2CF2ADDF">
             <End Role="DEPARTMENT_MST" EntitySet="DEPARTMENT_MST" />
             <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__FG_BOM__INPUT_MA__37A5467C" Association="Self.FK__FG_BOM__INPUT_MA__37A5467C">
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__2180FB33" Association="Self.FK__FG_BOM__INPUT_MA__2180FB33">
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
             <End Role="FG_BOM" EntitySet="FG_BOM" />
           </AssociationSet>
-          <AssociationSet Name="FK__FG_BOM__INPUT_MA__38996AB5" Association="Self.FK__FG_BOM__INPUT_MA__38996AB5">
+          <AssociationSet Name="FK__FG_BOM__INPUT_MA__22751F6C" Association="Self.FK__FG_BOM__INPUT_MA__22751F6C">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="FG_BOM" EntitySet="FG_BOM" />
           </AssociationSet>
-          <AssociationSet Name="FK__RECEPIE_M__ACTIV__4F7CD00D" Association="Self.FK__RECEPIE_M__ACTIV__4F7CD00D">
+          <AssociationSet Name="FK__RECEPIE_M__OUTPU__3E1D39E1" Association="Self.FK__RECEPIE_M__OUTPU__3E1D39E1">
             <End Role="FG_MST" EntitySet="FG_MST" />
             <End Role="RECEPIE_MST" EntitySet="RECEPIE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_DTL__STATUS__6442E2C9" Association="Self.FK__GRN_DTL__STATUS__6442E2C9">
+          <AssociationSet Name="FK__GRN_DTL__GRN_MST__236943A5" Association="Self.FK__GRN_DTL__GRN_MST__236943A5">
             <End Role="GRN_MST" EntitySet="GRN_MST" />
             <End Role="GRN_DTL" EntitySet="GRN_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__TODAY__793DFFAF" Association="Self.FK__GRN_LABEL__TODAY__793DFFAF">
+          <AssociationSet Name="FK__GRN_LABEL__GRN_D__25518C17" Association="Self.FK__GRN_LABEL__GRN_D__25518C17">
             <End Role="GRN_DTL" EntitySet="GRN_DTL" />
             <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_MST__STATUS__671F4F74" Association="Self.FK__QC_MST__STATUS__671F4F74">
+          <AssociationSet Name="FK__QC_MST__GRN_DTL___3B40CD36" Association="Self.FK__QC_MST__GRN_DTL___3B40CD36">
             <End Role="GRN_DTL" EntitySet="GRN_DTL" />
             <End Role="QC_MST" EntitySet="QC_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__CREAT__7C1A6C5A" Association="Self.FK__GRN_LABEL__CREAT__7C1A6C5A">
+          <AssociationSet Name="FK__GRN_LABEL__CREAT__245D67DE" Association="Self.FK__GRN_LABEL__CREAT__245D67DE">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_LABEL__LABEL__7A3223E8" Association="Self.FK__GRN_LABEL__LABEL__7A3223E8">
+          <AssociationSet Name="FK__GRN_LABEL__LABEL__2645B050" Association="Self.FK__GRN_LABEL__LABEL__2645B050">
             <End Role="LABEL_TYPE_MST" EntitySet="LABEL_TYPE_MST" />
             <End Role="GRN_LABEL_PRINTING" EntitySet="GRN_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__CREATED__5629CD9C" Association="Self.FK__GRN_MST__CREATED__5629CD9C">
-            <End Role="SITE_MST" EntitySet="SITE_MST" />
-            <End Role="GRN_MST" EntitySet="GRN_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__CREATED__5812160E" Association="Self.FK__GRN_MST__CREATED__5812160E">
+          <AssociationSet Name="FK__GRN_MST__CREATED__2739D489" Association="Self.FK__GRN_MST__CREATED__2739D489">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="GRN_MST" EntitySet="GRN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__GRN_MST__GRN_TYP__571DF1D5" Association="Self.FK__GRN_MST__GRN_TYP__571DF1D5">
+          <AssociationSet Name="FK__GRN_MST__GRN_TYP__282DF8C2" Association="Self.FK__GRN_MST__GRN_TYP__282DF8C2">
             <End Role="GRN_TYPE_MST" EntitySet="GRN_TYPE_MST" />
             <End Role="GRN_MST" EntitySet="GRN_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__INV_M__74794A92" Association="Self.FK__INVENTORY__INV_M__74794A92">
+          <AssociationSet Name="FK__GRN_MST__SITE_MS__29221CFB" Association="Self.FK__GRN_MST__SITE_MS__29221CFB">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="GRN_MST" EntitySet="GRN_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__INVENTORY__INV_M__2A164134" Association="Self.FK__INVENTORY__INV_M__2A164134">
             <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
             <End Role="INVENTORY_DTL" EntitySet="INVENTORY_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__CREAT__70A8B9AE" Association="Self.FK__INVENTORY__CREAT__70A8B9AE">
+          <AssociationSet Name="FK__INVENTORY__QC_MS__2B0A656D" Association="Self.FK__INVENTORY__QC_MS__2B0A656D">
             <End Role="QC_MST" EntitySet="QC_MST" />
             <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__INVENTORY__SITE___2116E6DF" Association="Self.FK__INVENTORY__SITE___2116E6DF">
+          <AssociationSet Name="FK__INVENTORY__SITE___2BFE89A6" Association="Self.FK__INVENTORY__SITE___2BFE89A6">
             <End Role="SITE_MST" EntitySet="SITE_MST" />
             <End Role="INVENTORY_MST" EntitySet="INVENTORY_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__ACTIV__0D7A0286" Association="Self.FK__MACHINE_M__ACTIV__0D7A0286">
+          <AssociationSet Name="FK__PICKING_D__LOCAT__32AB8735" Association="Self.FK__PICKING_D__LOCAT__32AB8735">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="PICKING_DTL" EntitySet="PICKING_DTL" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAT_MOVEMENT_LOG_LOCATION_MST" Association="Self.FK_MAT_MOVEMENT_LOG_LOCATION_MST">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="MAT_MOVEMENT_LOG" EntitySet="MAT_MOVEMENT_LOG" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PUT_AWAY_LOCATION_MST1" Association="Self.FK_PUT_AWAY_LOCATION_MST1">
+            <End Role="LOCATION_MST" EntitySet="LOCATION_MST" />
+            <End Role="PUT_AWAY" EntitySet="PUT_AWAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__MACHINE_M__MACHI__2DE6D218" Association="Self.FK__MACHINE_M__MACHI__2DE6D218">
             <End Role="MACHINE_TYPE_MST" EntitySet="MACHINE_TYPE_MST" />
             <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MACHINE_M__PROCE__0F624AF8" Association="Self.FK__MACHINE_M__PROCE__0F624AF8">
+          <AssociationSet Name="FK__MACHINE_M__PROCE__2EDAF651" Association="Self.FK__MACHINE_M__PROCE__2EDAF651">
             <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
             <End Role="MACHINE_MST" EntitySet="MACHINE_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATERIAL___ACTIV__31EC6D26" Association="Self.FK__MATERIAL___ACTIV__31EC6D26">
+          <AssociationSet Name="FK__MATERIAL___PRIMA__30C33EC3" Association="Self.FK__MATERIAL___PRIMA__30C33EC3">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__MATERIAL___SECON__32E0915F" Association="Self.FK__MATERIAL___SECON__32E0915F">
+          <AssociationSet Name="FK__MATERIAL___SECON__31B762FC" Association="Self.FK__MATERIAL___SECON__31B762FC">
             <End Role="UOM_MST" EntitySet="UOM_MST" />
             <End Role="MATERIAL_MST" EntitySet="MATERIAL_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__PROCESS_M__ACTIV__3F466844" Association="Self.FK__PROCESS_M__ACTIV__3F466844">
+          <AssociationSet Name="FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID" Association="Self.FK_PICKINGMST_STOMSTID_MIX_PALLET_STO_STOMSTID">
+            <End Role="MIXED_PALLET_STO" EntitySet="MIXED_PALLET_STO" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID" Association="Self.FK_PICKING_MST_MRNMSTID_MRN_MST_MRNMSTID">
+            <End Role="MRN_MST" EntitySet="MRN_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROCESS_M__PROCE__367C1819" Association="Self.FK__PROCESS_M__PROCE__367C1819">
             <End Role="PROCESS_TYPE_MST" EntitySet="PROCESS_TYPE_MST" />
             <End Role="PROCESS_MST" EntitySet="PROCESS_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_DTL__STATUS__6AEFE058" Association="Self.FK__QC_DTL__STATUS__6AEFE058">
+          <AssociationSet Name="FK_PUT_AWAY_SITE_MST" Association="Self.FK_PUT_AWAY_SITE_MST">
+            <End Role="SITE_MST" EntitySet="SITE_MST" />
+            <End Role="PUT_AWAY" EntitySet="PUT_AWAY" />
+          </AssociationSet>
+          <AssociationSet Name="FK__QC_DTL__QC_MST_I__395884C4" Association="Self.FK__QC_DTL__QC_MST_I__395884C4">
             <End Role="QC_MST" EntitySet="QC_MST" />
             <End Role="QC_DTL" EntitySet="QC_DTL" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_LABEL___QUANT__6DCC4D03" Association="Self.FK__QC_LABEL___QUANT__6DCC4D03">
+          <AssociationSet Name="FK__QC_LABEL___QC_DT__3A4CA8FD" Association="Self.FK__QC_LABEL___QC_DT__3A4CA8FD">
             <End Role="QC_DTL" EntitySet="QC_DTL" />
             <End Role="QC_LABEL_PRINTING" EntitySet="QC_LABEL_PRINTING" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_MST__QC_BY__681373AD" Association="Self.FK__QC_MST__QC_BY__681373AD">
+          <AssociationSet Name="FK__QC_MST__QC_BY__3C34F16F" Association="Self.FK__QC_MST__QC_BY__3C34F16F">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="QC_MST" EntitySet="QC_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__QC_REJECT__CREAT__11158940" Association="Self.FK__QC_REJECT__CREAT__11158940">
+          <AssociationSet Name="FK__QC_REJECT__CREAT__3D2915A8" Association="Self.FK__QC_REJECT__CREAT__3D2915A8">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
           </AssociationSet>
-          <AssociationSet Name="FK__REJECTION__QC_BA__13F1F5EB" Association="Self.FK__REJECTION__QC_BA__13F1F5EB">
+          <AssociationSet Name="FK__REJECTION__QC_NO__3F115E1A" Association="Self.FK__REJECTION__QC_NO__3F115E1A">
             <End Role="QC_REJECTION_NOTE" EntitySet="QC_REJECTION_NOTE" />
             <End Role="REJECTION_DTL" EntitySet="REJECTION_DTL" />
           </AssociationSet>
@@ -2217,28 +2753,27 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <End Role="SITE_MST" EntitySet="SITE_MST" />
             <End Role="USER_MST" EntitySet="USER_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__PICKING_M__PICKE__318258D2" Association="Self.FK__PICKING_M__PICKE__318258D2">
-            <End Role="STO_MST" EntitySet="STO_MST" />
-            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__STO_MST__SITE_ID__2EA5EC27" Association="Self.FK__STO_MST__SITE_ID__2EA5EC27">
+          <AssociationSet Name="FK__STO_MST__CREATED__40058253" Association="Self.FK__STO_MST__CREATED__40058253">
             <End Role="USER_MST" EntitySet="USER_MST" />
             <End Role="STO_MST" EntitySet="STO_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__PICKING_M__PICKE__32767D0B" Association="Self.FK__PICKING_M__PICKE__32767D0B">
-            <End Role="USER_MST" EntitySet="USER_MST" />
-            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
-          </AssociationSet>
-          <AssociationSet Name="FK__USER_MST__ACTIVE__4CA06362" Association="Self.FK__USER_MST__ACTIVE__4CA06362">
+          <AssociationSet Name="FK__USER_MST__USER_R__40F9A68C" Association="Self.FK__USER_MST__USER_R__40F9A68C">
             <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
             <End Role="USER_MST" EntitySet="USER_MST" />
           </AssociationSet>
-          <AssociationSet Name="FK__USER_ROLE__DELET__7FB5F314" Association="Self.FK__USER_ROLE__DELET__7FB5F314">
+          <AssociationSet Name="FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID" Association="Self.FK_PICKINGMST_PICKEDBY_USERMST_USERMSTID">
+            <End Role="USER_MST" EntitySet="USER_MST" />
+            <End Role="PICKING_MST" EntitySet="PICKING_MST" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USER_ROLE__USER___42E1EEFE" Association="Self.FK__USER_ROLE__USER___42E1EEFE">
             <End Role="USER_ROLE_MST" EntitySet="USER_ROLE_MST" />
             <End Role="USER_ROLE_ACCESS_MST" EntitySet="USER_ROLE_ACCESS_MST" />
           </AssociationSet>
+          <FunctionImport Name="FN_GET_PART_DETAILS" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.FN_GET_PART_DETAILS_Result)">
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="GET_PART_NO_NAME_BY_BARCODE" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_PART_NO_NAME_BY_BARCODE_Result)">
-          <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_QC_BARCODE_SERIAL" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_QC_BARCODE_SERIAL_Result)">
             <Parameter Name="PART_NO" Mode="In" Type="String" />
@@ -2250,23 +2785,110 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="QC_BY" Mode="In" Type="Int32" />
             <Parameter Name="QC_ON" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="SP_APPROVE_QC_BY_PART">
+            <Parameter Name="GRN_DTL_ID" Mode="In" Type="Int32" />
+            <Parameter Name="QC_MST_ID" Mode="In" Type="Int32" />
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="QC_BY" Mode="In" Type="Int32" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_CHANGE_QC_LABEL_PRINTING_STATUS">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+            <Parameter Name="PARENT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE_TYPE" Mode="In" Type="Int32" />
+            <Parameter Name="TOTALBARCODES" Mode="InOut" Type="Int32" />
+            <Parameter Name="PRINTEDBARCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_CHECK_IF_GRN_DONE" ReturnType="Collection(AI_BTS_DENSOModel.SP_CHECK_IF_GRN_DONE_Result)">
             <Parameter Name="QC_TYPE" Mode="In" Type="String" />
             <Parameter Name="BARCODE" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_COIL_QC_DONE">
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DISPATCH">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+            <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="DISPATCHED_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GENERATE_QC_LABELS">
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="QC_DTL_ID" Mode="In" Type="Int32" />
+            <Parameter Name="INV_MST_ID" Mode="In" Type="Int32" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="BARCODE_TYPE" Mode="In" Type="Int32" />
+            <Parameter Name="QUANTITY" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="Int32" />
+            <Parameter Name="LOT_NO" Mode="In" Type="String" />
+            <Parameter Name="PALETNO" Mode="In" Type="Int32" />
+            <Parameter Name="WEIGHT" Mode="In" Type="Decimal" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_BARCODE_SERIAL">
             <Parameter Name="BARCODE_TYPE" Mode="In" Type="String" />
             <Parameter Name="Serial" Mode="InOut" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_GET_DISPATCH_LIST" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_DISPATCH_LIST_Result)">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_GET_GRN_DATA_FOR_QC" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_GRN_DATA_FOR_QC_Result)">
-          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_GRN_DETAILS">
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="InOut" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="GRN_DTL_ID" Mode="InOut" Type="Int32" />
+            <Parameter Name="PART_NO" Mode="InOut" Type="String" />
+            <Parameter Name="PART_QTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="BOX_QTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="PICKED_QTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="SUPPLIER_BATCH_NO" Mode="InOut" Type="String" />
+            <Parameter Name="PALETNO" Mode="InOut" Type="Int32" />
+            <Parameter Name="PART_TYPE" Mode="InOut" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+            <Parameter Name="LOTNO" Mode="InOut" Type="String" />
+            <Parameter Name="NOOFLABELS" Mode="InOut" Type="Int32" />
+            <Parameter Name="APPROVEQTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="REJECTQTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="SCRAPQTY" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_PALLET_LIST" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_PALLET_LIST_Result)">
             <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
             <Parameter Name="PALLET_NO" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_GET_QC_BARCODE">
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="QTY" Mode="In" Type="Int32" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="TARGET_MST" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="InOut" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_GET_QC_DATA_BY_ANOTICENO" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_QC_DATA_BY_ANOTICENO_Result)">
-          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_QC_LABELS_TO_PRINT" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_QC_LABELS_TO_PRINT_Result)">
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_REPACKING_LABELS">
+            <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="NO_OF_LABELS" Mode="In" Type="Int32" />
+            <Parameter Name="SITE_MST_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GET_SITES" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_SITES_Result)" />
+          <FunctionImport Name="SP_GET_STO" ReturnType="Collection(String)">
+            <Parameter Name="MODE" Mode="In" Type="String" />
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_INSERT_QC_MST_DATA">
             <Parameter Name="QC_TYPE" Mode="In" Type="String" />
@@ -2281,6 +2903,60 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="QC_BY" Mode="In" Type="Int32" />
             <Parameter Name="QC_ON" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="SP_PICKING">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+            <Parameter Name="LOC_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="PICKED_BY" Mode="In" Type="String" />
+            <Parameter Name="PART_NO" Mode="InOut" Type="String" />
+            <Parameter Name="PICKED_QTY" Mode="InOut" Type="Int32" />
+            <Parameter Name="STATUS" Mode="InOut" Type="Int32" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_PUT_AWAY">
+            <Parameter Name="PART_NO" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="QUANTITY" Mode="In" Type="Int32" />
+            <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="LOC_NAME" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="MODE" Mode="In" Type="String" />
+            <Parameter Name="CREATED_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_QC_DONE">
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+            <Parameter Name="QC_MODE" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_REPACKING">
+            <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="PACKSIZE" Mode="In" Type="Int32" />
+            <Parameter Name="SITE" Mode="In" Type="String" />
+            <Parameter Name="CREATED_BY" Mode="In" Type="String" />
+            <Parameter Name="MODE" Mode="In" Type="String" />
+            <Parameter Name="NO_OF_LABELS" Mode="InOut" Type="Int32" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_START_COIL_QC">
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="PICKED_QTY" Mode="In" Type="Int32" />
+            <Parameter Name="NO_OF_LBLS" Mode="In" Type="Int32" />
+            <Parameter Name="LOT_NO" Mode="In" Type="String" />
+            <Parameter Name="PALET_NO" Mode="In" Type="Int32" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_START_QC">
+            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+            <Parameter Name="QC_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS">
             <Parameter Name="QC_TYPE" Mode="In" Type="String" />
             <Parameter Name="BARCODE" Mode="In" Type="String" />
@@ -2293,6 +2969,41 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="BARCODE" Mode="In" Type="String" />
             <Parameter Name="QC_BY" Mode="In" Type="Int32" />
             <Parameter Name="STATUS" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UserLogin">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="SiteId" Mode="In" Type="Int32" />
+            <Parameter Name="Usertype" Mode="InOut" Type="String" />
+            <Parameter Name="msg" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_CHANGE_GRN_LABEL_PRINTING_STATUS">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="TOTALBARCODES" Mode="InOut" Type="Int32" />
+            <Parameter Name="PRINTEDBARCODE" Mode="InOut" Type="Int32" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_GET_DETAILS_FOR_COIL_QC" ReturnType="Collection(String)">
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_GET_GRN_LABELS_TO_PRINT_BY_STO" ReturnType="Collection(AI_BTS_DENSOModel.UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result)">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_GET_STO_TO_RECEIVE" ReturnType="Collection(AI_BTS_DENSOModel.UDP_GET_STO_TO_RECEIVE_Result)">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_MIX_PALET_DISPATCH">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+            <Parameter Name="PALET_BARCODE" Mode="In" Type="String" />
+            <Parameter Name="DISPATCH_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UDP_RECEIVE_STO">
+            <Parameter Name="STO_NO" Mode="In" Type="String" />
+            <Parameter Name="BARCODE" Mode="In" Type="String" />
+            <Parameter Name="REC_BY" Mode="In" Type="String" />
+            <Parameter Name="MSG" Mode="InOut" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_CHECK_IF_GRN_DONE_Result">
@@ -2310,6 +3021,12 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Type="String" Name="SUPPLIER_BATCH_NO" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="QUANTITY" Nullable="true" />
           <Property Type="Int32" Name="STATUS" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GET_DISPATCH_LIST_Result">
+          <Property Type="String" Name="BOX_BARCODE" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="LOCATION_MST_ID" Nullable="true" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_GET_GRN_DATA_FOR_QC_Result">
           <Property Type="Int32" Name="GRN_MST_ID" Nullable="false" />
@@ -2369,6 +3086,50 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <Property Type="Int32" Name="STATUS" Nullable="true" />
           <Property Type="Int32" Name="QUANTITY_REMAINING" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="SP_GET_QC_LABELS_TO_PRINT_Result">
+          <Property Type="String" Name="PARENT_BARCODE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="QC_BARCODE" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="INVOICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="QUANTITY" Nullable="true" />
+          <Property Type="String" Name="QC_ON" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="USER_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="SITE_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TODAY_BARCODE_SERIAL" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="BARCODE_TYPE" Nullable="false" MaxLength="7" />
+          <Property Type="Int32" Name="QC_LBL_ID" Nullable="false" />
+          <Property Type="String" Name="PART_TYPE" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LOT_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="PALET_NO" Nullable="true" />
+          <Property Type="Int32" Name="SERIAL_NO" Nullable="true" />
+          <Property Type="Int32" Name="WEIGHT" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_GET_SITES_Result">
+          <Property Type="Int32" Name="SITE_MST_ID" Nullable="false" />
+          <Property Type="String" Name="SITE_NAME" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result">
+          <Property Type="Int32" Name="LBL_PRN_CFM" Nullable="false" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PART_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="A_NOTICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="INVOICE_NO" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BOX_QUANTITY" Nullable="true" />
+          <Property Type="String" Name="SITE_NAME" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="TODAY_BARCODE_SERIAL" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="PRIMARY_BARCODE" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="UDP_GET_STO_TO_RECEIVE_Result">
+          <Property Type="String" Name="STO_NO" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="PALET_NO" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PART_NO" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="STATUS" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="PACK_SIZE" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="PICKED_QTY" Nullable="true" />
+          <Property Type="Int32" Name="RECEIVED_QTY" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2409,6 +3170,18 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="CATEGORY_MST_ID" ColumnName="CATEGORY_MST_ID" />
                 <ScalarProperty Name="CATEGORY_NAME" ColumnName="CATEGORY_NAME" />
                 <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COIL_QC_DETAILS">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.COIL_QC_DETAILS">
+              <MappingFragment StoreEntitySet="COIL_QC_DETAILS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="QC_LBL_ID" ColumnName="QC_LBL_ID" />
+                <ScalarProperty Name="LOT_NO" ColumnName="LOT_NO" />
+                <ScalarProperty Name="PALET_NO" ColumnName="PALET_NO" />
+                <ScalarProperty Name="SERIAL_NO" ColumnName="SERIAL_NO" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2516,6 +3289,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="QUANTITY_ISSUED" ColumnName="QUANTITY_ISSUED" />
                 <ScalarProperty Name="QUANTITY_REMAINING" ColumnName="QUANTITY_REMAINING" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2574,6 +3349,19 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="MAT_MOVEMENT_LOG">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MAT_MOVEMENT_LOG">
+              <MappingFragment StoreEntitySet="MAT_MOVEMENT_LOG">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="LOCATION_MST_ID" ColumnName="LOCATION_MST_ID" />
+                <ScalarProperty Name="MAT_BARCODE" ColumnName="MAT_BARCODE" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="MATERIAL_MST">
             <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MATERIAL_MST">
               <MappingFragment StoreEntitySet="MATERIAL_MST">
@@ -2611,23 +3399,26 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
                 <ScalarProperty Name="IS_PICKED" ColumnName="IS_PICKED" />
                 <ScalarProperty Name="IS_DISPATCHED" ColumnName="IS_DISPATCHED" />
+                <ScalarProperty Name="DISPATCH_BY" ColumnName="DISPATCH_BY" />
+                <ScalarProperty Name="DISPATCH_ON" ColumnName="DISPATCH_ON" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="MRN_MST">
             <EntityTypeMapping TypeName="AI_BTS_DENSOModel.MRN_MST">
               <MappingFragment StoreEntitySet="MRN_MST">
-                <ScalarProperty Name="KANBAN_TEXT" ColumnName="KANBAN_TEXT" />
                 <ScalarProperty Name="MRN_MST_ID" ColumnName="MRN_MST_ID" />
                 <ScalarProperty Name="MRN_NO" ColumnName="MRN_NO" />
                 <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
                 <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="KANBAN_TEXT" ColumnName="KANBAN_TEXT" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
                 <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
                 <ScalarProperty Name="DISPATCH_BY" ColumnName="DISPATCH_BY" />
                 <ScalarProperty Name="DISPATCH_ON" ColumnName="DISPATCH_ON" />
+                <ScalarProperty Name="IS_PICKED" ColumnName="IS_PICKED" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2638,6 +3429,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="PICKING_MST_ID" ColumnName="PICKING_MST_ID" />
                 <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
                 <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="LOCATION_MST_ID" ColumnName="LOCATION_MST_ID" />
                 <ScalarProperty Name="BOX_BARCODE" ColumnName="BOX_BARCODE" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="PICKED_BY" ColumnName="PICKED_BY" />
@@ -2666,6 +3459,22 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="PUT_AWAY">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.PUT_AWAY">
+              <MappingFragment StoreEntitySet="PUT_AWAY">
+                <ScalarProperty Name="PUT_ID" ColumnName="PUT_ID" />
+                <ScalarProperty Name="LOCATION_MST_ID" ColumnName="LOCATION_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="MAT_BARCODE" ColumnName="MAT_BARCODE" />
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
+                <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="QC_DTL">
             <EntityTypeMapping TypeName="AI_BTS_DENSOModel.QC_DTL">
               <MappingFragment StoreEntitySet="QC_DTL">
@@ -2677,6 +3486,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
                 <ScalarProperty Name="QUANTITY_SCRAPPED" ColumnName="QUANTITY_SCRAPPED" />
+                <ScalarProperty Name="QUANTITY_PICKED" ColumnName="QUANTITY_PICKED" />
+                <ScalarProperty Name="QUANTITY_RETURN" ColumnName="QUANTITY_RETURN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2810,8 +3621,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySetMapping Name="STO_MST">
             <EntityTypeMapping TypeName="AI_BTS_DENSOModel.STO_MST">
               <MappingFragment StoreEntitySet="STO_MST">
-                <ScalarProperty Name="MRN_MST_ID" ColumnName="MRN_MST_ID" />
-                <ScalarProperty Name="MRN_NO" ColumnName="MRN_NO" />
+                <ScalarProperty Name="STO_MST_ID" ColumnName="STO_MST_ID" />
+                <ScalarProperty Name="STO_NO" ColumnName="STO_NO" />
                 <ScalarProperty Name="REFERENCE_NO" ColumnName="REFERENCE_NO" />
                 <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
                 <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
@@ -2819,6 +3630,18 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="CREATED_BY" ColumnName="CREATED_BY" />
                 <ScalarProperty Name="CREATED_ON" ColumnName="CREATED_ON" />
                 <ScalarProperty Name="SITE_ID" ColumnName="SITE_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempColiQCs">
+            <EntityTypeMapping TypeName="AI_BTS_DENSOModel.TempColiQC">
+              <MappingFragment StoreEntitySet="TempColiQC">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="BARCODE" ColumnName="BARCODE" />
+                <ScalarProperty Name="LOT_NO" ColumnName="LOT_NO" />
+                <ScalarProperty Name="PALET_NO" ColumnName="PALET_NO" />
+                <ScalarProperty Name="SERIAL_NO" ColumnName="SERIAL_NO" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2876,9 +3699,22 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
                 <ScalarProperty Name="PICKED_QTY" ColumnName="PICKED_QTY" />
                 <ScalarProperty Name="PICKED_BY" ColumnName="PICKED_BY" />
                 <ScalarProperty Name="PICKED_ON" ColumnName="PICKED_ON" />
+                <ScalarProperty Name="PALET_NO" ColumnName="PALET_NO" />
+                <ScalarProperty Name="MRN_MST_ID" ColumnName="MRN_MST_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionName="AI_BTS_DENSOModel.Store.FN_GET_PART_DETAILS" FunctionImportName="FN_GET_PART_DETAILS">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.FN_GET_PART_DETAILS_Result">
+                <ScalarProperty Name="INV_MST_ID" ColumnName="INV_MST_ID" />
+                <ScalarProperty Name="INVD_REC_ID" ColumnName="INVD_REC_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionName="AI_BTS_DENSOModel.Store.GET_PART_NO_NAME_BY_BARCODE" FunctionImportName="GET_PART_NO_NAME_BY_BARCODE">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.GET_PART_NO_NAME_BY_BARCODE_Result">
@@ -2894,6 +3730,8 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_APPROVE_QC_BY_PART" FunctionName="AI_BTS_DENSOModel.Store.SP_APPROVE_QC_BY_PART" />
+          <FunctionImportMapping FunctionImportName="SP_CHANGE_QC_LABEL_PRINTING_STATUS" FunctionName="AI_BTS_DENSOModel.Store.SP_CHANGE_QC_LABEL_PRINTING_STATUS" />
           <FunctionImportMapping FunctionImportName="SP_CHECK_IF_GRN_DONE" FunctionName="AI_BTS_DENSOModel.Store.SP_CHECK_IF_GRN_DONE">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_CHECK_IF_GRN_DONE_Result">
@@ -2914,7 +3752,20 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_COIL_QC_DONE" FunctionName="AI_BTS_DENSOModel.Store.SP_COIL_QC_DONE" />
+          <FunctionImportMapping FunctionImportName="SP_DISPATCH" FunctionName="AI_BTS_DENSOModel.Store.SP_DISPATCH" />
+          <FunctionImportMapping FunctionImportName="SP_GENERATE_QC_LABELS" FunctionName="AI_BTS_DENSOModel.Store.SP_GENERATE_QC_LABELS" />
           <FunctionImportMapping FunctionImportName="SP_GET_BARCODE_SERIAL" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_BARCODE_SERIAL" />
+          <FunctionImportMapping FunctionImportName="SP_GET_DISPATCH_LIST" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_DISPATCH_LIST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_DISPATCH_LIST_Result">
+                <ScalarProperty Name="BOX_BARCODE" ColumnName="BOX_BARCODE" />
+                <ScalarProperty Name="LOCATION_MST_ID" ColumnName="LOCATION_MST_ID" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_GET_GRN_DATA_FOR_QC" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_GRN_DATA_FOR_QC">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_GRN_DATA_FOR_QC_Result">
@@ -2938,6 +3789,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_GRN_DETAILS" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_GRN_DETAILS" />
           <FunctionImportMapping FunctionImportName="SP_GET_PALLET_LIST" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_PALLET_LIST">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_PALLET_LIST_Result">
@@ -2968,6 +3820,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_QC_BARCODE" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_QC_BARCODE" />
           <FunctionImportMapping FunctionImportName="SP_GET_QC_DATA_BY_ANOTICENO" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_QC_DATA_BY_ANOTICENO">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_QC_DATA_BY_ANOTICENO_Result">
@@ -2985,9 +3838,82 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_QC_LABELS_TO_PRINT" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_QC_LABELS_TO_PRINT">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_QC_LABELS_TO_PRINT_Result">
+                <ScalarProperty Name="PARENT_BARCODE" ColumnName="PARENT_BARCODE" />
+                <ScalarProperty Name="QC_BARCODE" ColumnName="QC_BARCODE" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="QUANTITY" ColumnName="QUANTITY" />
+                <ScalarProperty Name="QC_ON" ColumnName="QC_ON" />
+                <ScalarProperty Name="USER_NAME" ColumnName="USER_NAME" />
+                <ScalarProperty Name="SITE_NAME" ColumnName="SITE_NAME" />
+                <ScalarProperty Name="TODAY_BARCODE_SERIAL" ColumnName="TODAY_BARCODE_SERIAL" />
+                <ScalarProperty Name="BARCODE_TYPE" ColumnName="BARCODE_TYPE" />
+                <ScalarProperty Name="QC_LBL_ID" ColumnName="QC_LBL_ID" />
+                <ScalarProperty Name="PART_TYPE" ColumnName="PART_TYPE" />
+                <ScalarProperty Name="LOT_NO" ColumnName="LOT_NO" />
+                <ScalarProperty Name="PALET_NO" ColumnName="PALET_NO" />
+                <ScalarProperty Name="SERIAL_NO" ColumnName="SERIAL_NO" />
+                <ScalarProperty Name="WEIGHT" ColumnName="WEIGHT" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_REPACKING_LABELS" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_REPACKING_LABELS" />
+          <FunctionImportMapping FunctionImportName="SP_GET_SITES" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_SITES">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.SP_GET_SITES_Result">
+                <ScalarProperty Name="SITE_MST_ID" ColumnName="SITE_MST_ID" />
+                <ScalarProperty Name="SITE_NAME" ColumnName="SITE_NAME" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_GET_STO" FunctionName="AI_BTS_DENSOModel.Store.SP_GET_STO" />
           <FunctionImportMapping FunctionImportName="SP_INSERT_QC_MST_DATA" FunctionName="AI_BTS_DENSOModel.Store.SP_INSERT_QC_MST_DATA" />
+          <FunctionImportMapping FunctionImportName="SP_PICKING" FunctionName="AI_BTS_DENSOModel.Store.SP_PICKING" />
+          <FunctionImportMapping FunctionImportName="SP_PUT_AWAY" FunctionName="AI_BTS_DENSOModel.Store.SP_PUT_AWAY" />
+          <FunctionImportMapping FunctionImportName="SP_QC_DONE" FunctionName="AI_BTS_DENSOModel.Store.SP_QC_DONE" />
+          <FunctionImportMapping FunctionImportName="SP_REPACKING" FunctionName="AI_BTS_DENSOModel.Store.SP_REPACKING" />
+          <FunctionImportMapping FunctionImportName="SP_START_COIL_QC" FunctionName="AI_BTS_DENSOModel.Store.SP_START_COIL_QC" />
+          <FunctionImportMapping FunctionImportName="SP_START_QC" FunctionName="AI_BTS_DENSOModel.Store.SP_START_QC" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" FunctionName="AI_BTS_DENSOModel.Store.SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS" />
           <FunctionImportMapping FunctionImportName="SP_UPDATE_QC_MST_DTL_STATUS" FunctionName="AI_BTS_DENSOModel.Store.SP_UPDATE_QC_MST_DTL_STATUS" />
+          <FunctionImportMapping FunctionImportName="SP_UserLogin" FunctionName="AI_BTS_DENSOModel.Store.SP_UserLogin" />
+          <FunctionImportMapping FunctionImportName="UDP_CHANGE_GRN_LABEL_PRINTING_STATUS" FunctionName="AI_BTS_DENSOModel.Store.UDP_CHANGE_GRN_LABEL_PRINTING_STATUS" />
+          <FunctionImportMapping FunctionImportName="UDP_GET_DETAILS_FOR_COIL_QC" FunctionName="AI_BTS_DENSOModel.Store.UDP_GET_DETAILS_FOR_COIL_QC" />
+          <FunctionImportMapping FunctionImportName="UDP_GET_GRN_LABELS_TO_PRINT_BY_STO" FunctionName="AI_BTS_DENSOModel.Store.UDP_GET_GRN_LABELS_TO_PRINT_BY_STO">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result">
+                <ScalarProperty Name="LBL_PRN_CFM" ColumnName="LBL_PRN_CFM" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="PART_NAME" ColumnName="PART_NAME" />
+                <ScalarProperty Name="A_NOTICE_NO" ColumnName="A_NOTICE_NO" />
+                <ScalarProperty Name="INVOICE_NO" ColumnName="INVOICE_NO" />
+                <ScalarProperty Name="BOX_QUANTITY" ColumnName="BOX_QUANTITY" />
+                <ScalarProperty Name="SITE_NAME" ColumnName="SITE_NAME" />
+                <ScalarProperty Name="TODAY_BARCODE_SERIAL" ColumnName="TODAY_BARCODE_SERIAL" />
+                <ScalarProperty Name="PRIMARY_BARCODE" ColumnName="PRIMARY_BARCODE" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_GET_STO_TO_RECEIVE" FunctionName="AI_BTS_DENSOModel.Store.UDP_GET_STO_TO_RECEIVE">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AI_BTS_DENSOModel.UDP_GET_STO_TO_RECEIVE_Result">
+                <ScalarProperty Name="STO_NO" ColumnName="STO_NO" />
+                <ScalarProperty Name="PALET_NO" ColumnName="PALET_NO" />
+                <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PACK_SIZE" ColumnName="PACK_SIZE" />
+                <ScalarProperty Name="PICKED_QTY" ColumnName="PICKED_QTY" />
+                <ScalarProperty Name="RECEIVED_QTY" ColumnName="RECEIVED_QTY" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UDP_MIX_PALET_DISPATCH" FunctionName="AI_BTS_DENSOModel.Store.UDP_MIX_PALET_DISPATCH" />
+          <FunctionImportMapping FunctionImportName="UDP_RECEIVE_STO" FunctionName="AI_BTS_DENSOModel.Store.UDP_RECEIVE_STO" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

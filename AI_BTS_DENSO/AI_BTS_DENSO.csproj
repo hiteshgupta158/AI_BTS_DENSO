@@ -301,6 +301,9 @@
     <Compile Include="Model\CATEGORY_MST.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\COIL_QC_DETAILS.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\DBModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -323,6 +326,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\FG_MST.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\FN_GET_PART_DETAILS_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\GET_PART_NO_NAME_BY_BARCODE_Result.cs">
@@ -368,6 +374,9 @@
     <Compile Include="Model\MATERIAL_TYPE_MST.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\MAT_MOVEMENT_LOG.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\MIXED_PALLET_STO.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -384,6 +393,9 @@
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PROCESS_TYPE_MST.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PUT_AWAY.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\QC_DTL.cs">
@@ -422,6 +434,9 @@
     <Compile Include="Model\SP_CHECK_IF_GRN_DONE_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_GET_DISPATCH_LIST_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\SP_GET_GRN_DATA_FOR_QC_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
@@ -431,10 +446,25 @@
     <Compile Include="Model\SP_GET_QC_DATA_BY_ANOTICENO_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SP_GET_QC_LABELS_TO_PRINT_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SP_GET_SITES_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\STATUS_MST.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\STO_MST.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\TempColiQC.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result.cs">
+      <DependentUpon>DBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\UDP_GET_STO_TO_RECEIVE_Result.cs">
       <DependentUpon>DBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\UOM_MST.cs">

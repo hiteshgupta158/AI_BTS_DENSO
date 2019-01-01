@@ -22,8 +22,11 @@ namespace AI_BTS_DENSO.Model
         public Nullable<int> PICKED_QTY { get; set; }
         public Nullable<int> PICKED_BY { get; set; }
         public Nullable<System.DateTime> PICKED_ON { get; set; }
+        public string PALET_NO { get; set; }
+        public Nullable<int> MRN_MST_ID { get; set; }
     
-        public virtual STO_MST STO_MST { get; set; }
+        public virtual MIXED_PALLET_STO MIXED_PALLET_STO { get; set; }
+        public virtual MRN_MST MRN_MST { get; set; }
         public virtual USER_MST USER_MST { get; set; }
     }
 }

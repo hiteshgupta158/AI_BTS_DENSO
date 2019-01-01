@@ -14,8 +14,23 @@ namespace AI_BTS_DENSO.Model
     
     public partial class LOCATION_MST
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public LOCATION_MST()
+        {
+            this.PICKING_DTL = new HashSet<PICKING_DTL>();
+            this.MAT_MOVEMENT_LOG = new HashSet<MAT_MOVEMENT_LOG>();
+            this.PUT_AWAY = new HashSet<PUT_AWAY>();
+        }
+    
         public int LOCATION_MST_ID { get; set; }
         public string LOCATION_NAME { get; set; }
         public string DESCRIPTION { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PICKING_DTL> PICKING_DTL { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MAT_MOVEMENT_LOG> MAT_MOVEMENT_LOG { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PUT_AWAY> PUT_AWAY { get; set; }
     }
 }

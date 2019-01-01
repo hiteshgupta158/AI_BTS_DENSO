@@ -44,8 +44,8 @@ namespace AI_BTS_DENSO.Model
         public virtual SITE_MST SITE_MST { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<STO_MST> STO_MST { get; set; }
+        public virtual USER_ROLE_MST USER_ROLE_MST { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PICKING_MST> PICKING_MST { get; set; }
-        public virtual USER_ROLE_MST USER_ROLE_MST { get; set; }
     }
 }

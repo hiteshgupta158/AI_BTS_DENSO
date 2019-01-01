@@ -10,20 +10,15 @@
 namespace AI_BTS_DENSO.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class STO_MST
+    public partial class UDP_GET_STO_TO_RECEIVE_Result
     {
-        public int STO_MST_ID { get; set; }
         public string STO_NO { get; set; }
-        public string REFERENCE_NO { get; set; }
+        public string PALET_NO { get; set; }
         public string PART_NO { get; set; }
-        public Nullable<int> QUANTITY { get; set; }
-        public Nullable<int> STATUS { get; set; }
-        public Nullable<int> CREATED_BY { get; set; }
-        public Nullable<System.DateTime> CREATED_ON { get; set; }
-        public Nullable<int> SITE_ID { get; set; }
-    
-        public virtual USER_MST USER_MST { get; set; }
+        public string STATUS { get; set; }
+        public string PACK_SIZE { get; set; }
+        public Nullable<int> PICKED_QTY { get; set; }
+        public int RECEIVED_QTY { get; set; }
     }
 }

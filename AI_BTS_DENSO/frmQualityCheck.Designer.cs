@@ -49,20 +49,6 @@
             this.btnSave = new System.Windows.Forms.Button();
             this.pnlDataGridView = new System.Windows.Forms.Panel();
             this.dgvData = new System.Windows.Forms.DataGridView();
-            this.GRN_DTL_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IS_Block = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QC_MST_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Part_Level_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.chkSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.Part_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Part_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Supplier_Batch_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack_Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Quantity_Remaining = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QC_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -72,6 +58,21 @@
             this.label14 = new System.Windows.Forms.Label();
             this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
             this.label15 = new System.Windows.Forms.Label();
+            this.GRN_DTL_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IS_Block = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QC_MST_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Part_Level_Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.chkSelect = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Part_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Part_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pallete_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Supplier_Batch_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pack_Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Barcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Quantity_Remaining = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QC_Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlHeaderControl.SuspendLayout();
             this.pnlMain.SuspendLayout();
             this.pnlGridBottomControls.SuspendLayout();
@@ -321,6 +322,7 @@
             this.chkSelect,
             this.Part_No,
             this.Part_Name,
+            this.Pallete_No,
             this.Supplier_Batch_No,
             this.Pack_Size,
             this.Barcode,
@@ -335,120 +337,6 @@
             this.dgvData.Size = new System.Drawing.Size(1109, 471);
             this.dgvData.TabIndex = 0;
             this.dgvData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvData_CellContentClick);
-            // 
-            // GRN_DTL_ID
-            // 
-            this.GRN_DTL_ID.DataPropertyName = "GRN_DTL_ID";
-            this.GRN_DTL_ID.HeaderText = "GRN DTL ID";
-            this.GRN_DTL_ID.Name = "GRN_DTL_ID";
-            this.GRN_DTL_ID.ReadOnly = true;
-            this.GRN_DTL_ID.Visible = false;
-            // 
-            // IS_Block
-            // 
-            this.IS_Block.DataPropertyName = "Is_block";
-            this.IS_Block.HeaderText = "Is Block";
-            this.IS_Block.Name = "IS_Block";
-            this.IS_Block.ReadOnly = true;
-            this.IS_Block.Visible = false;
-            // 
-            // QC_MST_ID
-            // 
-            this.QC_MST_ID.DataPropertyName = "QC_MST_ID";
-            this.QC_MST_ID.HeaderText = "QC MST ID";
-            this.QC_MST_ID.Name = "QC_MST_ID";
-            this.QC_MST_ID.ReadOnly = true;
-            this.QC_MST_ID.Visible = false;
-            // 
-            // Part_Level_Quantity
-            // 
-            this.Part_Level_Quantity.DataPropertyName = "Part_Level_Quantity";
-            this.Part_Level_Quantity.HeaderText = "Part Level Qty";
-            this.Part_Level_Quantity.Name = "Part_Level_Quantity";
-            this.Part_Level_Quantity.ReadOnly = true;
-            this.Part_Level_Quantity.Visible = false;
-            // 
-            // Status
-            // 
-            this.Status.DataPropertyName = "Status";
-            this.Status.HeaderText = "Status";
-            this.Status.Name = "Status";
-            this.Status.ReadOnly = true;
-            this.Status.Visible = false;
-            // 
-            // chkSelect
-            // 
-            this.chkSelect.HeaderText = "";
-            this.chkSelect.Name = "chkSelect";
-            this.chkSelect.ReadOnly = true;
-            this.chkSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.chkSelect.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.chkSelect.Width = 25;
-            // 
-            // Part_No
-            // 
-            this.Part_No.DataPropertyName = "Part_No";
-            this.Part_No.HeaderText = "Part No";
-            this.Part_No.Name = "Part_No";
-            this.Part_No.ReadOnly = true;
-            this.Part_No.Width = 150;
-            // 
-            // Part_Name
-            // 
-            this.Part_Name.DataPropertyName = "Part_Name";
-            this.Part_Name.HeaderText = "Part Name";
-            this.Part_Name.Name = "Part_Name";
-            this.Part_Name.ReadOnly = true;
-            this.Part_Name.Width = 200;
-            // 
-            // Supplier_Batch_No
-            // 
-            this.Supplier_Batch_No.DataPropertyName = "Supplier_Batch_No";
-            this.Supplier_Batch_No.HeaderText = "Supplier Code";
-            this.Supplier_Batch_No.Name = "Supplier_Batch_No";
-            this.Supplier_Batch_No.ReadOnly = true;
-            this.Supplier_Batch_No.Width = 140;
-            // 
-            // Pack_Size
-            // 
-            this.Pack_Size.DataPropertyName = "Pack_Size";
-            this.Pack_Size.HeaderText = "Pack Size";
-            this.Pack_Size.Name = "Pack_Size";
-            this.Pack_Size.ReadOnly = true;
-            this.Pack_Size.Width = 125;
-            // 
-            // Barcode
-            // 
-            this.Barcode.DataPropertyName = "Primary_Barcode";
-            this.Barcode.HeaderText = "Barcode";
-            this.Barcode.Name = "Barcode";
-            this.Barcode.ReadOnly = true;
-            this.Barcode.Visible = false;
-            this.Barcode.Width = 300;
-            // 
-            // Quantity
-            // 
-            this.Quantity.DataPropertyName = "Quantity";
-            this.Quantity.HeaderText = "Total Qty";
-            this.Quantity.Name = "Quantity";
-            this.Quantity.ReadOnly = true;
-            this.Quantity.Width = 120;
-            // 
-            // Quantity_Remaining
-            // 
-            this.Quantity_Remaining.DataPropertyName = "Quantity_Remaining";
-            this.Quantity_Remaining.HeaderText = "Remaining Qty";
-            this.Quantity_Remaining.Name = "Quantity_Remaining";
-            this.Quantity_Remaining.ReadOnly = true;
-            this.Quantity_Remaining.Width = 150;
-            // 
-            // QC_Status
-            // 
-            this.QC_Status.DataPropertyName = "QC_Status";
-            this.QC_Status.HeaderText = "QC Status";
-            this.QC_Status.Name = "QC_Status";
-            this.QC_Status.ReadOnly = true;
-            this.QC_Status.Width = 110;
             // 
             // panel1
             // 
@@ -559,6 +447,128 @@
             this.label15.TabIndex = 4;
             this.label15.Text = "A Notice Date";
             // 
+            // GRN_DTL_ID
+            // 
+            this.GRN_DTL_ID.DataPropertyName = "GRN_DTL_ID";
+            this.GRN_DTL_ID.HeaderText = "GRN DTL ID";
+            this.GRN_DTL_ID.Name = "GRN_DTL_ID";
+            this.GRN_DTL_ID.ReadOnly = true;
+            this.GRN_DTL_ID.Visible = false;
+            // 
+            // IS_Block
+            // 
+            this.IS_Block.DataPropertyName = "Is_block";
+            this.IS_Block.HeaderText = "Is Block";
+            this.IS_Block.Name = "IS_Block";
+            this.IS_Block.ReadOnly = true;
+            this.IS_Block.Visible = false;
+            // 
+            // QC_MST_ID
+            // 
+            this.QC_MST_ID.DataPropertyName = "QC_MST_ID";
+            this.QC_MST_ID.HeaderText = "QC MST ID";
+            this.QC_MST_ID.Name = "QC_MST_ID";
+            this.QC_MST_ID.ReadOnly = true;
+            this.QC_MST_ID.Visible = false;
+            // 
+            // Part_Level_Quantity
+            // 
+            this.Part_Level_Quantity.DataPropertyName = "Part_Level_Quantity";
+            this.Part_Level_Quantity.HeaderText = "Part Level Qty";
+            this.Part_Level_Quantity.Name = "Part_Level_Quantity";
+            this.Part_Level_Quantity.ReadOnly = true;
+            this.Part_Level_Quantity.Visible = false;
+            // 
+            // Status
+            // 
+            this.Status.DataPropertyName = "Status";
+            this.Status.HeaderText = "Status";
+            this.Status.Name = "Status";
+            this.Status.ReadOnly = true;
+            this.Status.Visible = false;
+            // 
+            // chkSelect
+            // 
+            this.chkSelect.HeaderText = "";
+            this.chkSelect.Name = "chkSelect";
+            this.chkSelect.ReadOnly = true;
+            this.chkSelect.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.chkSelect.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.chkSelect.Width = 25;
+            // 
+            // Part_No
+            // 
+            this.Part_No.DataPropertyName = "Part_No";
+            this.Part_No.HeaderText = "Part No";
+            this.Part_No.Name = "Part_No";
+            this.Part_No.ReadOnly = true;
+            this.Part_No.Width = 150;
+            // 
+            // Part_Name
+            // 
+            this.Part_Name.DataPropertyName = "Part_Name";
+            this.Part_Name.HeaderText = "Part Name";
+            this.Part_Name.Name = "Part_Name";
+            this.Part_Name.ReadOnly = true;
+            this.Part_Name.Width = 200;
+            // 
+            // Pallete_No
+            // 
+            this.Pallete_No.DataPropertyName = "PALLETE_NO";
+            this.Pallete_No.HeaderText = "Pallet No";
+            this.Pallete_No.Name = "Pallete_No";
+            this.Pallete_No.ReadOnly = true;
+            this.Pallete_No.Width = 170;
+            // 
+            // Supplier_Batch_No
+            // 
+            this.Supplier_Batch_No.DataPropertyName = "Supplier_Batch_No";
+            this.Supplier_Batch_No.HeaderText = "Supplier Code";
+            this.Supplier_Batch_No.Name = "Supplier_Batch_No";
+            this.Supplier_Batch_No.ReadOnly = true;
+            this.Supplier_Batch_No.Width = 140;
+            // 
+            // Pack_Size
+            // 
+            this.Pack_Size.DataPropertyName = "Pack_Size";
+            this.Pack_Size.HeaderText = "Pack Size";
+            this.Pack_Size.Name = "Pack_Size";
+            this.Pack_Size.ReadOnly = true;
+            this.Pack_Size.Width = 125;
+            // 
+            // Barcode
+            // 
+            this.Barcode.DataPropertyName = "Primary_Barcode";
+            this.Barcode.HeaderText = "Barcode";
+            this.Barcode.Name = "Barcode";
+            this.Barcode.ReadOnly = true;
+            this.Barcode.Visible = false;
+            this.Barcode.Width = 300;
+            // 
+            // Quantity
+            // 
+            this.Quantity.DataPropertyName = "Quantity";
+            this.Quantity.HeaderText = "Total Qty";
+            this.Quantity.Name = "Quantity";
+            this.Quantity.ReadOnly = true;
+            this.Quantity.Width = 120;
+            // 
+            // Quantity_Remaining
+            // 
+            this.Quantity_Remaining.DataPropertyName = "Quantity_Remaining";
+            this.Quantity_Remaining.HeaderText = "Remaining Qty";
+            this.Quantity_Remaining.Name = "Quantity_Remaining";
+            this.Quantity_Remaining.ReadOnly = true;
+            this.Quantity_Remaining.Width = 150;
+            // 
+            // QC_Status
+            // 
+            this.QC_Status.DataPropertyName = "QC_Status";
+            this.QC_Status.HeaderText = "QC Status";
+            this.QC_Status.Name = "QC_Status";
+            this.QC_Status.ReadOnly = true;
+            this.QC_Status.Width = 110;
+            // 
             // frmQualityCheck
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -627,6 +637,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn chkSelect;
         private System.Windows.Forms.DataGridViewTextBoxColumn Part_No;
         private System.Windows.Forms.DataGridViewTextBoxColumn Part_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pallete_No;
         private System.Windows.Forms.DataGridViewTextBoxColumn Supplier_Batch_No;
         private System.Windows.Forms.DataGridViewTextBoxColumn Pack_Size;
         private System.Windows.Forms.DataGridViewTextBoxColumn Barcode;

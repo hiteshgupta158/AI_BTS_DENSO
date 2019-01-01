@@ -14,16 +14,26 @@ namespace AI_BTS_DENSO.Model
     
     public partial class MRN_MST
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MRN_MST()
+        {
+            this.PICKING_MST = new HashSet<PICKING_MST>();
+        }
+    
         public int MRN_MST_ID { get; set; }
         public string MRN_NO { get; set; }
         public string PART_NO { get; set; }
         public Nullable<int> QUANTITY { get; set; }
+        public string KANBAN_TEXT { get; set; }
         public Nullable<int> STATUS { get; set; }
         public Nullable<int> CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_ON { get; set; }
         public Nullable<int> SITE_MST_ID { get; set; }
         public Nullable<int> DISPATCH_BY { get; set; }
         public Nullable<System.DateTime> DISPATCH_ON { get; set; }
-        public string KANBAN_TEXT { get; set; }
+        public Nullable<int> IS_PICKED { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PICKING_MST> PICKING_MST { get; set; }
     }
 }

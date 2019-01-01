@@ -14,6 +14,12 @@ namespace AI_BTS_DENSO.Model
     
     public partial class QC_LABEL_PRINTING
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public QC_LABEL_PRINTING()
+        {
+            this.COIL_QC_DETAILS = new HashSet<COIL_QC_DETAILS>();
+        }
+    
         public int QC_LBL_ID { get; set; }
         public Nullable<int> QC_DTL_ID { get; set; }
         public string PARENT_BARCODE { get; set; }
@@ -26,6 +32,8 @@ namespace AI_BTS_DENSO.Model
         public Nullable<int> QC_BY { get; set; }
         public Nullable<int> STATUS { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<COIL_QC_DETAILS> COIL_QC_DETAILS { get; set; }
         public virtual QC_DTL QC_DTL { get; set; }
     }
 }

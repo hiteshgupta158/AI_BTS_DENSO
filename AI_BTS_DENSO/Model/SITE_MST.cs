@@ -19,6 +19,7 @@ namespace AI_BTS_DENSO.Model
         {
             this.GRN_MST = new HashSet<GRN_MST>();
             this.INVENTORY_MST = new HashSet<INVENTORY_MST>();
+            this.PUT_AWAY = new HashSet<PUT_AWAY>();
             this.USER_MST = new HashSet<USER_MST>();
         }
     
@@ -31,6 +32,8 @@ namespace AI_BTS_DENSO.Model
         public virtual ICollection<GRN_MST> GRN_MST { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<INVENTORY_MST> INVENTORY_MST { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PUT_AWAY> PUT_AWAY { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<USER_MST> USER_MST { get; set; }
     }

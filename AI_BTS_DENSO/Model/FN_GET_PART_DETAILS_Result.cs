@@ -10,21 +10,13 @@
 namespace AI_BTS_DENSO.Model
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class INVENTORY_DTL
+    public partial class FN_GET_PART_DETAILS_Result
     {
-        public int INVD_REC_ID { get; set; }
         public Nullable<int> INV_MST_ID { get; set; }
-        public string P_BARCODE { get; set; }
-        public string C_BARCODE { get; set; }
+        public int INVD_REC_ID { get; set; }
+        public string PART_NO { get; set; }
+        public Nullable<int> PACK_SIZE { get; set; }
         public Nullable<int> QUANTITY { get; set; }
-        public Nullable<int> QUANTITY_ISSUED { get; set; }
-        public Nullable<int> QUANTITY_REMAINING { get; set; }
-        public Nullable<int> STATUS { get; set; }
-        public Nullable<int> CREATED_BY { get; set; }
-        public Nullable<System.DateTime> CREATED_ON { get; set; }
-    
-        public virtual INVENTORY_MST INVENTORY_MST { get; set; }
     }
 }

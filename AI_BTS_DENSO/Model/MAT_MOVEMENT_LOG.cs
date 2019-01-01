@@ -12,19 +12,16 @@ namespace AI_BTS_DENSO.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class INVENTORY_DTL
+    public partial class MAT_MOVEMENT_LOG
     {
-        public int INVD_REC_ID { get; set; }
-        public Nullable<int> INV_MST_ID { get; set; }
-        public string P_BARCODE { get; set; }
-        public string C_BARCODE { get; set; }
-        public Nullable<int> QUANTITY { get; set; }
-        public Nullable<int> QUANTITY_ISSUED { get; set; }
-        public Nullable<int> QUANTITY_REMAINING { get; set; }
-        public Nullable<int> STATUS { get; set; }
-        public Nullable<int> CREATED_BY { get; set; }
+        public int ID { get; set; }
+        public Nullable<int> LOCATION_MST_ID { get; set; }
+        public string MAT_BARCODE { get; set; }
+        public string CREATED_BY { get; set; }
         public Nullable<System.DateTime> CREATED_ON { get; set; }
+        public Nullable<int> SITE_MST_ID { get; set; }
+        public Nullable<int> STATUS { get; set; }
     
-        public virtual INVENTORY_MST INVENTORY_MST { get; set; }
+        public virtual LOCATION_MST LOCATION_MST { get; set; }
     }
 }

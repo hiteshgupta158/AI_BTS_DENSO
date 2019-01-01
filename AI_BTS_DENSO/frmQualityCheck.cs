@@ -201,7 +201,7 @@ namespace AI_BTS_DENSO
                     ClsMessage.ShowError("Please Select the valid data for QC.");
                     txtANoticeNo.Focus();
                 }
-                else if (dgvData.Rows.Count <= 1)
+                else if (dgvData.Rows.Count <= 0)
                     ClsMessage.ShowError("Please select the valid data for QC first.");
                 else if (optNone.Checked)
                     ClsMessage.ShowError("Please Select at least one part for QC.");
@@ -273,7 +273,7 @@ namespace AI_BTS_DENSO
                                                     qc_mst.QC_BY = Convert.ToInt32(clsCurrentUser.User_MST_ID);
                                                     qc_mst.QC_ON = qc_on;
                                                     qc_mst.STATUS = 2;
-
+                                                    
                                                     db.QC_MST.Add(qc_mst);
                                                 }
                                                 db.SaveChanges();
@@ -335,41 +335,44 @@ namespace AI_BTS_DENSO
                                                 string lstrCurrBox = "";
                                                 grn_lbl = db.GRN_LABEL_PRINTING.Where(x => x.GRN_DTL_ID == lintGrnDtlID && x.STATUS == 1).OrderBy(m => m.LBL_PRN_CFM).ToList();
 
-                                                //now check if qty aproved is for all closed boxes or open box also there.
-                                                lintTotalBoxApproved = lintApproveQty / Convert.ToInt16(currRow.Cells["Pack_Size"].Value.ToString());
-
-                                                //process closed approved boxes
-                                                for (int lintCurrBox = 0; lintCurrBox < lintTotalBoxApproved; lintCurrBox++)
+                                                if (grn_lbl.Count > 0)
                                                 {
-                                                    //here we do not need to check that if this barcode already exists in in qc_dtl tble or not
-                                                    //because at any time at least a box quantity will be processed
-                                                    qc_dtl = new QC_DTL()
+                                                    //now check if qty aproved is for all closed boxes or open box also there.
+                                                    lintTotalBoxApproved = lintApproveQty / Convert.ToInt16(currRow.Cells["Pack_Size"].Value.ToString());
+
+                                                    //process closed approved boxes
+                                                    for (int lintCurrBox = 0; lintCurrBox < lintTotalBoxApproved; lintCurrBox++)
                                                     {
-                                                        QC_MST_ID = qc_mst.QC_MST_ID,
-                                                        PRIMARY_BARCODE = grn_lbl[lintCurrBox].PRIMARY_BARCODE,
-                                                        QUANTITY = Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString()),
-                                                        QUANTITY_APPROVED = Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString()),
-                                                        QUANTITY_REJECTED = 0, //since this is full box hence qty approved will be as per pack size
-                                                        QUANTITY_SCRAPPED = 0,
-                                                        STATUS = 2,
-                                                    };
+                                                        //here we do not need to check that if this barcode already exists in in qc_dtl tble or not
+                                                        //because at any time at least a box quantity will be processed
+                                                        qc_dtl = new QC_DTL()
+                                                        {
+                                                            QC_MST_ID = qc_mst.QC_MST_ID,
+                                                            PRIMARY_BARCODE = grn_lbl[lintCurrBox].PRIMARY_BARCODE,
+                                                            QUANTITY = Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString()),
+                                                            QUANTITY_APPROVED = Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString()),
+                                                            QUANTITY_REJECTED = 0, //since this is full box hence qty approved will be as per pack size
+                                                            QUANTITY_SCRAPPED = 0,
+                                                            STATUS = 2,
+                                                        };
 
-                                                    db.QC_DTL.Add(qc_dtl);
-                                                    db.SaveChanges();
-                                                    //update status of current in GRN Table to QC Done
-                                                    grn_lbl[lintCurrBox].STATUS = 3;
+                                                        db.QC_DTL.Add(qc_dtl);
+                                                        db.SaveChanges();
+                                                        //update status of current in GRN Table to QC Done
+                                                        grn_lbl[lintCurrBox].STATUS = 3;
 
-                                                    #region UPDATE INVENTORY DTL TABLE FOR APPROVED QTY
-                                                    //=======================================================================================
-                                                    //in Inventory DTL table data will always be added. becuase this table contains box level data 
-                                                    //in case of coil inventory has to go at individual level because barcode generated fo each coil
+                                                        #region UPDATE INVENTORY DTL TABLE FOR APPROVED QTY
+                                                        //=======================================================================================
+                                                        //in Inventory DTL table data will always be added. becuase this table contains box level data 
+                                                        //in case of coil inventory has to go at individual level because barcode generated fo each coil
 
-                                                    string lstrCurrBarcode = grn_lbl[lintCurrBox].PRIMARY_BARCODE;
-                                                    inv_dtl = common.Get_Inventory_DTL(inv_mst, lstrCurrBarcode, Convert.ToInt32(qc_dtl.QUANTITY));
-                                                    db.INVENTORY_DTL.Add(inv_dtl);
-                                                    //=======================================================================================
-                                                    #endregion
-                                                }//end of for loop for all aproved boxes
+                                                        string lstrCurrBarcode = grn_lbl[lintCurrBox].PRIMARY_BARCODE;
+                                                        inv_dtl = common.Get_Inventory_DTL(inv_mst, lstrCurrBarcode, Convert.ToInt32(qc_dtl.QUANTITY));
+                                                        db.INVENTORY_DTL.Add(inv_dtl);
+                                                        //=======================================================================================
+                                                        #endregion
+                                                    }//end of for loop for all aproved boxes
+                                                }
                                                 #endregion
 
 
@@ -424,6 +427,7 @@ namespace AI_BTS_DENSO
                             {
                                 DbTransacation.Rollback();
                                 common.WriteLog("Error Message: " + ex.Message + " Inner Excception " + ex.InnerException + ex.StackTrace.Substring(0, ex.StackTrace.IndexOf("(")));
+                                throw new Exception(ex.Message);
                             }
                         }//end of using transaction block
                     }//end of using db entities block
@@ -624,7 +628,7 @@ namespace AI_BTS_DENSO
                         }
                         else
                         {
-                            ClsMessage.ShowError("No Data found whose QC has been done with current A Notice No");
+                            ClsMessage.ShowError("No Data found available for QC. Please Check if all labels are printed for current A Notice No");
                             common.ClearDataGridViewRows(ref dgvData);
                             btnSave.Enabled = false;
                         }

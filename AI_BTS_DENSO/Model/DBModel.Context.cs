@@ -31,6 +31,7 @@ namespace AI_BTS_DENSO.Model
         public virtual DbSet<BIN_MST> BIN_MST { get; set; }
         public virtual DbSet<BIN_TYPE_MST> BIN_TYPE_MST { get; set; }
         public virtual DbSet<CATEGORY_MST> CATEGORY_MST { get; set; }
+        public virtual DbSet<COIL_QC_DETAILS> COIL_QC_DETAILS { get; set; }
         public virtual DbSet<DEPARTMENT_MST> DEPARTMENT_MST { get; set; }
         public virtual DbSet<FG_BOM> FG_BOM { get; set; }
         public virtual DbSet<FG_MST> FG_MST { get; set; }
@@ -44,6 +45,7 @@ namespace AI_BTS_DENSO.Model
         public virtual DbSet<LOCATION_MST> LOCATION_MST { get; set; }
         public virtual DbSet<MACHINE_MST> MACHINE_MST { get; set; }
         public virtual DbSet<MACHINE_TYPE_MST> MACHINE_TYPE_MST { get; set; }
+        public virtual DbSet<MAT_MOVEMENT_LOG> MAT_MOVEMENT_LOG { get; set; }
         public virtual DbSet<MATERIAL_MST> MATERIAL_MST { get; set; }
         public virtual DbSet<MATERIAL_TYPE_MST> MATERIAL_TYPE_MST { get; set; }
         public virtual DbSet<MIXED_PALLET_STO> MIXED_PALLET_STO { get; set; }
@@ -51,6 +53,7 @@ namespace AI_BTS_DENSO.Model
         public virtual DbSet<PICKING_DTL> PICKING_DTL { get; set; }
         public virtual DbSet<PROCESS_MST> PROCESS_MST { get; set; }
         public virtual DbSet<PROCESS_TYPE_MST> PROCESS_TYPE_MST { get; set; }
+        public virtual DbSet<PUT_AWAY> PUT_AWAY { get; set; }
         public virtual DbSet<QC_DTL> QC_DTL { get; set; }
         public virtual DbSet<QC_LABEL_PRINTING> QC_LABEL_PRINTING { get; set; }
         public virtual DbSet<QC_MST> QC_MST { get; set; }
@@ -64,11 +67,22 @@ namespace AI_BTS_DENSO.Model
         public virtual DbSet<SITE_MST> SITE_MST { get; set; }
         public virtual DbSet<STATUS_MST> STATUS_MST { get; set; }
         public virtual DbSet<STO_MST> STO_MST { get; set; }
+        public virtual DbSet<TempColiQC> TempColiQCs { get; set; }
         public virtual DbSet<UOM_MST> UOM_MST { get; set; }
         public virtual DbSet<USER_MST> USER_MST { get; set; }
         public virtual DbSet<USER_ROLE_ACCESS_MST> USER_ROLE_ACCESS_MST { get; set; }
         public virtual DbSet<USER_ROLE_MST> USER_ROLE_MST { get; set; }
         public virtual DbSet<PICKING_MST> PICKING_MST { get; set; }
+    
+        [DbFunction("AI_BTS_DENSOEntities1", "FN_GET_PART_DETAILS")]
+        public virtual IQueryable<FN_GET_PART_DETAILS_Result> FN_GET_PART_DETAILS(string bARCODE)
+        {
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_GET_PART_DETAILS_Result>("[AI_BTS_DENSOEntities1].[FN_GET_PART_DETAILS](@BARCODE)", bARCODEParameter);
+        }
     
         [DbFunction("AI_BTS_DENSOEntities1", "GET_PART_NO_NAME_BY_BARCODE")]
         public virtual IQueryable<GET_PART_NO_NAME_BY_BARCODE_Result> GET_PART_NO_NAME_BY_BARCODE(string bARCODE)
@@ -118,6 +132,52 @@ namespace AI_BTS_DENSO.Model
             return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<GET_QC_BARCODE_SERIAL_Result>("[AI_BTS_DENSOEntities1].[GET_QC_BARCODE_SERIAL](@PART_NO, @A_NOTICVE_NO, @QTY, @PACK_SIZE, @PRIMARY_BARCODE, @SITE_NAME, @QC_BY, @QC_ON)", pART_NOParameter, a_NOTICVE_NOParameter, qTYParameter, pACK_SIZEParameter, pRIMARY_BARCODEParameter, sITE_NAMEParameter, qC_BYParameter, qC_ONParameter);
         }
     
+        public virtual int SP_APPROVE_QC_BY_PART(Nullable<int> gRN_DTL_ID, Nullable<int> qC_MST_ID, string pART_NO, Nullable<int> qC_BY, Nullable<int> sITE_CODE, ObjectParameter mSG)
+        {
+            var gRN_DTL_IDParameter = gRN_DTL_ID.HasValue ?
+                new ObjectParameter("GRN_DTL_ID", gRN_DTL_ID) :
+                new ObjectParameter("GRN_DTL_ID", typeof(int));
+    
+            var qC_MST_IDParameter = qC_MST_ID.HasValue ?
+                new ObjectParameter("QC_MST_ID", qC_MST_ID) :
+                new ObjectParameter("QC_MST_ID", typeof(int));
+    
+            var pART_NOParameter = pART_NO != null ?
+                new ObjectParameter("PART_NO", pART_NO) :
+                new ObjectParameter("PART_NO", typeof(string));
+    
+            var qC_BYParameter = qC_BY.HasValue ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(int));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_APPROVE_QC_BY_PART", gRN_DTL_IDParameter, qC_MST_IDParameter, pART_NOParameter, qC_BYParameter, sITE_CODEParameter, mSG);
+        }
+    
+        public virtual int SP_CHANGE_QC_LABEL_PRINTING_STATUS(Nullable<int> iD, string qC_BY, string pARENT_BARCODE, Nullable<int> bARCODE_TYPE, ObjectParameter tOTALBARCODES, ObjectParameter pRINTEDBARCODE, ObjectParameter mSG)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            var pARENT_BARCODEParameter = pARENT_BARCODE != null ?
+                new ObjectParameter("PARENT_BARCODE", pARENT_BARCODE) :
+                new ObjectParameter("PARENT_BARCODE", typeof(string));
+    
+            var bARCODE_TYPEParameter = bARCODE_TYPE.HasValue ?
+                new ObjectParameter("BARCODE_TYPE", bARCODE_TYPE) :
+                new ObjectParameter("BARCODE_TYPE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_CHANGE_QC_LABEL_PRINTING_STATUS", iDParameter, qC_BYParameter, pARENT_BARCODEParameter, bARCODE_TYPEParameter, tOTALBARCODES, pRINTEDBARCODE, mSG);
+        }
+    
         public virtual ObjectResult<SP_CHECK_IF_GRN_DONE_Result> SP_CHECK_IF_GRN_DONE(string qC_TYPE, string bARCODE)
         {
             var qC_TYPEParameter = qC_TYPE != null ?
@@ -131,6 +191,93 @@ namespace AI_BTS_DENSO.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_CHECK_IF_GRN_DONE_Result>("SP_CHECK_IF_GRN_DONE", qC_TYPEParameter, bARCODEParameter);
         }
     
+        public virtual int SP_COIL_QC_DONE(string a_NOTICE_NO, Nullable<int> sITE_CODE, string qC_BY, ObjectParameter mSG)
+        {
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_COIL_QC_DONE", a_NOTICE_NOParameter, sITE_CODEParameter, qC_BYParameter, mSG);
+        }
+    
+        public virtual int SP_DISPATCH(string sTO_NO, string mAT_BARCODE, string dISPATCHED_BY, ObjectParameter mSG)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            var mAT_BARCODEParameter = mAT_BARCODE != null ?
+                new ObjectParameter("MAT_BARCODE", mAT_BARCODE) :
+                new ObjectParameter("MAT_BARCODE", typeof(string));
+    
+            var dISPATCHED_BYParameter = dISPATCHED_BY != null ?
+                new ObjectParameter("DISPATCHED_BY", dISPATCHED_BY) :
+                new ObjectParameter("DISPATCHED_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DISPATCH", sTO_NOParameter, mAT_BARCODEParameter, dISPATCHED_BYParameter, mSG);
+        }
+    
+        public virtual int SP_GENERATE_QC_LABELS(string pART_NO, string a_NOTICE_NO, Nullable<int> sITE_CODE, Nullable<int> qC_DTL_ID, Nullable<int> iNV_MST_ID, string bARCODE, Nullable<int> bARCODE_TYPE, Nullable<int> qUANTITY, Nullable<int> qC_BY, string lOT_NO, Nullable<int> pALETNO, Nullable<decimal> wEIGHT, ObjectParameter mSG)
+        {
+            var pART_NOParameter = pART_NO != null ?
+                new ObjectParameter("PART_NO", pART_NO) :
+                new ObjectParameter("PART_NO", typeof(string));
+    
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var qC_DTL_IDParameter = qC_DTL_ID.HasValue ?
+                new ObjectParameter("QC_DTL_ID", qC_DTL_ID) :
+                new ObjectParameter("QC_DTL_ID", typeof(int));
+    
+            var iNV_MST_IDParameter = iNV_MST_ID.HasValue ?
+                new ObjectParameter("INV_MST_ID", iNV_MST_ID) :
+                new ObjectParameter("INV_MST_ID", typeof(int));
+    
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var bARCODE_TYPEParameter = bARCODE_TYPE.HasValue ?
+                new ObjectParameter("BARCODE_TYPE", bARCODE_TYPE) :
+                new ObjectParameter("BARCODE_TYPE", typeof(int));
+    
+            var qUANTITYParameter = qUANTITY.HasValue ?
+                new ObjectParameter("QUANTITY", qUANTITY) :
+                new ObjectParameter("QUANTITY", typeof(int));
+    
+            var qC_BYParameter = qC_BY.HasValue ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(int));
+    
+            var lOT_NOParameter = lOT_NO != null ?
+                new ObjectParameter("LOT_NO", lOT_NO) :
+                new ObjectParameter("LOT_NO", typeof(string));
+    
+            var pALETNOParameter = pALETNO.HasValue ?
+                new ObjectParameter("PALETNO", pALETNO) :
+                new ObjectParameter("PALETNO", typeof(int));
+    
+            var wEIGHTParameter = wEIGHT.HasValue ?
+                new ObjectParameter("WEIGHT", wEIGHT) :
+                new ObjectParameter("WEIGHT", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GENERATE_QC_LABELS", pART_NOParameter, a_NOTICE_NOParameter, sITE_CODEParameter, qC_DTL_IDParameter, iNV_MST_IDParameter, bARCODEParameter, bARCODE_TYPEParameter, qUANTITYParameter, qC_BYParameter, lOT_NOParameter, pALETNOParameter, wEIGHTParameter, mSG);
+        }
+    
         public virtual int SP_GET_BARCODE_SERIAL(string bARCODE_TYPE, ObjectParameter serial)
         {
             var bARCODE_TYPEParameter = bARCODE_TYPE != null ?
@@ -140,6 +287,15 @@ namespace AI_BTS_DENSO.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GET_BARCODE_SERIAL", bARCODE_TYPEParameter, serial);
         }
     
+        public virtual ObjectResult<SP_GET_DISPATCH_LIST_Result> SP_GET_DISPATCH_LIST(string sTO_NO)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_DISPATCH_LIST_Result>("SP_GET_DISPATCH_LIST", sTO_NOParameter);
+        }
+    
         public virtual ObjectResult<SP_GET_GRN_DATA_FOR_QC_Result> SP_GET_GRN_DATA_FOR_QC(string a_NOTICE_NO)
         {
             var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
@@ -147,6 +303,19 @@ namespace AI_BTS_DENSO.Model
                 new ObjectParameter("A_NOTICE_NO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_GRN_DATA_FOR_QC_Result>("SP_GET_GRN_DATA_FOR_QC", a_NOTICE_NOParameter);
+        }
+    
+        public virtual int SP_GET_GRN_DETAILS(string bARCODE, ObjectParameter a_NOTICE_NO, Nullable<int> sITE_CODE, ObjectParameter gRN_DTL_ID, ObjectParameter pART_NO, ObjectParameter pART_QTY, ObjectParameter bOX_QTY, ObjectParameter pICKED_QTY, ObjectParameter sUPPLIER_BATCH_NO, ObjectParameter pALETNO, ObjectParameter pART_TYPE, ObjectParameter mSG, ObjectParameter lOTNO, ObjectParameter nOOFLABELS, ObjectParameter aPPROVEQTY, ObjectParameter rEJECTQTY, ObjectParameter sCRAPQTY)
+        {
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GET_GRN_DETAILS", bARCODEParameter, a_NOTICE_NO, sITE_CODEParameter, gRN_DTL_ID, pART_NO, pART_QTY, bOX_QTY, pICKED_QTY, sUPPLIER_BATCH_NO, pALETNO, pART_TYPE, mSG, lOTNO, nOOFLABELS, aPPROVEQTY, rEJECTQTY, sCRAPQTY);
         }
     
         public virtual ObjectResult<SP_GET_PALLET_LIST_Result> SP_GET_PALLET_LIST(string a_NOTICE_NO, string pALLET_NO)
@@ -162,6 +331,31 @@ namespace AI_BTS_DENSO.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_PALLET_LIST_Result>("SP_GET_PALLET_LIST", a_NOTICE_NOParameter, pALLET_NOParameter);
         }
     
+        public virtual int SP_GET_QC_BARCODE(string pART_NO, string a_NOTICE_NO, Nullable<int> qTY, Nullable<int> sITE_CODE, string tARGET_MST, ObjectParameter bARCODE)
+        {
+            var pART_NOParameter = pART_NO != null ?
+                new ObjectParameter("PART_NO", pART_NO) :
+                new ObjectParameter("PART_NO", typeof(string));
+    
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var qTYParameter = qTY.HasValue ?
+                new ObjectParameter("QTY", qTY) :
+                new ObjectParameter("QTY", typeof(int));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var tARGET_MSTParameter = tARGET_MST != null ?
+                new ObjectParameter("TARGET_MST", tARGET_MST) :
+                new ObjectParameter("TARGET_MST", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GET_QC_BARCODE", pART_NOParameter, a_NOTICE_NOParameter, qTYParameter, sITE_CODEParameter, tARGET_MSTParameter, bARCODE);
+        }
+    
         public virtual ObjectResult<SP_GET_QC_DATA_BY_ANOTICENO_Result> SP_GET_QC_DATA_BY_ANOTICENO(string a_NOTICE_NO)
         {
             var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
@@ -169,6 +363,50 @@ namespace AI_BTS_DENSO.Model
                 new ObjectParameter("A_NOTICE_NO", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_QC_DATA_BY_ANOTICENO_Result>("SP_GET_QC_DATA_BY_ANOTICENO", a_NOTICE_NOParameter);
+        }
+    
+        public virtual ObjectResult<SP_GET_QC_LABELS_TO_PRINT_Result> SP_GET_QC_LABELS_TO_PRINT(string qC_BY)
+        {
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_QC_LABELS_TO_PRINT_Result>("SP_GET_QC_LABELS_TO_PRINT", qC_BYParameter);
+        }
+    
+        public virtual int SP_GET_REPACKING_LABELS(string mAT_BARCODE, Nullable<int> nO_OF_LABELS, Nullable<int> sITE_MST_ID)
+        {
+            var mAT_BARCODEParameter = mAT_BARCODE != null ?
+                new ObjectParameter("MAT_BARCODE", mAT_BARCODE) :
+                new ObjectParameter("MAT_BARCODE", typeof(string));
+    
+            var nO_OF_LABELSParameter = nO_OF_LABELS.HasValue ?
+                new ObjectParameter("NO_OF_LABELS", nO_OF_LABELS) :
+                new ObjectParameter("NO_OF_LABELS", typeof(int));
+    
+            var sITE_MST_IDParameter = sITE_MST_ID.HasValue ?
+                new ObjectParameter("SITE_MST_ID", sITE_MST_ID) :
+                new ObjectParameter("SITE_MST_ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GET_REPACKING_LABELS", mAT_BARCODEParameter, nO_OF_LABELSParameter, sITE_MST_IDParameter);
+        }
+    
+        public virtual ObjectResult<SP_GET_SITES_Result> SP_GET_SITES()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GET_SITES_Result>("SP_GET_SITES");
+        }
+    
+        public virtual ObjectResult<string> SP_GET_STO(string mODE, string sTO_NO)
+        {
+            var mODEParameter = mODE != null ?
+                new ObjectParameter("MODE", mODE) :
+                new ObjectParameter("MODE", typeof(string));
+    
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("SP_GET_STO", mODEParameter, sTO_NOParameter);
         }
     
         public virtual int SP_INSERT_QC_MST_DATA(string qC_TYPE, string qC_ACTION, string a_NOTICE_NO, Nullable<int> gRN_DTL_ID, Nullable<int> pACK_SIZE, Nullable<int> qTY_APPROVED, Nullable<int> qTY_REJECTED, Nullable<int> qTY_SCRAPPED, string pRIMARY_BARCODE, Nullable<int> qC_BY, Nullable<System.DateTime> qC_ON)
@@ -220,6 +458,164 @@ namespace AI_BTS_DENSO.Model
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_INSERT_QC_MST_DATA", qC_TYPEParameter, qC_ACTIONParameter, a_NOTICE_NOParameter, gRN_DTL_IDParameter, pACK_SIZEParameter, qTY_APPROVEDParameter, qTY_REJECTEDParameter, qTY_SCRAPPEDParameter, pRIMARY_BARCODEParameter, qC_BYParameter, qC_ONParameter);
         }
     
+        public virtual int SP_PICKING(string sTO_NO, string lOC_BARCODE, string mAT_BARCODE, string pICKED_BY, ObjectParameter pART_NO, ObjectParameter pICKED_QTY, ObjectParameter sTATUS, ObjectParameter mSG)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            var lOC_BARCODEParameter = lOC_BARCODE != null ?
+                new ObjectParameter("LOC_BARCODE", lOC_BARCODE) :
+                new ObjectParameter("LOC_BARCODE", typeof(string));
+    
+            var mAT_BARCODEParameter = mAT_BARCODE != null ?
+                new ObjectParameter("MAT_BARCODE", mAT_BARCODE) :
+                new ObjectParameter("MAT_BARCODE", typeof(string));
+    
+            var pICKED_BYParameter = pICKED_BY != null ?
+                new ObjectParameter("PICKED_BY", pICKED_BY) :
+                new ObjectParameter("PICKED_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PICKING", sTO_NOParameter, lOC_BARCODEParameter, mAT_BARCODEParameter, pICKED_BYParameter, pART_NO, pICKED_QTY, sTATUS, mSG);
+        }
+    
+        public virtual int SP_PUT_AWAY(string pART_NO, string a_NOTICE_NO, Nullable<int> qUANTITY, string mAT_BARCODE, string lOC_NAME, Nullable<int> sITE_CODE, string mODE, string cREATED_BY, ObjectParameter mSG)
+        {
+            var pART_NOParameter = pART_NO != null ?
+                new ObjectParameter("PART_NO", pART_NO) :
+                new ObjectParameter("PART_NO", typeof(string));
+    
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var qUANTITYParameter = qUANTITY.HasValue ?
+                new ObjectParameter("QUANTITY", qUANTITY) :
+                new ObjectParameter("QUANTITY", typeof(int));
+    
+            var mAT_BARCODEParameter = mAT_BARCODE != null ?
+                new ObjectParameter("MAT_BARCODE", mAT_BARCODE) :
+                new ObjectParameter("MAT_BARCODE", typeof(string));
+    
+            var lOC_NAMEParameter = lOC_NAME != null ?
+                new ObjectParameter("LOC_NAME", lOC_NAME) :
+                new ObjectParameter("LOC_NAME", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var mODEParameter = mODE != null ?
+                new ObjectParameter("MODE", mODE) :
+                new ObjectParameter("MODE", typeof(string));
+    
+            var cREATED_BYParameter = cREATED_BY != null ?
+                new ObjectParameter("CREATED_BY", cREATED_BY) :
+                new ObjectParameter("CREATED_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_PUT_AWAY", pART_NOParameter, a_NOTICE_NOParameter, qUANTITYParameter, mAT_BARCODEParameter, lOC_NAMEParameter, sITE_CODEParameter, mODEParameter, cREATED_BYParameter, mSG);
+        }
+    
+        public virtual int SP_QC_DONE(string a_NOTICE_NO, Nullable<int> sITE_CODE, string qC_BY, string qC_MODE, ObjectParameter mSG)
+        {
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            var qC_MODEParameter = qC_MODE != null ?
+                new ObjectParameter("QC_MODE", qC_MODE) :
+                new ObjectParameter("QC_MODE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_QC_DONE", a_NOTICE_NOParameter, sITE_CODEParameter, qC_BYParameter, qC_MODEParameter, mSG);
+        }
+    
+        public virtual int SP_REPACKING(string mAT_BARCODE, Nullable<int> pACKSIZE, string sITE, string cREATED_BY, string mODE, ObjectParameter nO_OF_LABELS, ObjectParameter mSG)
+        {
+            var mAT_BARCODEParameter = mAT_BARCODE != null ?
+                new ObjectParameter("MAT_BARCODE", mAT_BARCODE) :
+                new ObjectParameter("MAT_BARCODE", typeof(string));
+    
+            var pACKSIZEParameter = pACKSIZE.HasValue ?
+                new ObjectParameter("PACKSIZE", pACKSIZE) :
+                new ObjectParameter("PACKSIZE", typeof(int));
+    
+            var sITEParameter = sITE != null ?
+                new ObjectParameter("SITE", sITE) :
+                new ObjectParameter("SITE", typeof(string));
+    
+            var cREATED_BYParameter = cREATED_BY != null ?
+                new ObjectParameter("CREATED_BY", cREATED_BY) :
+                new ObjectParameter("CREATED_BY", typeof(string));
+    
+            var mODEParameter = mODE != null ?
+                new ObjectParameter("MODE", mODE) :
+                new ObjectParameter("MODE", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_REPACKING", mAT_BARCODEParameter, pACKSIZEParameter, sITEParameter, cREATED_BYParameter, mODEParameter, nO_OF_LABELS, mSG);
+        }
+    
+        public virtual int SP_START_COIL_QC(string bARCODE, string a_NOTICE_NO, Nullable<int> pICKED_QTY, Nullable<int> nO_OF_LBLS, string lOT_NO, Nullable<int> pALET_NO, Nullable<int> sITE_CODE, string qC_BY, ObjectParameter mSG)
+        {
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var pICKED_QTYParameter = pICKED_QTY.HasValue ?
+                new ObjectParameter("PICKED_QTY", pICKED_QTY) :
+                new ObjectParameter("PICKED_QTY", typeof(int));
+    
+            var nO_OF_LBLSParameter = nO_OF_LBLS.HasValue ?
+                new ObjectParameter("NO_OF_LBLS", nO_OF_LBLS) :
+                new ObjectParameter("NO_OF_LBLS", typeof(int));
+    
+            var lOT_NOParameter = lOT_NO != null ?
+                new ObjectParameter("LOT_NO", lOT_NO) :
+                new ObjectParameter("LOT_NO", typeof(string));
+    
+            var pALET_NOParameter = pALET_NO.HasValue ?
+                new ObjectParameter("PALET_NO", pALET_NO) :
+                new ObjectParameter("PALET_NO", typeof(int));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_START_COIL_QC", bARCODEParameter, a_NOTICE_NOParameter, pICKED_QTYParameter, nO_OF_LBLSParameter, lOT_NOParameter, pALET_NOParameter, sITE_CODEParameter, qC_BYParameter, mSG);
+        }
+    
+        public virtual int SP_START_QC(string a_NOTICE_NO, Nullable<int> sITE_CODE, string qC_BY, ObjectParameter mSG)
+        {
+            var a_NOTICE_NOParameter = a_NOTICE_NO != null ?
+                new ObjectParameter("A_NOTICE_NO", a_NOTICE_NO) :
+                new ObjectParameter("A_NOTICE_NO", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            var qC_BYParameter = qC_BY != null ?
+                new ObjectParameter("QC_BY", qC_BY) :
+                new ObjectParameter("QC_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_START_QC", a_NOTICE_NOParameter, sITE_CODEParameter, qC_BYParameter, mSG);
+        }
+    
         public virtual int SP_UPDATE_GRN_LBL_PRINTING_QC_STATUS(string qC_TYPE, string bARCODE, Nullable<int> sTATUS)
         {
             var qC_TYPEParameter = qC_TYPE != null ?
@@ -264,6 +660,97 @@ namespace AI_BTS_DENSO.Model
                 new ObjectParameter("STATUS", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UPDATE_QC_MST_DTL_STATUS", qC_TYPEParameter, a_NOTICE_NOParameter, pART_NOParameter, bARCODEParameter, qC_BYParameter, sTATUSParameter);
+        }
+    
+        public virtual int SP_UserLogin(string username, string password, Nullable<int> siteId, ObjectParameter usertype, ObjectParameter msg)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var siteIdParameter = siteId.HasValue ?
+                new ObjectParameter("SiteId", siteId) :
+                new ObjectParameter("SiteId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UserLogin", usernameParameter, passwordParameter, siteIdParameter, usertype, msg);
+        }
+    
+        public virtual int UDP_CHANGE_GRN_LABEL_PRINTING_STATUS(Nullable<int> iD, ObjectParameter tOTALBARCODES, ObjectParameter pRINTEDBARCODE, ObjectParameter mSG)
+        {
+            var iDParameter = iD.HasValue ?
+                new ObjectParameter("ID", iD) :
+                new ObjectParameter("ID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_CHANGE_GRN_LABEL_PRINTING_STATUS", iDParameter, tOTALBARCODES, pRINTEDBARCODE, mSG);
+        }
+    
+        public virtual ObjectResult<string> UDP_GET_DETAILS_FOR_COIL_QC(string bARCODE, Nullable<int> sITE_CODE)
+        {
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var sITE_CODEParameter = sITE_CODE.HasValue ?
+                new ObjectParameter("SITE_CODE", sITE_CODE) :
+                new ObjectParameter("SITE_CODE", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("UDP_GET_DETAILS_FOR_COIL_QC", bARCODEParameter, sITE_CODEParameter);
+        }
+    
+        public virtual ObjectResult<UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result> UDP_GET_GRN_LABELS_TO_PRINT_BY_STO(string sTO_NO)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result>("UDP_GET_GRN_LABELS_TO_PRINT_BY_STO", sTO_NOParameter);
+        }
+    
+        public virtual ObjectResult<UDP_GET_STO_TO_RECEIVE_Result> UDP_GET_STO_TO_RECEIVE(string sTO_NO)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<UDP_GET_STO_TO_RECEIVE_Result>("UDP_GET_STO_TO_RECEIVE", sTO_NOParameter);
+        }
+    
+        public virtual int UDP_MIX_PALET_DISPATCH(string sTO_NO, string pALET_BARCODE, string dISPATCH_BY, ObjectParameter mSG)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            var pALET_BARCODEParameter = pALET_BARCODE != null ?
+                new ObjectParameter("PALET_BARCODE", pALET_BARCODE) :
+                new ObjectParameter("PALET_BARCODE", typeof(string));
+    
+            var dISPATCH_BYParameter = dISPATCH_BY != null ?
+                new ObjectParameter("DISPATCH_BY", dISPATCH_BY) :
+                new ObjectParameter("DISPATCH_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_MIX_PALET_DISPATCH", sTO_NOParameter, pALET_BARCODEParameter, dISPATCH_BYParameter, mSG);
+        }
+    
+        public virtual int UDP_RECEIVE_STO(string sTO_NO, string bARCODE, string rEC_BY, ObjectParameter mSG)
+        {
+            var sTO_NOParameter = sTO_NO != null ?
+                new ObjectParameter("STO_NO", sTO_NO) :
+                new ObjectParameter("STO_NO", typeof(string));
+    
+            var bARCODEParameter = bARCODE != null ?
+                new ObjectParameter("BARCODE", bARCODE) :
+                new ObjectParameter("BARCODE", typeof(string));
+    
+            var rEC_BYParameter = rEC_BY != null ?
+                new ObjectParameter("REC_BY", rEC_BY) :
+                new ObjectParameter("REC_BY", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UDP_RECEIVE_STO", sTO_NOParameter, bARCODEParameter, rEC_BYParameter, mSG);
         }
     }
 }
