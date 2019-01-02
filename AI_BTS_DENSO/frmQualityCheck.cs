@@ -72,7 +72,7 @@ namespace AI_BTS_DENSO
 
         private void cmbQCType_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Convert.ToInt16(e.KeyChar) == 13)
+            if (Convert.ToInt32(e.KeyChar) == 13)
                 txtANoticeNo.Focus();
         }
         #endregion
@@ -338,7 +338,7 @@ namespace AI_BTS_DENSO
                                                 if (grn_lbl.Count > 0)
                                                 {
                                                     //now check if qty aproved is for all closed boxes or open box also there.
-                                                    lintTotalBoxApproved = lintApproveQty / Convert.ToInt16(currRow.Cells["Pack_Size"].Value.ToString());
+                                                    lintTotalBoxApproved = lintApproveQty / Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString());
 
                                                     //process closed approved boxes
                                                     for (int lintCurrBox = 0; lintCurrBox < lintTotalBoxApproved; lintCurrBox++)
@@ -378,7 +378,7 @@ namespace AI_BTS_DENSO
 
                                                 #region Update Open Box Quantity
                                                 //=======================================================================================
-                                                int lintOpenApproved = lintApproveQty % Convert.ToInt16(currRow.Cells["Pack_Size"].Value.ToString());
+                                                int lintOpenApproved = lintApproveQty % Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString());
                                                 if (lintOpenApproved > 0)
                                                 {
                                                     //process open approved boxes 
@@ -610,7 +610,7 @@ namespace AI_BTS_DENSO
        
         private void txtANoticeNo_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (Convert.ToInt16(e.KeyChar) == 13)
+            if (Convert.ToInt32(e.KeyChar) == 13)
             {
                 try
                 {

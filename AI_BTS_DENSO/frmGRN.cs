@@ -328,7 +328,6 @@ namespace AI_BTS_DENSO
                                             if (currRow.DefaultCellStyle.BackColor != Color.Red)
                                             {
                                                 //store values in temp variable since LINQ does not support the DATAGridViewCell.getItem
-
                                                 string lstrTmpPartNo = common.ReplaceNullString(currRow.Cells["Part_No"].Value);
                                                 string lstrTmpPackSize = common.ReplaceNullString(currRow.Cells["Pack_Size"].Value);
                                                 string lstrPalletNo = common.ReplaceNullString(currRow.Cells["PALLETE_NO"].Value); // created by putta

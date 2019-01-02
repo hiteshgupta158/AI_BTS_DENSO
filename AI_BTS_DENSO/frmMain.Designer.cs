@@ -35,14 +35,13 @@
             this.pnlData = new System.Windows.Forms.Panel();
             this.pnlDataHeader = new System.Windows.Forms.Panel();
             this.pnlSiteMap = new System.Windows.Forms.Panel();
+            this.lblSiteMap = new AccessPark.MyLabel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Mastertabpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lblSiteMap = new AccessPark.MyLabel();
             this.lblLocation = new AccessPark.MyLabel();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.lblBinType = new AccessPark.MyLabel();
             this.myLabel2 = new AccessPark.MyLabel();
             this.myLabel3 = new AccessPark.MyLabel();
@@ -58,6 +57,8 @@
             this.myLabel15 = new AccessPark.MyLabel();
             this.myLabel16 = new AccessPark.MyLabel();
             this.myLabel18 = new AccessPark.MyLabel();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.myLabel19 = new AccessPark.MyLabel();
             this.myLabel13 = new AccessPark.MyLabel();
             this.myLabel17 = new AccessPark.MyLabel();
             this.myLabel1 = new AccessPark.MyLabel();
@@ -136,6 +137,19 @@
             this.pnlSiteMap.Size = new System.Drawing.Size(862, 30);
             this.pnlSiteMap.TabIndex = 9;
             // 
+            // lblSiteMap
+            // 
+            this.lblSiteMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.lblSiteMap.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblSiteMap.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSiteMap.Location = new System.Drawing.Point(0, 0);
+            this.lblSiteMap.Name = "lblSiteMap";
+            this.lblSiteMap.Size = new System.Drawing.Size(862, 30);
+            this.lblSiteMap.TabIndex = 10;
+            this.lblSiteMap.Text = "Batch Traciability";
+            this.lblSiteMap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSiteMap.Click += new System.EventHandler(this.lblSiteMap_Click_1);
+            // 
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
@@ -200,6 +214,22 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(240, 0);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
+            // lblLocation
+            // 
+            this.lblLocation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblLocation.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLocation.ImageIndex = 0;
+            this.lblLocation.ImageList = this.imageList1;
+            this.lblLocation.Location = new System.Drawing.Point(3, 6);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(216, 50);
+            this.lblLocation.TabIndex = 2;
+            this.lblLocation.Tag = "101";
+            this.lblLocation.Text = "Location";
+            this.lblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLocation.Click += new System.EventHandler(this.lblLeftMenu_Click);
+            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -231,49 +261,6 @@
             this.imageList1.Images.SetKeyName(24, "Print.png");
             this.imageList1.Images.SetKeyName(25, "dashboardICO.png");
             this.imageList1.Images.SetKeyName(26, "closeForm.png");
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.myLabel13);
-            this.tabPage2.Controls.Add(this.myLabel17);
-            this.tabPage2.Controls.Add(this.myLabel1);
-            this.tabPage2.Controls.Add(this.myLabel14);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(246, 586);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Transactions";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // lblSiteMap
-            // 
-            this.lblSiteMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.lblSiteMap.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblSiteMap.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSiteMap.Location = new System.Drawing.Point(0, 0);
-            this.lblSiteMap.Name = "lblSiteMap";
-            this.lblSiteMap.Size = new System.Drawing.Size(862, 30);
-            this.lblSiteMap.TabIndex = 10;
-            this.lblSiteMap.Text = "Batch Traciability";
-            this.lblSiteMap.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblSiteMap.Click += new System.EventHandler(this.lblSiteMap_Click_1);
-            // 
-            // lblLocation
-            // 
-            this.lblLocation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblLocation.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLocation.ImageIndex = 0;
-            this.lblLocation.ImageList = this.imageList1;
-            this.lblLocation.Location = new System.Drawing.Point(3, 6);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(216, 50);
-            this.lblLocation.TabIndex = 2;
-            this.lblLocation.Tag = "101";
-            this.lblLocation.Text = "Location";
-            this.lblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLocation.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
             // lblBinType
             // 
@@ -516,6 +503,37 @@
             this.myLabel18.Text = "Reprint";
             this.myLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.myLabel18.Click += new System.EventHandler(this.lblLeftMenu_Click);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.myLabel19);
+            this.tabPage2.Controls.Add(this.myLabel13);
+            this.tabPage2.Controls.Add(this.myLabel17);
+            this.tabPage2.Controls.Add(this.myLabel1);
+            this.tabPage2.Controls.Add(this.myLabel14);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(246, 586);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Transactions";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // myLabel19
+            // 
+            this.myLabel19.Dock = System.Windows.Forms.DockStyle.Top;
+            this.myLabel19.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.myLabel19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.myLabel19.ImageIndex = 8;
+            this.myLabel19.ImageList = this.imageList1;
+            this.myLabel19.Location = new System.Drawing.Point(3, 203);
+            this.myLabel19.Name = "myLabel19";
+            this.myLabel19.Size = new System.Drawing.Size(240, 50);
+            this.myLabel19.TabIndex = 25;
+            this.myLabel19.Tag = "122";
+            this.myLabel19.Text = "GRN Qty Update";
+            this.myLabel19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.myLabel19.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
             // myLabel13
             // 
@@ -776,6 +794,7 @@
         private AccessPark.MyLabel myLabel17;
         private AccessPark.MyLabel myLabel13;
         private AccessPark.MyLabel myLabel18;
+        private AccessPark.MyLabel myLabel19;
     }
 }
 

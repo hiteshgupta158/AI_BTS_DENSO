@@ -202,8 +202,8 @@ namespace AI_BTS_DENSO
                                     {
                                         MRN_NO = lstrMRNNO,
                                         PART_NO = currRow.Cells["Part_No"].Value.ToString(),
-                                        QUANTITY = Convert.ToInt32(currRow.Cells["Quantity"].Value.ToString()),
-                                        KANBAN_TEXT = common.ReplaceNullString(currRow.Cells["Kanban_Text"].Value.ToString()),
+                                        QUANTITY = common.ReplaceNullNumber(currRow.Cells["Quantity"].Value),
+                                        KANBAN_TEXT = common.ReplaceNullString(currRow.Cells["Kanban_Text"].Value),
                                         STATUS = 0,
                                         CREATED_BY = Convert.ToInt32(clsCurrentUser.User_MST_ID),
                                         CREATED_ON = DateTime.Today,

@@ -175,6 +175,12 @@
     <Compile Include="frmPalleteInvoiceReport.Designer.cs">
       <DependentUpon>frmPalleteInvoiceReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmQtyUpdate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmQtyUpdate.Designer.cs">
+      <DependentUpon>frmQtyUpdate.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmReprint.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -510,6 +516,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPalleteInvoiceReport.resx">
       <DependentUpon>frmPalleteInvoiceReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmQtyUpdate.resx">
+      <DependentUpon>frmQtyUpdate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmReprint.resx">
       <DependentUpon>FrmReprint.cs</DependentUpon>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AI_BTS_DENSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AI_BTS_DENSOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ACTIVE_MST">
           <Key>
             <PropertyRef Name="ACTIVE_MST_ID" />
@@ -94,6 +94,9 @@
           <Property Name="PALLET_SIZE" Type="varchar" MaxLength="250" />
           <Property Name="PART_TYPE" Type="varchar" MaxLength="50" />
           <Property Name="PALLETE_NO_BARCODE" Type="varchar" MaxLength="250" />
+          <Property Name="ADDED_QUANTITY" Type="int" />
+          <Property Name="TRANSFER_SLIP_NO" Type="varchar" MaxLength="100" />
+          <Property Name="REASON" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="GRN_LABEL_PRINTING">
           <Key>
@@ -1479,8 +1482,7 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <End Role="USER_MST" EntitySet="USER_MST" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AI_BTS_DENSOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1599,6 +1601,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <NavigationProperty Name="GRN_MST" Relationship="Self.FK__GRN_DTL__GRN_MST__236943A5" FromRole="GRN_DTL" ToRole="GRN_MST" />
           <NavigationProperty Name="GRN_LABEL_PRINTING" Relationship="Self.FK__GRN_LABEL__GRN_D__25518C17" FromRole="GRN_DTL" ToRole="GRN_LABEL_PRINTING" />
           <NavigationProperty Name="QC_MST" Relationship="Self.FK__QC_MST__GRN_DTL___3B40CD36" FromRole="GRN_DTL" ToRole="QC_MST" />
+          <Property Name="ADDED_QUANTITY" Type="Int32" />
+          <Property Name="TRANSFER_SLIP_NO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="REASON" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="GRN_LABEL_PRINTING">
           <Key>
@@ -2770,10 +2775,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <End Role="USER_ROLE_ACCESS_MST" EntitySet="USER_ROLE_ACCESS_MST" />
           </AssociationSet>
           <FunctionImport Name="FN_GET_PART_DETAILS" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.FN_GET_PART_DETAILS_Result)">
-            <Parameter Name="BARCODE" Mode="In" Type="String" />
+          <Parameter Name="BARCODE" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_PART_NO_NAME_BY_BARCODE" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_PART_NO_NAME_BY_BARCODE_Result)">
-            <Parameter Name="BARCODE" Mode="In" Type="String" />
+          <Parameter Name="BARCODE" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GET_QC_BARCODE_SERIAL" IsComposable="true" ReturnType="Collection(AI_BTS_DENSOModel.GET_QC_BARCODE_SERIAL_Result)">
             <Parameter Name="PART_NO" Mode="In" Type="String" />
@@ -2838,10 +2843,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="Serial" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_DISPATCH_LIST" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_DISPATCH_LIST_Result)">
-            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          <Parameter Name="STO_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_GRN_DATA_FOR_QC" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_GRN_DATA_FOR_QC_Result)">
-            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_GRN_DETAILS">
             <Parameter Name="BARCODE" Mode="In" Type="String" />
@@ -2875,10 +2880,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="BARCODE" Mode="InOut" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_QC_DATA_BY_ANOTICENO" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_QC_DATA_BY_ANOTICENO_Result)">
-            <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
+          <Parameter Name="A_NOTICE_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_QC_LABELS_TO_PRINT" ReturnType="Collection(AI_BTS_DENSOModel.SP_GET_QC_LABELS_TO_PRINT_Result)">
-            <Parameter Name="QC_BY" Mode="In" Type="String" />
+          <Parameter Name="QC_BY" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_GET_REPACKING_LABELS">
             <Parameter Name="MAT_BARCODE" Mode="In" Type="String" />
@@ -2988,10 +2993,10 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
             <Parameter Name="SITE_CODE" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UDP_GET_GRN_LABELS_TO_PRINT_BY_STO" ReturnType="Collection(AI_BTS_DENSOModel.UDP_GET_GRN_LABELS_TO_PRINT_BY_STO_Result)">
-            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          <Parameter Name="STO_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_GET_STO_TO_RECEIVE" ReturnType="Collection(AI_BTS_DENSOModel.UDP_GET_STO_TO_RECEIVE_Result)">
-            <Parameter Name="STO_NO" Mode="In" Type="String" />
+          <Parameter Name="STO_NO" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="UDP_MIX_PALET_DISPATCH">
             <Parameter Name="STO_NO" Mode="In" Type="String" />
@@ -3219,6 +3224,9 @@ warning 6002: The table/view 'AI_BTS_DENSO.dbo.PICKING_MST' does not have a prim
           <EntitySetMapping Name="GRN_DTL">
             <EntityTypeMapping TypeName="AI_BTS_DENSOModel.GRN_DTL">
               <MappingFragment StoreEntitySet="GRN_DTL">
+                <ScalarProperty Name="REASON" ColumnName="REASON" />
+                <ScalarProperty Name="TRANSFER_SLIP_NO" ColumnName="TRANSFER_SLIP_NO" />
+                <ScalarProperty Name="ADDED_QUANTITY" ColumnName="ADDED_QUANTITY" />
                 <ScalarProperty Name="GRN_DTL_ID" ColumnName="GRN_DTL_ID" />
                 <ScalarProperty Name="GRN_MST_ID" ColumnName="GRN_MST_ID" />
                 <ScalarProperty Name="PART_NO" ColumnName="PART_NO" />
