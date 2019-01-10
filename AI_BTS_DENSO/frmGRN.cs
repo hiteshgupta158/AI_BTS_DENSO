@@ -575,60 +575,61 @@ namespace AI_BTS_DENSO
                     //=================================================================================================
                     using (AI_BTS_DENSOEntities1 db = new AI_BTS_DENSOEntities1())
                     {
-                        using (var DbTransacation = db.Database.BeginTransaction())
+
+                        List<GRN_LABEL_PRINTING> grnlst;
+
+                        //Print coupon for Selected Row Only
+                        foreach (DataGridViewRow currRow in dgvData.Rows)
                         {
-                            try
+                            //Make sure Current row is oot blank as last row may be blank in grid view and user may select it. 
+                            if (currRow.Cells["Part_No"].Value != null)
                             {
-                                List<GRN_LABEL_PRINTING> grnlst;
-
-                                //Print coupon for Selected Row Only
-                                foreach (DataGridViewRow currRow in dgvData.Rows)
+                                if (currRow.Cells["chkPrint"].Value != null && Boolean.Parse(currRow.Cells["chkPrint"].Value.ToString()) == true)
                                 {
-                                    //Make sure Current row is oot blank as last row may be blank in grid view and user may select it. 
-                                    if (currRow.Cells["Part_No"].Value != null)
+                                    //Make sure that barcode label label for all of its box are not printind yet. as we are not giving reprinting option right now.
+                                    //Lateron when we will give the option for reprinting then we will disable this condition and will ask user about serial no. of label
+                                    //that of which serial he wants the coupon.
+                                    if (currRow.Cells["STATUS"].Value.ToString() != "1") //status 1 means that label for all boxes of this part have been printed
                                     {
-                                        if (currRow.Cells["chkPrint"].Value != null && Boolean.Parse(currRow.Cells["chkPrint"].Value.ToString()) == true)
+                                        if (currRow.Cells["IS_BLOCK"].Value.ToString() != "1")
                                         {
-                                            //Make sure that barcode label label for all of its box are not printind yet. as we are not giving reprinting option right now.
-                                            //Lateron when we will give the option for reprinting then we will disable this condition and will ask user about serial no. of label
-                                            //that of which serial he wants the coupon.
-                                            if (currRow.Cells["STATUS"].Value.ToString() != "1") //status 1 means that label for all boxes of this part have been printed
+                                            //Get the list of Boxes for this part whose label are not printed yet. First we need to get the boxes whose label are remaining for priting.
+                                            //although user will also give the quantity that how many boxes should be printed but we need to consider following scenarios
+                                            //1. User enter 5 quantity to print out of total 10 boxes and no coupon printed yet. in this case first 5 coupon (1-5) will be printed
+                                            //2. User enter 5 quantity but 5 coupons already printed in that case coupon serial 6-10 qill be printed
+                                            //3. User enter 5 quantity but 3 coupons already printied in that case 5 coupons from 4-8 will be printed
+                                            //4. User enter 5 quantity but 7 coupons already printed in that case only 3 coupon printed 8-10
+                                            long lstrCurrGRNDTLID = Convert.ToInt64(currRow.Cells["GRN_DTL_ID"].Value.ToString());
+
+                                            //Get list of all barcode label for current part which are not printed yet
+                                            grnlst = db.GRN_LABEL_PRINTING.Where(x => x.GRN_DTL_ID == lstrCurrGRNDTLID && x.STATUS == 0).OrderBy(m => m.BR_SERIAL).ToList();
+
+
+                                            if (grnlst.Count > 0)
                                             {
-                                                if (currRow.Cells["IS_BLOCK"].Value.ToString() != "1")
+                                                int lintRemainingLabelQty = grnlst.Count;
+                                                int lintRequestedLabelQty = 0;
+
+                                                if (currRow.Cells["PALLETE_NO"].Value.ToString() == "" || optIndividualPrint.Checked)
                                                 {
-                                                    //Get the list of Boxes for this part whose label are not printed yet. First we need to get the boxes whose label are remaining for priting.
-                                                    //although user will also give the quantity that how many boxes should be printed but we need to consider following scenarios
-                                                    //1. User enter 5 quantity to print out of total 10 boxes and no coupon printed yet. in this case first 5 coupon (1-5) will be printed
-                                                    //2. User enter 5 quantity but 5 coupons already printed in that case coupon serial 6-10 qill be printed
-                                                    //3. User enter 5 quantity but 3 coupons already printied in that case 5 coupons from 4-8 will be printed
-                                                    //4. User enter 5 quantity but 7 coupons already printed in that case only 3 coupon printed 8-10
-                                                    long lstrCurrGRNDTLID = Convert.ToInt64(currRow.Cells["GRN_DTL_ID"].Value.ToString());
+                                                    int lintLabelToPrint = 0;
 
-                                                    //Get list of all barcode label for current part which are not printed yet
-                                                    grnlst = db.GRN_LABEL_PRINTING.Where(x => x.GRN_DTL_ID == lstrCurrGRNDTLID && x.STATUS == 0).OrderBy(m => m.BR_SERIAL).ToList();
-                                                    
+                                                    if (currRow.Cells["No_Of_Print"].Value != null)
+                                                        lintRequestedLabelQty = common.ReplaceNullNumber(currRow.Cells["No_Of_Print"].Value.ToString());
 
-                                                    if (grnlst.Count > 0)
+                                                    //this is case when user did not requested the quantity. OR user Requested More than equal to remaining qty. Means he wants to print all remaining labels
+                                                    if (lintRequestedLabelQty == 0 || lintRequestedLabelQty >= lintRemainingLabelQty)
+                                                        lintLabelToPrint = lintRemainingLabelQty;
+                                                    else if (lintRequestedLabelQty < lintRemainingLabelQty)
+                                                        lintLabelToPrint = lintRequestedLabelQty;
+
+                                                    int lintNoOfBox = 1;
+
+                                                    for (int currPart = 0; currPart < lintLabelToPrint; currPart++)
                                                     {
-                                                        int lintRemainingLabelQty = grnlst.Count;
-                                                        int lintRequestedLabelQty = 0;
-
-                                                        if (currRow.Cells["PALLETE_NO"].Value.ToString() == "" || optIndividualPrint.Checked)
+                                                        using (var DbTransacation = db.Database.BeginTransaction())
                                                         {
-                                                            int lintLabelToPrint = 0;
-
-                                                            if (currRow.Cells["No_Of_Print"].Value != null)
-                                                                lintRequestedLabelQty = common.ReplaceNullNumber(currRow.Cells["No_Of_Print"].Value.ToString());
-
-                                                            //this is case when user did not requested the quantity. OR user Requested More than equal to remaining qty. Means he wants to print all remaining labels
-                                                            if (lintRequestedLabelQty == 0 || lintRequestedLabelQty >= lintRemainingLabelQty)
-                                                                lintLabelToPrint = lintRemainingLabelQty;
-                                                            else if (lintRequestedLabelQty < lintRemainingLabelQty)
-                                                                lintLabelToPrint = lintRequestedLabelQty;
-
-                                                            int lintNoOfBox = 1;
-
-                                                            for (int currPart = 0; currPart < lintLabelToPrint; currPart++)
+                                                            try
                                                             {
                                                                 lintNoOfBox = Convert.ToInt32(currRow.Cells["Quantity"].Value.ToString()) / Convert.ToInt32(currRow.Cells["Pack_Size"].Value.ToString());
 
@@ -647,11 +648,24 @@ namespace AI_BTS_DENSO
                                                                         clsCurrentUser.Site_Name.ToString()
                                                                 );
 
-                                                                 grnlst[currPart].STATUS = 1;
+                                                                grnlst[currPart].STATUS = 1;
                                                                 grnlst[currPart].PRINT_TYPE = "Individual";
+                                                                db.SaveChanges();
+                                                                DbTransacation.Commit();
+                                                            }//end of inner try block inside using tansaction
+                                                            catch (Exception ex)
+                                                            {
+                                                                DbTransacation.Rollback();
+                                                                throw new Exception("Error occured while printing label for Serial " + grnlst[currPart].TODAY_BARCODE_SERIAL);
                                                             }
-                                                        }//end of checking if pallet no is not blank
-                                                        else
+                                                        }
+                                                    }
+                                                }//end of checking if pallet no is not blank
+                                                else
+                                                {
+                                                    using (var DbTransacation = db.Database.BeginTransaction())
+                                                    {
+                                                        try
                                                         {
                                                             string lstrPalletNo = common.ReplaceNullString(currRow.Cells["PALLETE_NO"].Value);
                                                             if (!htPalletPrinted.ContainsKey(lstrPalletNo))
@@ -678,41 +692,44 @@ namespace AI_BTS_DENSO
                                                                 currLabel.STATUS = 1;
                                                                 currLabel.PRINT_TYPE = "Mix Pallet";
                                                             }
+                                                            db.SaveChanges();
+                                                            DbTransacation.Commit();
                                                         }
-                                                        #region Update Status of GRN_DTL
-                                                        //We need to check if all lbel of current part have been printed then status has to be change in GRN_DTL Table also
-                                                        //if requested qty is >= remaining quantity  it means all label of current part have been printed.
-                                                        if (lintRequestedLabelQty >= lintRemainingLabelQty || lintRequestedLabelQty == 0)
+                                                        catch (Exception ex)
                                                         {
-                                                            long currGrnDTLID = Convert.ToInt64(currRow.Cells["GRN_DTL_ID"].Value.ToString());
-                                                            grn_dtl = db.GRN_DTL.Where(g => g.GRN_DTL_ID == currGrnDTLID).ToList().FirstOrDefault();
-                                                            grn_dtl.STATUS = 1;
-                                                            currRow.Cells["Status"].Value = "1";
+                                                            DbTransacation.Rollback();
+                                                            throw new Exception("Error occurred while printing mix pallet #: " + currRow.Cells["PALLETE_NO"].Value);
                                                         }
-                                                        #endregion
-                                                    }//End of cndition check if current grnlbl list has any lable for printing.
-                                                }// end of checking if part is Not blocked
-                                            }//end of condition STATUS check condition
-                                        } //End of condition to check if current row is selected or not
-                                          //check if any row selected for printing else show alert to select the  row
-                                    }////end of condition check for current row is not blank for part no.
-                                }//end of for loop of each row in data grid view
-                                db.SaveChanges();
-                                DbTransacation.Commit();
-                                ClsMessage.ShowInfo("Requested barcode labels have been printied successfully.");
-                                LoadGRNDataInForm(common.GetGRNData_ByNoticeNo(txtANoticeNo.Text.Trim(),"Parts"), false);
-                            }//end of inner try block inside using tansaction
-                            catch (Exception ex)
-                            {
-                                DbTransacation.Rollback();
-                            }
-                        }//end of using db transaction
-                    }//End of using db entities
-                }//
+                                                    }
+                                                }
+                                                #region Update Status of GRN_DTL
+                                                //We need to check if all lbel of current part have been printed then status has to be change in GRN_DTL Table also
+                                                //if requested qty is >= remaining quantity  it means all label of current part have been printed.
+                                                if (lintRequestedLabelQty >= lintRemainingLabelQty || lintRequestedLabelQty == 0)
+                                                {
+                                                    long currGrnDTLID = Convert.ToInt64(currRow.Cells["GRN_DTL_ID"].Value.ToString());
+                                                    grn_dtl = db.GRN_DTL.Where(g => g.GRN_DTL_ID == currGrnDTLID).ToList().FirstOrDefault();
+                                                    grn_dtl.STATUS = 1;
+                                                    currRow.Cells["Status"].Value = "1";
+                                                }
+                                                #endregion
+                                                db.SaveChanges();
+                                            }//End of cndition check if current grnlbl list has any lable for printing.
+                                        }// end of checking if part is Not blocked
+                                    }//end of condition STATUS check condition
+                                } //End of condition to check if current row is selected or not
+                            }////end of condition check for current row is not blank for part no.
+                        }//end of for loop of each row in data grid view
+                        db.SaveChanges();
+                        ClsMessage.ShowInfo("Requested barcode labels have been printied successfully.");
+                        LoadGRNDataInForm(common.GetGRNData_ByNoticeNo(txtANoticeNo.Text.Trim(), "Parts"), false);
+                    }//end of using db transaction
+                }//End of using db entities
             } // end of main try block
             catch (Exception ex)
             {
-                common.WriteLog("Error Message: " + ex.Message + " Inner Excception " + ex.InnerException  + " in Method: " + MethodBase.GetCurrentMethod());
+                ClsMessage.ShowError("Error occurred while printing label. Please contact your application administrator.");
+                common.WriteLog("Error Message: " + ex.Message + " Inner Excception " + ex.InnerException + " in Method: " + MethodBase.GetCurrentMethod());
             }
         }
 

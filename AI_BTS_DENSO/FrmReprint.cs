@@ -387,15 +387,15 @@ namespace AI_BTS_DENSO
 
         private void dgvPartList_Scroll(object sender, ScrollEventArgs e)
         {
-            int oldval = e.OldValue;
-            int diff = e.NewValue - e.OldValue;
-            CheckBox chkHeader = (CheckBox)dgvPartList.Controls["chkHeader"];
-            Point newLoc = new Point((chkHeader.Location.X - diff), chkHeader.Location.Y);
-            chkHeader.Location = newLoc;
-            if (newLoc.X < 40)
-                chkHeader.Visible = false;
-            else
-                chkHeader.Visible = true;
+            //int oldval = e.OldValue;
+            //int diff = e.NewValue - e.OldValue;
+            //CheckBox chkHeader = (CheckBox)dgvPartList.Controls["chkHeader"];
+            //Point newLoc = new Point((chkHeader.Location.X - diff), chkHeader.Location.Y);
+            //chkHeader.Location = newLoc;
+            //if (newLoc.X < 40)
+            //    chkHeader.Visible = false;
+            //else
+            //    chkHeader.Visible = true;
         }
 
         private void dgvPartList_CellContentClick(object sender, DataGridViewCellEventArgs e)

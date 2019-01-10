@@ -134,7 +134,7 @@ namespace AI_BTS_DENSO
                                 {
 
                                     //Update quantity in grn DTL Table as old Qty + added Qty so that label will be printed as per updated total quantity
-                                    #region save GRN_DTL Table data
+                                    #region SAVE GRN_DTL Table data
                                     //currPart = new GRN_DTL();
                                     currPart = db.GRN_DTL.Where(x => x.GRN_DTL_ID == currPart.GRN_DTL_ID).FirstOrDefault();
 
@@ -154,8 +154,8 @@ namespace AI_BTS_DENSO
                                     Int64 lintOLDQuantity = Convert.ToInt64(currPart.QUANTITY) - Convert.ToInt64(currPart.ADDED_QUANTITY);
                                     long lintOLDNoOfBox = 1;
                                     lintOLDNoOfBox = lintOLDQuantity / Convert.ToInt64(currPart.PACK_SIZE.ToString());
-                                    long lintOpenBox = lintOLDQuantity % Convert.ToInt64(currPart.PACK_SIZE.ToString());
-                                    if (lintOpenBox > 0)
+                                    long lintOLDOpenBoxQty = lintOLDQuantity % Convert.ToInt64(currPart.PACK_SIZE.ToString());
+                                    if (lintOLDOpenBoxQty > 0)
                                         lintOLDNoOfBox += 1;
 
                                     //First we will check if added quantity as any open box or not if not then we will not make any change
@@ -164,6 +164,7 @@ namespace AI_BTS_DENSO
                                     {
                                         //case When there is no open box in new added quantity
                                         int lintNewBoxesToBeAdded = Convert.ToInt32(currPart.ADDED_QUANTITY / Convert.ToInt32(currPart.PACK_SIZE.ToString()));
+
                                         long lintSerial = common.GenerateBarcodeSerial("GRN", lintNewBoxesToBeAdded);
 
                                         for (int CurrLabel = 1; CurrLabel <= lintNewBoxesToBeAdded; CurrLabel++)
@@ -185,7 +186,7 @@ namespace AI_BTS_DENSO
 
                                             int currBRSerial = Convert.ToInt32( CurrLabel + lintOLDNoOfBox);
 
-                                            GRN_LABEL_PRINTING grn_label = new GRN_LABEL_PRINTING
+                                            GRN_LABEL_PRINTING grn_label = new GRN_LABEL_PRINTING  
                                             {
                                                 GRN_DTL_ID = currPart.GRN_DTL_ID,
                                                 PRIMARY_BARCODE = lstrCurrBarCode,
@@ -206,12 +207,96 @@ namespace AI_BTS_DENSO
                                         //Case when there is a new box in new added quantity. Here may be two cases. Old quantity may or may not
                                         //have open box, while new added quantity have open box. if old quantity do not have open box then we 
                                         //will add these new quantity boxes as it is new qty (Closed + Open). otherwise we will add quantity 
-                                        Int64 lintTotalQuantity = Convert.ToInt64(currPart.QUANTITY) - Convert.ToInt64(currPart.ADDED_QUANTITY);
+                                        Int64 lintTotalQuantity = Convert.ToInt64(currPart.QUANTITY);// - Convert.ToInt64(currPart.ADDED_QUANTITY);
                                         long lintTotalNoOfBox = 1;
-                                        lintOLDNoOfBox = lintTotalQuantity / Convert.ToInt64(currPart.PACK_SIZE.ToString());
+                                        lintTotalNoOfBox = lintTotalQuantity / Convert.ToInt64(currPart.PACK_SIZE.ToString());
                                         long lintTotalOpenBox = lintTotalQuantity % Convert.ToInt64(currPart.PACK_SIZE.ToString());
                                         if (lintTotalOpenBox > 0)
                                             lintTotalNoOfBox += 1;
+
+                                        //Case when Old quantity has open Boxes as well as new added quantity has open box. then merge both the open boxes
+                                        //and calculate how many new boxes need to be introduced. And box quantity of old open box has to be updaed as per pack size
+                                        int lintNewOpenQtyRemaining = 0;
+                                        int lintNewClosedBoxRemaining = 0;
+                                        int lintNewOpenBoxQty = Convert.ToInt32( currPart.ADDED_QUANTITY % Convert.ToInt32(currPart.PACK_SIZE.ToString()));
+                                        int lintCurrPartSize = Convert.ToInt32(currPart.PACK_SIZE.ToString());
+
+                                        if (lintOLDOpenBoxQty > 0 && lintNewOpenBoxQty >  0)
+                                        {
+                                            //Check if after mergin new open qty and old open qty is there still any open quantity remaining. or its merged in old box only.
+                                            //new closed box will be separate. here we calculating for open qty only
+                                            GRN_LABEL_PRINTING grn_label;
+                                            //there may be maximum one box open in old quantity.
+                                            grn_label = db.GRN_LABEL_PRINTING.Where(x => x.GRN_DTL_ID == currPart.GRN_DTL_ID && x.BOX_QUANTITY != lintCurrPartSize).FirstOrDefault();
+
+                                            if (lintOLDOpenBoxQty + lintNewOpenBoxQty <= lintCurrPartSize)
+                                            {
+                                                //set current box quantity as per total of old open qty and new open qty.
+                                                grn_label.BOX_QUANTITY = Convert.ToInt32( lintOLDOpenBoxQty + lintNewOpenBoxQty);
+                                            }
+                                            else
+                                            {
+                                                //case when after merging the old open box and new open box still some open qty is remaning.
+                                                lintNewOpenQtyRemaining = Convert.ToInt32((lintOLDOpenBoxQty + lintNewOpenBoxQty)) - lintCurrPartSize;
+
+                                                //Set Current old open box quantity as per pack size since this box is full now.
+                                                grn_label.BOX_QUANTITY = lintCurrPartSize;
+                                            }
+                                            #region UPDATE QTY IN LABEL BARCODE
+                                            var arrPrimaryBarcode = grn_label.PRIMARY_BARCODE.ToString().Split('|');
+                                            grn_label.PRIMARY_BARCODE = arrPrimaryBarcode[0] + "|" + arrPrimaryBarcode[1] + "|" + grn_label.BOX_QUANTITY + "|" +
+                                                                        arrPrimaryBarcode[3] + "|" + arrPrimaryBarcode[4];
+                                            #endregion
+                                        }
+                                        else
+                                        {
+                                            //Case When Old quantity does not have open box but new added quantity has
+                                            lintNewOpenQtyRemaining = lintNewOpenBoxQty;
+                                        }
+
+                                        lintNewClosedBoxRemaining = Convert.ToInt32(currPart.ADDED_QUANTITY / lintCurrPartSize);
+                                        if (lintNewOpenQtyRemaining > 0)
+                                            lintNewClosedBoxRemaining += 1;
+
+
+                                        long lintSerial = common.GenerateBarcodeSerial("GRN", lintNewClosedBoxRemaining);
+
+                                        for (int CurrLabel = 1; CurrLabel <= lintNewClosedBoxRemaining; CurrLabel++)
+                                        {
+                                            string lstrCurrSerial = "";
+                                            if (lintSerial.ToString().Length <= 5)
+                                                lstrCurrSerial = DateTime.Today.ToString("ddMMyy") + String.Format("{0:00000}", lintSerial++);
+                                            else
+                                                lstrCurrSerial = String.Format("{0:00000}", lintSerial++);
+
+                                            int lintCurrBoxQuantity = Convert.ToInt32(currPart.PACK_SIZE);
+                                            if(CurrLabel == lintNewClosedBoxRemaining && lintNewOpenQtyRemaining > 0 )
+                                                lintCurrBoxQuantity = lintNewOpenQtyRemaining;
+
+                                            string lstrCurrBarCode = common.GenerateGRNBarCode(
+                                                                                common.ReplaceNullString(currPart.PART_NO),
+                                                                                txtANoticeNo.Text.Trim(),
+                                                                                lintCurrBoxQuantity.ToString(),
+                                                                                lstrCurrSerial,
+                                                                                clsCurrentUser.Site_Name.ToString());
+
+                                            int currBRSerial = Convert.ToInt32(CurrLabel + lintOLDNoOfBox);
+
+                                            GRN_LABEL_PRINTING grn_label = new GRN_LABEL_PRINTING
+                                            {
+                                                GRN_DTL_ID = currPart.GRN_DTL_ID,
+                                                PRIMARY_BARCODE = lstrCurrBarCode,
+                                                BR_SERIAL = currBRSerial,
+                                                LABEL_TYPE_MST_ID = 1,
+                                                STATUS = 0,
+                                                CREATED_BY = clsCurrentUser.User_MST_ID,
+                                                CREATED_DATE = DateTime.Now,
+                                                TODAY_BARCODE_SERIAL = lstrCurrSerial,
+                                                BOX_QUANTITY = lintCurrBoxQuantity,
+                                            };
+                                            db.GRN_LABEL_PRINTING.Add(grn_label);
+                                            db.SaveChanges();
+                                        }
                                     }
                                     #endregion
 
