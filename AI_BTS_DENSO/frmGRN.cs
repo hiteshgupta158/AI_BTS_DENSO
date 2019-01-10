@@ -802,9 +802,9 @@ namespace AI_BTS_DENSO
             {
                 //when user has selected individual label printing then he cannot print multiple mix pallets at a time
                 //hence need to check if individual label type is selected then user should not be able to print multiple mixed pallets
-                if (optIndividualPrint.Checked && CheckIfMultipleMixPalletSelected())
-                    ClsMessage.ShowError("Multiple mixed pallet cannot be printed for individual label type. Either select label print type as mixed pallet or print one mixed pallet label at a time.");
-                else
+                //if (optIndividualPrint.Checked && CheckIfMultipleMixPalletSelected())
+                //    ClsMessage.ShowError("Multiple mixed pallet cannot be printed for individual label type. Either select label print type as mixed pallet or print one mixed pallet label at a time.");
+                //else
                     PrintBarCodeData();
             }
             else
