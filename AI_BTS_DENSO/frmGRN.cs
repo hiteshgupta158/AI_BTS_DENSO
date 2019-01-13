@@ -877,16 +877,13 @@ namespace AI_BTS_DENSO
                                 }
                             }
                         }
-                        //else
-                        //    ClsMessage.ShowError("Could not found data in cigma for current A Notice No.");
-                        //lstrQry = "SELECT BD423PR.ANNNBR AS A_NOTICE_NO, BD423PR.ANSUPC AS SUPPLIER_BATCH_NO, BD423PR.ANRCDT AS INVOICE_DATE, BD423PR.ANRCQY AS QUANTITY," +
-                        //        "BD423PR.ANRFNO AS INVOICE_NO,BD423PR.ANPRTN AS PART_NO FROM C809EF9W.KIRESLIB.BD423PR BD423PR WHERE BD423PR.ANNNBR = '" + txtANoticeNo.Text.Trim() + "'";
                     }
                     else
                     {    //DNJP Concept
                         lstrQry = "SELECT BD223PR.CHPLNT,BD223PR.CHCNNO,BD223PR.CHIVNO AS INVOICE_NO,BD223PR.CHPRT1 AS PART_NO,BD223PR.CHBXNO AS PALLETE_NO," +
                                   "BD223PR.CHPKQY AS QTY_PER_BOX,BD223PR.CHNOPK AS NO_OF_BOX,BD223PR.CHSHQY AS QUANTITY,BD223PR.CHDPDT AS INVOICE_DATE " +
-                                  "FROM BD223PR BD223PR Where BD223PR.CHIVNO = '" + txtANoticeNo.Text.Trim() + "'";
+                                  "FROM C809EF9W.KIRESLIB.BD223PR BD223PR Where BD223PR.CHIVNO = '" + txtANoticeNo.Text.Trim() + "'";
+
                     }
                     if (ConfigurationSettings.AppSettings["AppEnvironment"].ToString().ToUpper() == "DEV")
                         lstrQry = lstrQry.ToUpper().Replace("C809EF9W.KIRESLIB.", "");

@@ -72,6 +72,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblLoginUser = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.lblReprintQC = new AccessPark.MyLabel();
             this.panel2.SuspendLayout();
             this.pnlData.SuspendLayout();
             this.pnlDataHeader.SuspendLayout();
@@ -196,6 +197,7 @@
             this.Mastertabpnl.Controls.Add(this.myLabel15);
             this.Mastertabpnl.Controls.Add(this.myLabel16);
             this.Mastertabpnl.Controls.Add(this.myLabel18);
+            this.Mastertabpnl.Controls.Add(this.lblReprintQC);
             this.Mastertabpnl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Mastertabpnl.Location = new System.Drawing.Point(3, 3);
             this.Mastertabpnl.Name = "Mastertabpnl";
@@ -721,6 +723,22 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "Login User :";
             // 
+            // lblReprintQC
+            // 
+            this.lblReprintQC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblReprintQC.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReprintQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblReprintQC.ImageIndex = 10;
+            this.lblReprintQC.ImageList = this.imageList1;
+            this.lblReprintQC.Location = new System.Drawing.Point(3, 806);
+            this.lblReprintQC.Name = "lblReprintQC";
+            this.lblReprintQC.Size = new System.Drawing.Size(216, 50);
+            this.lblReprintQC.TabIndex = 21;
+            this.lblReprintQC.Tag = "123";
+            this.lblReprintQC.Text = "Reprint QC";
+            this.lblReprintQC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblReprintQC.Click += new System.EventHandler(this.lblLeftMenu_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -795,6 +813,7 @@
         private AccessPark.MyLabel myLabel13;
         private AccessPark.MyLabel myLabel18;
         private AccessPark.MyLabel myLabel19;
+        private AccessPark.MyLabel lblReprintQC;
     }
 }
 

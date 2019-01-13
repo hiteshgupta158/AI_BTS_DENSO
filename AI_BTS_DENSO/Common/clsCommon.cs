@@ -110,6 +110,9 @@ namespace AI_BTS_DENSO.Common
                     case 122:
                         lfrm = new frmQtyUpdate();
                         break;
+                    case 123:
+                        lfrm = new frmReprintQC();
+                        break;
                     default:
                         break;
                 }
@@ -593,12 +596,86 @@ namespace AI_BTS_DENSO.Common
             }
         }
 
-        /// <summary>
-        /// Gets GRN Master Details by Notice No.
-        /// </summary>
-        /// <param name="pstrANoticeNo">Notice No. for which GRN Master details need to be fetched</param>
-        /// <returns>Returns object of GRN Master fetched from database</returns>
-        public GRN_DATA GetGRNData_ByNoticeNo(string pstrANoticeNo,string pstrPartType)
+
+        public List<QC_REJECTED_DATA> GetQCRejectedData_ByNoticeNo(string pstrANoticeNo)
+        {
+            List<QC_REJECTED_DATA> rtnLstRejData = new List<QC_REJECTED_DATA>();
+            QC_REJECTED_DATA qc_rejected_data = new QC_REJECTED_DATA();
+            List<QC_MST> qc_mst = new List<QC_MST>();
+            try
+            {
+                
+                if (pstrANoticeNo != "" && pstrANoticeNo != null)
+                {
+                    using (AI_BTS_DENSOEntities1 db = new AI_BTS_DENSOEntities1())
+                    {
+                        //get list of all parts in current A_Notice_No.
+                        qc_mst = db.QC_MST.Where(x => x.A_NOTICE_NO == pstrANoticeNo && x.QUANTITY_REJECTED > 0).ToList();
+                        if (qc_mst.Count > 0)
+                        {
+                            //Itrate for each part and check if any of its box got rejected or not. 
+                            //Only consider those part to show in main  list which have rejected box(s). and only those box in part list grid view
+                            foreach (QC_MST currPart in qc_mst)
+                            {
+                                qc_rejected_data = new QC_REJECTED_DATA();
+                                List<QC_DTL> lstQcDtl = new List<QC_DTL>();
+                                //Get list of all boxes of current part which got partial/full rejected.
+                                //lstQcDtl = db.QC_DTL.Where(x => x.QC_MST_ID == currPart.QC_MST_ID && x.QUANTITY_REJECTED > 0).ToList(); //remove this line
+                                lstQcDtl = currPart.QC_DTL.Where(x => x.QUANTITY_REJECTED > 0).ToList();
+                                if (lstQcDtl.Count > 0)
+                                {
+
+                                    //get part name of current part no.(it will be required to send in label PRN
+                                    //MATERIAL_MST partInfo = db.MATERIAL_MST.Where(x => x.PART_NO == currPart.PART_NO).FirstOrDefault();
+
+                                    //set current Qc_Rejected Data Object for QC MST and part name
+
+                                    qc_rejected_data.qc_mst = currPart;
+                                    qc_rejected_data.Part_Name = currPart.GRN_DTL.PART_NAME;//  partInfo.PART_NAME;
+
+                                    //Get details of rejected label of current box
+                                    List<QC_LABEL_PRINTING> lstQCLbl = new List<QC_LABEL_PRINTING>();
+                                    foreach (QC_DTL currBox in lstQcDtl)
+                                    {
+                                        //get list of 
+                                        List<QC_LABEL_PRINTING> lstBoxLbl = currBox.QC_LABEL_PRINTING.Where(x => x.STATUS == 1).ToList();
+                                        if (lstBoxLbl.Count>0)
+                                        {
+                                            foreach (QC_LABEL_PRINTING c_LABEL_PRINTING in lstBoxLbl)
+                                            {
+                                                lstQCLbl.Add(c_LABEL_PRINTING);
+                                            }
+                                        }
+                                    }
+                                    qc_rejected_data.lst_QC_Lbl = lstQCLbl;
+                                }
+                            }
+                            rtnLstRejData.Add(qc_rejected_data);
+                        }
+                        else
+                        {
+                            ClsMessage.ShowInfo("No rejected part found in current A Notice No./Invoice.");
+                            rtnLstRejData = null;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                WriteLog("Error Message: " + ex.Message + " Inner Excception " + ex.InnerException + ex.StackTrace.Substring(0, ex.StackTrace.IndexOf("(")));
+            }
+            return rtnLstRejData;
+        }
+
+
+
+
+            /// <summary>
+            /// Gets GRN Master Details by Notice No.
+            /// </summary>
+            /// <param name="pstrANoticeNo">Notice No. for which GRN Master details need to be fetched</param>
+            /// <returns>Returns object of GRN Master fetched from database</returns>
+            public GRN_DATA GetGRNData_ByNoticeNo(string pstrANoticeNo,string pstrPartType)
         {
             //Created GRN_DATA Class to get the join fields data as default query.toList() passes field as per original class 
             //structure only and join fields's value do not passs. For ex. in GRN_MST SITE_Name does not pass but SITE_ID
@@ -609,7 +686,7 @@ namespace AI_BTS_DENSO.Common
                 {
                     using (AI_BTS_DENSOEntities1 db = new AI_BTS_DENSOEntities1())
                     {
-                        var query = from a in db.GRN_MST
+                        var query = from a in db.GRN_MST    
                                     join b in db.GRN_TYPE_MST on a.GRN_TYPE_MST_ID equals b.GRN_TYPE_MST_ID
                                     join c in db.SITE_MST on a.SITE_MST_ID equals c.SITE_MST_ID
                                     join d in db.GRN_DTL on a.GRN_MST_ID equals d.GRN_MST_ID

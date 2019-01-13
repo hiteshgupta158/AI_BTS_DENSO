@@ -17,4 +17,13 @@ namespace AI_BTS_DENSO.Model
 
         public List<GRN_DTL> lstGrn_Dtl { get; set; }
     }
+    
+    class QC_REJECTED_DATA
+    {
+        public QC_MST qc_mst { get; set; }
+
+        public string Part_Name { get; set; }
+        
+        public List<QC_LABEL_PRINTING> lst_QC_Lbl { get; set; }
+    }
 }

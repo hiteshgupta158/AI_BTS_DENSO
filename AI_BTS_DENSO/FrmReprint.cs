@@ -549,6 +549,10 @@ namespace AI_BTS_DENSO
         {
             try
             {
+                if (optAll.Checked)
+                {
+                    dgvPartList.SelectAll();
+                }
                 //if (common.IsAnyRowSelected(dgvPartList, "chkPrint"))
                 if(dgvPartList.SelectedRows.Count>0)
                 {
@@ -558,11 +562,7 @@ namespace AI_BTS_DENSO
                     if (lintOpenBox > 0)
                         lintNoOfBox += 1;
 
-                    if(optAll.Checked)
-                    {
-                        dgvPartList.SelectAll();
-                    }
-
+                    
                     foreach (DataGridViewRow currLabel in dgvPartList.SelectedRows)
                     {
                         //if (common.ReplaceNullBoolean(currLabel.Cells["CHKPRINT"].Value) == true)
