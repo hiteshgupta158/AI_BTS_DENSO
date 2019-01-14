@@ -629,7 +629,6 @@ namespace AI_BTS_DENSO.Common
                                     //MATERIAL_MST partInfo = db.MATERIAL_MST.Where(x => x.PART_NO == currPart.PART_NO).FirstOrDefault();
 
                                     //set current Qc_Rejected Data Object for QC MST and part name
-
                                     qc_rejected_data.qc_mst = currPart;
                                     qc_rejected_data.Part_Name = currPart.GRN_DTL.PART_NAME;//  partInfo.PART_NAME;
 
@@ -638,7 +637,7 @@ namespace AI_BTS_DENSO.Common
                                     foreach (QC_DTL currBox in lstQcDtl)
                                     {
                                         //get list of 
-                                        List<QC_LABEL_PRINTING> lstBoxLbl = currBox.QC_LABEL_PRINTING.Where(x => x.STATUS == 1).ToList();
+                                        List<QC_LABEL_PRINTING> lstBoxLbl = currBox.QC_LABEL_PRINTING.Where(x => x.STATUS == 1).OrderBy(x=> x.BARCODE_TYPE).OrderBy(x=> x.TODAY_BARCODE_SERIAL).ToList();
                                         if (lstBoxLbl.Count>0)
                                         {
                                             foreach (QC_LABEL_PRINTING c_LABEL_PRINTING in lstBoxLbl)
@@ -1222,7 +1221,7 @@ namespace AI_BTS_DENSO.Common
             return isSelected;
         }
 
-        public void PrintPallet(string pstrANoticeNo, string pstrPalletNo)
+        public void PrintPallet(string pstrANoticeNo, string pstrPalletNo,bool ShowPreview)
         {
             try
             {
@@ -1230,8 +1229,31 @@ namespace AI_BTS_DENSO.Common
                 DataTable ldt = getTable(str);
 
                 rptGRN rptgrn = new rptGRN();
-                frmPalleteInvoiceReport frmrptViewer = new frmPalleteInvoiceReport(rptgrn, ldt);
-                frmrptViewer.ShowDialog();
+                
+                if (ShowPreview)
+                {
+                    frmPalleteInvoiceReport frmrptViewer = new frmPalleteInvoiceReport(rptgrn, ldt);
+                    frmrptViewer.ShowDialog();
+                }
+                else
+                {
+                    string strPrinterName = GetConfigKey("PrinterName");
+                    if (strPrinterName.Trim() != "")
+                    {
+                        System.Drawing.Printing.PrintDocument pDoc = new System.Drawing.Printing.PrintDocument();
+                        CrystalDecisions.Shared.PrintLayoutSettings PrintLayout = new CrystalDecisions.Shared.PrintLayoutSettings();
+                        System.Drawing.Printing.PrinterSettings printerSettings = new System.Drawing.Printing.PrinterSettings();
+                        printerSettings.PrinterName = strPrinterName;//"EPSON Coupon Generator(TM-T82)";//"SATO CL4NX 203dpi";
+                        rptgrn.SetDataSource(ldt);
+                        System.Drawing.Printing.PageSettings pageSettings = new System.Drawing.Printing.PageSettings(printerSettings);
+                        rptgrn.PrintToPrinter(printerSettings, pageSettings, false, PrintLayout);
+                    }
+                    else
+                    {
+                        ClsMessage.ShowError("Please configure printer name in configuration setting.");
+                        throw new Exception("Printer name is not configured in configuration setting.");
+                    }
+                }
             }
             catch (Exception ex)
             {

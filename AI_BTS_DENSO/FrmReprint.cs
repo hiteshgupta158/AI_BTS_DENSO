@@ -597,7 +597,7 @@ namespace AI_BTS_DENSO
                 {
                     lstrANoticeNo = grn_data.Grn_Mst.A_NOTICE_NO; ;
                     lstrPalletNo = common.ReplaceNullString(pCurrRow.Cells["Pallete_No"].Value);
-                    common.PrintPallet(lstrANoticeNo, lstrPalletNo);
+                    common.PrintPallet(lstrANoticeNo, lstrPalletNo,optPreview.Checked);
 
                     //Change Reprint status of all parts of current pallet so that we wont print mix pallet 
                     //print again for current part's pallet

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlTop = new System.Windows.Forms.Panel();
             this.txtANoticeNo = new System.Windows.Forms.TextBox();
@@ -42,12 +42,6 @@
             this.dgvPartList = new System.Windows.Forms.DataGridView();
             this.dgvData = new System.Windows.Forms.DataGridView();
             this.lblAssetLastModifiedDate = new System.Windows.Forms.Label();
-            this.QC_MST_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Part_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Part_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Pack_Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.A_Notice_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Invoice_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TODAY_BARCODE_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Barcode_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BR_SERIAL = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +51,12 @@
             this.QC_LBL_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Quantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Total_Label = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QC_MST_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Part_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Part_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Pack_Size = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.A_Notice_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Invoice_No = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pnlMain.SuspendLayout();
             this.pnlTop.SuspendLayout();
             this.pnlGridControl.SuspendLayout();
@@ -212,8 +212,8 @@
             // 
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvData.BackgroundColor = System.Drawing.Color.White;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -247,53 +247,6 @@
             this.lblAssetLastModifiedDate.Name = "lblAssetLastModifiedDate";
             this.lblAssetLastModifiedDate.Size = new System.Drawing.Size(0, 15);
             this.lblAssetLastModifiedDate.TabIndex = 26;
-            // 
-            // QC_MST_ID
-            // 
-            this.QC_MST_ID.DataPropertyName = "QC_MST_ID";
-            this.QC_MST_ID.HeaderText = "QC MST ID";
-            this.QC_MST_ID.Name = "QC_MST_ID";
-            this.QC_MST_ID.ReadOnly = true;
-            this.QC_MST_ID.Visible = false;
-            // 
-            // Part_No
-            // 
-            this.Part_No.DataPropertyName = "Part_No";
-            this.Part_No.HeaderText = "Part Number";
-            this.Part_No.Name = "Part_No";
-            this.Part_No.ReadOnly = true;
-            this.Part_No.Width = 200;
-            // 
-            // Part_Name
-            // 
-            this.Part_Name.DataPropertyName = "Part_Name";
-            this.Part_Name.HeaderText = "Part Name";
-            this.Part_Name.Name = "Part_Name";
-            this.Part_Name.ReadOnly = true;
-            this.Part_Name.Width = 280;
-            // 
-            // Pack_Size
-            // 
-            this.Pack_Size.DataPropertyName = "Pack_Size";
-            this.Pack_Size.HeaderText = "Pack Size";
-            this.Pack_Size.Name = "Pack_Size";
-            this.Pack_Size.ReadOnly = true;
-            this.Pack_Size.Width = 130;
-            // 
-            // A_Notice_No
-            // 
-            this.A_Notice_No.DataPropertyName = "A_NOTICE_NO";
-            this.A_Notice_No.HeaderText = "A Notice No";
-            this.A_Notice_No.Name = "A_Notice_No";
-            this.A_Notice_No.ReadOnly = true;
-            this.A_Notice_No.Visible = false;
-            // 
-            // Invoice_No
-            // 
-            this.Invoice_No.DataPropertyName = "Invoice_No";
-            this.Invoice_No.HeaderText = "Inovice No.";
-            this.Invoice_No.Name = "Invoice_No";
-            this.Invoice_No.ReadOnly = true;
             // 
             // TODAY_BARCODE_SERIAL
             // 
@@ -366,6 +319,54 @@
             this.Total_Label.ReadOnly = true;
             this.Total_Label.Visible = false;
             // 
+            // QC_MST_ID
+            // 
+            this.QC_MST_ID.DataPropertyName = "QC_MST_ID";
+            this.QC_MST_ID.HeaderText = "QC MST ID";
+            this.QC_MST_ID.Name = "QC_MST_ID";
+            this.QC_MST_ID.ReadOnly = true;
+            this.QC_MST_ID.Visible = false;
+            // 
+            // Part_No
+            // 
+            this.Part_No.DataPropertyName = "Part_No";
+            this.Part_No.HeaderText = "Part Number";
+            this.Part_No.Name = "Part_No";
+            this.Part_No.ReadOnly = true;
+            this.Part_No.Width = 200;
+            // 
+            // Part_Name
+            // 
+            this.Part_Name.DataPropertyName = "Part_Name";
+            this.Part_Name.HeaderText = "Part Name";
+            this.Part_Name.Name = "Part_Name";
+            this.Part_Name.ReadOnly = true;
+            this.Part_Name.Width = 280;
+            // 
+            // Pack_Size
+            // 
+            this.Pack_Size.DataPropertyName = "Pack_Size";
+            this.Pack_Size.HeaderText = "Pack Size";
+            this.Pack_Size.Name = "Pack_Size";
+            this.Pack_Size.ReadOnly = true;
+            this.Pack_Size.Width = 130;
+            // 
+            // A_Notice_No
+            // 
+            this.A_Notice_No.DataPropertyName = "A_NOTICE_NO";
+            this.A_Notice_No.HeaderText = "A Notice No";
+            this.A_Notice_No.Name = "A_Notice_No";
+            this.A_Notice_No.ReadOnly = true;
+            this.A_Notice_No.Visible = false;
+            // 
+            // Invoice_No
+            // 
+            this.Invoice_No.DataPropertyName = "Invoice_No";
+            this.Invoice_No.HeaderText = "Inovice No.";
+            this.Invoice_No.Name = "Invoice_No";
+            this.Invoice_No.ReadOnly = true;
+            this.Invoice_No.Visible = false;
+            // 
             // frmReprintQC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -411,12 +412,6 @@
         private System.Windows.Forms.Panel pnlPartList;
         private System.Windows.Forms.DataGridView dgvPartList;
         private System.Windows.Forms.DataGridView dgvData;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QC_MST_ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Part_No;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Part_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Pack_Size;
-        private System.Windows.Forms.DataGridViewTextBoxColumn A_Notice_No;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Invoice_No;
         private System.Windows.Forms.DataGridViewTextBoxColumn TODAY_BARCODE_SERIAL;
         private System.Windows.Forms.DataGridViewTextBoxColumn Barcode_Type;
         private System.Windows.Forms.DataGridViewTextBoxColumn BR_SERIAL;
@@ -426,5 +421,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn QC_LBL_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Quantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Label;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QC_MST_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Part_No;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Part_Name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Pack_Size;
+        private System.Windows.Forms.DataGridViewTextBoxColumn A_Notice_No;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Invoice_No;
     }
 }

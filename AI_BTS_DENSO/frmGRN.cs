@@ -670,7 +670,7 @@ namespace AI_BTS_DENSO
                                                             string lstrPalletNo = common.ReplaceNullString(currRow.Cells["PALLETE_NO"].Value);
                                                             if (!htPalletPrinted.ContainsKey(lstrPalletNo))
                                                             {
-                                                                common.PrintPallet(txtANoticeNo.Text.Trim(), lstrPalletNo);
+                                                                common.PrintPallet(txtANoticeNo.Text.Trim(), lstrPalletNo,optPreview.Checked );
                                                                 htPalletPrinted.Add(lstrPalletNo, "1");
 
                                                                 //Add Pallet No. to Mixed STO Pallet Table for STO Purpose
@@ -1379,6 +1379,18 @@ namespace AI_BTS_DENSO
         {
             if(common.CheckIfMultiPartMixPalletSelected(dgvData))
                 optMixedPalletPrint.Checked = true;
+
+            grnPrintMode.Enabled = false;
+        }
+
+        private void optMixedPalletPrint_CheckedChanged(object sender, EventArgs e)
+        {
+            grnPrintMode.Enabled = true;
+        }
+
+        private void optDirect_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

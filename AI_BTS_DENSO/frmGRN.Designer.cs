@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlMain = new System.Windows.Forms.Panel();
             this.pnlDGVnControls = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -81,6 +81,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblMaterialSource = new System.Windows.Forms.Label();
             this.ofd = new System.Windows.Forms.OpenFileDialog();
+            this.grnPrintMode = new System.Windows.Forms.GroupBox();
+            this.optDirect = new System.Windows.Forms.RadioButton();
+            this.optPreview = new System.Windows.Forms.RadioButton();
             this.pnlMain.SuspendLayout();
             this.pnlDGVnControls.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -89,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvData)).BeginInit();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.grnPrintMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlMain
@@ -117,6 +121,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.grnPrintMode);
             this.panel4.Controls.Add(this.groupBox2);
             this.panel4.Controls.Add(this.label10);
             this.panel4.Controls.Add(this.label9);
@@ -138,7 +143,7 @@
             // 
             this.groupBox2.Controls.Add(this.optMixedPalletPrint);
             this.groupBox2.Controls.Add(this.optIndividualPrint);
-            this.groupBox2.Location = new System.Drawing.Point(526, 13);
+            this.groupBox2.Location = new System.Drawing.Point(280, 16);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(244, 51);
             this.groupBox2.TabIndex = 16;
@@ -155,6 +160,7 @@
             this.optMixedPalletPrint.TabStop = true;
             this.optMixedPalletPrint.Text = "Mixed Pallet";
             this.optMixedPalletPrint.UseVisualStyleBackColor = true;
+            this.optMixedPalletPrint.CheckedChanged += new System.EventHandler(this.optMixedPalletPrint_CheckedChanged);
             // 
             // optIndividualPrint
             // 
@@ -271,8 +277,8 @@
             this.dgvData.AllowUserToAddRows = false;
             this.dgvData.AllowUserToDeleteRows = false;
             this.dgvData.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            this.dgvData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
             this.dgvData.BackgroundColor = System.Drawing.Color.White;
             this.dgvData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -337,10 +343,10 @@
             // 
             // chkPrint
             // 
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.NullValue = false;
-            this.chkPrint.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle6.NullValue = false;
+            this.chkPrint.DefaultCellStyle = dataGridViewCellStyle6;
             this.chkPrint.HeaderText = "";
             this.chkPrint.Name = "chkPrint";
             this.chkPrint.ReadOnly = true;
@@ -646,6 +652,41 @@
             // 
             this.ofd.FileName = "openFileDialog1";
             // 
+            // grnPrintMode
+            // 
+            this.grnPrintMode.Controls.Add(this.optDirect);
+            this.grnPrintMode.Controls.Add(this.optPreview);
+            this.grnPrintMode.Location = new System.Drawing.Point(530, 17);
+            this.grnPrintMode.Name = "grnPrintMode";
+            this.grnPrintMode.Size = new System.Drawing.Size(244, 51);
+            this.grnPrintMode.TabIndex = 17;
+            this.grnPrintMode.TabStop = false;
+            this.grnPrintMode.Text = "Pallet Print Mode";
+            // 
+            // optDirect
+            // 
+            this.optDirect.AutoSize = true;
+            this.optDirect.Location = new System.Drawing.Point(128, 22);
+            this.optDirect.Name = "optDirect";
+            this.optDirect.Size = new System.Drawing.Size(105, 24);
+            this.optDirect.TabIndex = 2;
+            this.optDirect.TabStop = true;
+            this.optDirect.Text = "Direct Print";
+            this.optDirect.UseVisualStyleBackColor = true;
+            this.optDirect.CheckedChanged += new System.EventHandler(this.optDirect_CheckedChanged);
+            // 
+            // optPreview
+            // 
+            this.optPreview.AutoSize = true;
+            this.optPreview.Checked = true;
+            this.optPreview.Location = new System.Drawing.Point(28, 21);
+            this.optPreview.Name = "optPreview";
+            this.optPreview.Size = new System.Drawing.Size(81, 24);
+            this.optPreview.TabIndex = 1;
+            this.optPreview.TabStop = true;
+            this.optPreview.Text = "Preview";
+            this.optPreview.UseVisualStyleBackColor = true;
+            // 
             // frmGRN
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -673,6 +714,8 @@
             this.panel1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.grnPrintMode.ResumeLayout(false);
+            this.grnPrintMode.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -729,5 +772,8 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton optMixedPalletPrint;
         private System.Windows.Forms.RadioButton optIndividualPrint;
+        private System.Windows.Forms.GroupBox grnPrintMode;
+        private System.Windows.Forms.RadioButton optDirect;
+        private System.Windows.Forms.RadioButton optPreview;
     }
 }

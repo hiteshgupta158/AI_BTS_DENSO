@@ -190,6 +190,7 @@ namespace AI_BTS_DENSO
                     dgvData.AutoGenerateColumns = false;
                     dgvData.Rows.Clear();
                     //dgvData.DataSource = pgrn_data.lstGrn_Dtl;
+                    int lintGridRow = 0;
                     foreach (QC_REJECTED_DATA currPart in pData)
                     {
                         using (AI_BTS_DENSOEntities1 db = new AI_BTS_DENSOEntities1())
@@ -198,6 +199,9 @@ namespace AI_BTS_DENSO
                             if (currPart.qc_mst != null)
                             {
                                 dgvData.Rows.Add(currPart.qc_mst.QC_MST_ID, currPart.qc_mst.PART_NO, currPart.Part_Name, currPart.qc_mst.GRN_DTL.PACK_SIZE,currPart.qc_mst.A_NOTICE_NO);
+                                long lintGRNMSTID =Convert.ToInt64( currPart.qc_mst.GRN_DTL.GRN_MST_ID.ToString());
+                                string lstrInvoiceNo = db.GRN_MST.Where(x => x.GRN_MST_ID == lintGRNMSTID).FirstOrDefault().INVOICE_NO;
+                                dgvData.Rows[lintGridRow++].Cells["Invoice_No"].Value = lstrInvoiceNo;
                             }
                         }
                     }
@@ -228,7 +232,7 @@ namespace AI_BTS_DENSO
             QC_REJECTED_DATA qc_rejected_data = new QC_REJECTED_DATA();
             pnlPartList.Visible = true;
             lstrANoticeNo = common.ReplaceNullString(pCurrRow.Cells["A_NOTICE_NO"].Value);
-            //lstrInvoiceNo = grn_data.Grn_Mst.INVOICE_NO;
+            lstrInvoiceNo = common.ReplaceNullString(pCurrRow.Cells["Invoice_No"].Value);
             lstrPartNo = common.ReplaceNullString(pCurrRow.Cells["Part_No"].Value);
             lstrPartName = common.ReplaceNullString(pCurrRow.Cells["Part_Name"].Value);
             //lintQuantity = common.ReplaceNullNumber(pCurrRow.Cells["Quantity"].Value);
@@ -258,6 +262,8 @@ namespace AI_BTS_DENSO
 
                 if (qc_rejected_data.lst_QC_Lbl.Count > 0)
                 {
+                    int lintBRSerial = 0;
+                    string lstrCurrBarCodeType = "";
                     dgvPartList.DataSource = qc_rejected_data.lst_QC_Lbl;
                     //No. of total label/label no. and inspector name (QC BY User Name) of current part rejected/approved has to be calculated for current label for prn.
                     foreach(DataGridViewRow currLbl in dgvPartList.Rows )
@@ -271,9 +277,16 @@ namespace AI_BTS_DENSO
 
                         currLbl.Cells["Total_Label"].Value = lbl_print.QC_DTL.QC_LABEL_PRINTING.Where(x => x.BARCODE_TYPE == lbl_print.BARCODE_TYPE).ToList().Count;
 
+                        //Set current label serial no. (means what no. label it is out of total no. of labels)
+                        if (lstrCurrBarCodeType != currLbl.Cells["Barcode_Type"].Value.ToString())
+                        {
+                            lstrCurrBarCodeType = currLbl.Cells["Barcode_Type"].Value.ToString();
+                            lintBRSerial = 1;
+                        }
+                        else
+                            lintBRSerial += 1;
                         //Current Label serial no. means its ?/total No. of label for approval/rejection
-                        currLbl.Cells["BR_Serial"].Value = "";
-
+                        currLbl.Cells["BR_Serial"].Value = lintBRSerial.ToString();
                     }
                 }
                 else
@@ -358,20 +371,21 @@ namespace AI_BTS_DENSO
                     foreach (DataGridViewRow currLabel in dgvPartList.SelectedRows)
                     {
                         //Printing individual Barcode
-                        string lstrBoxQty = common.ReplaceNullString(currLabel.Cells["Box_Quantity"].Value);
+                        string lstrBoxQty = common.ReplaceNullString(currLabel.Cells["Quantity"].Value);
                         string lstrTodaySerialNumber = common.ReplaceNullString(currLabel.Cells["TODAY_BARCODE_SERIAL"].Value);
                         string lstrBRSerial = common.ReplaceNullString(currLabel.Cells["BR_SERIAL"].Value);
-                        string lstrRejectionNo = common.ReplaceNullString(currLabel.Cells["Total_Label"].Value);
+                        string lstrQCLblNo = lstrBRSerial + "/" + common.ReplaceNullString(currLabel.Cells["Total_Label"].Value);
                         DateTime ldtQCDateTime = DateTime.Parse(common.ReplaceNullString(currLabel.Cells["QC_ON"].Value));
                         string lstrInspectorName = common.ReplaceNullString(currLabel.Cells["Inspector_Name"].Value);
                         string lstrSerial= common.ReplaceNullString(currLabel.Cells["Today_Barcode_Serial"].Value);
+                        string lstrLblQCBarCode = common.ReplaceNullString(currLabel.Cells["QC_Barcode"].Value);
 
                         if (currLabel.Cells["Barcode_Type"].ToString() == "1")
-                            printRejectionLabel(lstrPartNo,lstrPartName,lstrInvoiceNo,lstrANoticeNo,lintQuantity.ToString(), lstrRejectionNo,
-                                ldtQCDateTime, lstrInspectorName,"", lstrSerial);
+                            printRejectionLabel(lstrPartNo,lstrPartName,lstrInvoiceNo,lstrANoticeNo,lintQuantity.ToString(), lstrQCLblNo,
+                                ldtQCDateTime, lstrInspectorName, lstrLblQCBarCode, lstrSerial);
                         else
-                            printApproveLabel(lstrPartNo,lstrPartName,lstrInvoiceNo,lstrANoticeNo,lintQuantity.ToString(),"", 
-                                ldtQCDateTime,lstrInspectorName,"",lstrTodaySerialNumber);
+                            printApproveLabel(lstrPartNo,lstrPartName,lstrInvoiceNo,lstrANoticeNo,lintQuantity.ToString(), lstrQCLblNo, 
+                                ldtQCDateTime,lstrInspectorName, lstrLblQCBarCode, lstrTodaySerialNumber);
                     }
                 }
                 else
@@ -397,12 +411,12 @@ namespace AI_BTS_DENSO
         /// <param name="Inspector"></param>
         /// <param name="location"></param>
         /// <param name="serialNo"></param>
-        public void printRejectionLabel(string partNo, string partName, string invoiceNo, string ANoticeNo, string quantity, string RejectionNo, DateTime RejectionDateTime, string Inspector, string location, string serialNo)
+        public void printRejectionLabel(string partNo, string partName, string invoiceNo, string ANoticeNo, string quantity, string RejectionNo, DateTime RejectionDateTime, string Inspector, string QCBarcode, string serialNo)
         {
             string sbpl = "";
             try
             {
-                using (System.IO.StreamReader reader = new System.IO.StreamReader("Rejection.Prn", Encoding.UTF8))
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(Application.StartupPath + "\\PRN Files\\Rejection.Prn", Encoding.UTF8))
                 {
                     sbpl = reader.ReadToEnd();
                     reader.Close();
@@ -417,9 +431,9 @@ namespace AI_BTS_DENSO
                 sbpl = sbpl.Replace("{VARDATE}", RejectionDateTime.ToString("dd-MM-yy"));
                 sbpl = sbpl.Replace("{VARTIME}", RejectionDateTime.ToString("HH:mm"));
                 sbpl = sbpl.Replace("{VARINSPECTOR}", Inspector);
-                string barcode = string.Format("{0}|{1}|{2}|{3}|{4}", partNo, ANoticeNo, quantity, location, serialNo);
-                sbpl = sbpl.Replace("{VARBARCODELEN}", barcode.Length.ToString());
-                sbpl = sbpl.Replace("{VARBARCODE}", barcode);
+                
+                sbpl = sbpl.Replace("{VARBARCODELEN}", QCBarcode.Length.ToString());
+                sbpl = sbpl.Replace("{VARBARCODE}", QCBarcode);
                 sbpl = sbpl.Replace("{VARBARCODEDATA1}", string.Format("{0}", serialNo));
 
                 if (sbpl == "")
@@ -453,12 +467,12 @@ namespace AI_BTS_DENSO
         /// <param name="Inspector"></param>
         /// <param name="location"></param>
         /// <param name="serialNo"></param>
-        public void printApproveLabel(string partNo, string partName, string invoiceNo, string ANoticeNo, string quantity, string BinInfo, DateTime ApprovalDateTime, string Inspector, string location, string serialNo)
+        public void printApproveLabel(string partNo, string partName, string invoiceNo, string ANoticeNo, string quantity, string BinInfo, DateTime ApprovalDateTime, string Inspector, string QCBarcode, string serialNo)
         {
             string sbpl = "";
             try
             {
-                using (System.IO.StreamReader reader = new System.IO.StreamReader("Approval.Prn", Encoding.UTF8))
+                using (System.IO.StreamReader reader = new System.IO.StreamReader(Application.StartupPath + "\\PRN Files\\Approval.Prn", Encoding.UTF8))
                 {
                     sbpl = reader.ReadToEnd();
                     reader.Close();
@@ -473,9 +487,9 @@ namespace AI_BTS_DENSO
                 sbpl = sbpl.Replace("{VARDATE}", ApprovalDateTime.ToString("dd-MM-yy"));
                 sbpl = sbpl.Replace("{VARTIME}", ApprovalDateTime.ToString("HH:mm"));
                 sbpl = sbpl.Replace("{VARINSPECTOR}", Inspector);
-                string barcode = string.Format("{0}|{1}|{2}|{3}|{4}", partNo, ANoticeNo, quantity, location, serialNo);
-                sbpl = sbpl.Replace("{VARBARCODELEN}", barcode.Length.ToString());
-                sbpl = sbpl.Replace("{VARBARCODE}", barcode);
+                
+                sbpl = sbpl.Replace("{VARBARCODELEN}", QCBarcode.Length.ToString());
+                sbpl = sbpl.Replace("{VARBARCODE}", QCBarcode);
                 sbpl = sbpl.Replace("{VARBARCODEDATA1}", string.Format("{0}", serialNo));
                 if (sbpl == "")
                 {
