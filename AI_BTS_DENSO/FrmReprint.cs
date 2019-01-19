@@ -186,11 +186,11 @@ namespace AI_BTS_DENSO
                     foreach (DataGridViewRow currRow in dgvPartList.Rows)
                     {
                         //select only those rows whose labels are remaining for printing and which are not blocked
-                        if (currRow.DefaultCellStyle.BackColor != Color.Yellow && currRow.DefaultCellStyle.BackColor != Color.Orange)
-                        {
+                        //if (currRow.DefaultCellStyle.BackColor != Color.Yellow && currRow.DefaultCellStyle.BackColor != Color.Orange)
+                        //{
                             //currRow.Cells[dgvPartList.CurrentCell.OwningColumn.Name].Value = true;
                             currRow.Selected = true;
-                        }
+                        //}
                     }
                 }
                 else
@@ -504,7 +504,7 @@ namespace AI_BTS_DENSO
                                 {
                                     if (common.ReplaceNullString(currRow.Cells["PALLETE_NO"].Value) == "" || IsIndividualLabelPrinted(currRow))
                                     {
-                                        //LoadLabelList(currRow);
+                                        LoadLabelList(currRow);
                                         PrintIndividualPart(currRow);
                                     }
                                     else
@@ -551,7 +551,10 @@ namespace AI_BTS_DENSO
             {
                 if (optAll.Checked)
                 {
-                    dgvPartList.SelectAll();
+                    foreach(DataGridViewRow currRow in dgvPartList.Rows)
+                    {
+                        currRow.Selected = true;
+                    }
                 }
                 //if (common.IsAnyRowSelected(dgvPartList, "chkPrint"))
                 if(dgvPartList.SelectedRows.Count>0)

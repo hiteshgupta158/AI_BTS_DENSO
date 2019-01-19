@@ -40,8 +40,9 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.Mastertabpnl = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblLocation = new AccessPark.MyLabel();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblLocation = new AccessPark.MyLabel();
             this.lblBinType = new AccessPark.MyLabel();
             this.myLabel2 = new AccessPark.MyLabel();
             this.myLabel3 = new AccessPark.MyLabel();
@@ -57,7 +58,7 @@
             this.myLabel15 = new AccessPark.MyLabel();
             this.myLabel16 = new AccessPark.MyLabel();
             this.myLabel18 = new AccessPark.MyLabel();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblReprintQC = new AccessPark.MyLabel();
             this.myLabel19 = new AccessPark.MyLabel();
             this.myLabel13 = new AccessPark.MyLabel();
             this.myLabel17 = new AccessPark.MyLabel();
@@ -72,7 +73,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.lblLoginUser = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.lblReprintQC = new AccessPark.MyLabel();
+            this.lblQCParameter = new AccessPark.MyLabel();
             this.panel2.SuspendLayout();
             this.pnlData.SuspendLayout();
             this.pnlDataHeader.SuspendLayout();
@@ -216,22 +217,6 @@
             this.flowLayoutPanel2.Size = new System.Drawing.Size(240, 0);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
-            // lblLocation
-            // 
-            this.lblLocation.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblLocation.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblLocation.ImageIndex = 0;
-            this.lblLocation.ImageList = this.imageList1;
-            this.lblLocation.Location = new System.Drawing.Point(3, 6);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(216, 50);
-            this.lblLocation.TabIndex = 2;
-            this.lblLocation.Tag = "101";
-            this.lblLocation.Text = "Location";
-            this.lblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblLocation.Click += new System.EventHandler(this.lblLeftMenu_Click);
-            // 
             // imageList1
             // 
             this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
@@ -263,6 +248,38 @@
             this.imageList1.Images.SetKeyName(24, "Print.png");
             this.imageList1.Images.SetKeyName(25, "dashboardICO.png");
             this.imageList1.Images.SetKeyName(26, "closeForm.png");
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.lblQCParameter);
+            this.tabPage2.Controls.Add(this.myLabel19);
+            this.tabPage2.Controls.Add(this.myLabel13);
+            this.tabPage2.Controls.Add(this.myLabel17);
+            this.tabPage2.Controls.Add(this.myLabel1);
+            this.tabPage2.Controls.Add(this.myLabel14);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(246, 586);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Transactions";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // lblLocation
+            // 
+            this.lblLocation.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblLocation.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLocation.ImageIndex = 0;
+            this.lblLocation.ImageList = this.imageList1;
+            this.lblLocation.Location = new System.Drawing.Point(3, 6);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(216, 50);
+            this.lblLocation.TabIndex = 2;
+            this.lblLocation.Tag = "101";
+            this.lblLocation.Text = "Location";
+            this.lblLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLocation.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
             // lblBinType
             // 
@@ -506,20 +523,21 @@
             this.myLabel18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.myLabel18.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
-            // tabPage2
+            // lblReprintQC
             // 
-            this.tabPage2.Controls.Add(this.myLabel19);
-            this.tabPage2.Controls.Add(this.myLabel13);
-            this.tabPage2.Controls.Add(this.myLabel17);
-            this.tabPage2.Controls.Add(this.myLabel1);
-            this.tabPage2.Controls.Add(this.myLabel14);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(246, 586);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Transactions";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.lblReprintQC.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblReprintQC.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblReprintQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblReprintQC.ImageIndex = 10;
+            this.lblReprintQC.ImageList = this.imageList1;
+            this.lblReprintQC.Location = new System.Drawing.Point(3, 806);
+            this.lblReprintQC.Name = "lblReprintQC";
+            this.lblReprintQC.Size = new System.Drawing.Size(216, 50);
+            this.lblReprintQC.TabIndex = 21;
+            this.lblReprintQC.Tag = "123";
+            this.lblReprintQC.Text = "Reprint QC";
+            this.lblReprintQC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblReprintQC.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
             // myLabel19
             // 
@@ -723,21 +741,21 @@
             this.label2.TabIndex = 19;
             this.label2.Text = "Login User :";
             // 
-            // lblReprintQC
+            // lblQCParameter
             // 
-            this.lblReprintQC.Dock = System.Windows.Forms.DockStyle.Top;
-            this.lblReprintQC.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblReprintQC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lblReprintQC.ImageIndex = 10;
-            this.lblReprintQC.ImageList = this.imageList1;
-            this.lblReprintQC.Location = new System.Drawing.Point(3, 806);
-            this.lblReprintQC.Name = "lblReprintQC";
-            this.lblReprintQC.Size = new System.Drawing.Size(216, 50);
-            this.lblReprintQC.TabIndex = 21;
-            this.lblReprintQC.Tag = "123";
-            this.lblReprintQC.Text = "Reprint QC";
-            this.lblReprintQC.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.lblReprintQC.Click += new System.EventHandler(this.lblLeftMenu_Click);
+            this.lblQCParameter.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lblQCParameter.Font = new System.Drawing.Font("Cambria", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQCParameter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblQCParameter.ImageIndex = 8;
+            this.lblQCParameter.ImageList = this.imageList1;
+            this.lblQCParameter.Location = new System.Drawing.Point(3, 253);
+            this.lblQCParameter.Name = "lblQCParameter";
+            this.lblQCParameter.Size = new System.Drawing.Size(240, 50);
+            this.lblQCParameter.TabIndex = 26;
+            this.lblQCParameter.Tag = "124";
+            this.lblQCParameter.Text = "QC Parameter";
+            this.lblQCParameter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblQCParameter.Click += new System.EventHandler(this.lblLeftMenu_Click);
             // 
             // frmMain
             // 
@@ -814,6 +832,7 @@
         private AccessPark.MyLabel myLabel18;
         private AccessPark.MyLabel myLabel19;
         private AccessPark.MyLabel lblReprintQC;
+        private AccessPark.MyLabel lblQCParameter;
     }
 }
 

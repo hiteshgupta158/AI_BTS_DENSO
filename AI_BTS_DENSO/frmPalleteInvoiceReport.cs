@@ -41,7 +41,6 @@ namespace AI_BTS_DENSO
                 ParameterField REPORT_TITLE = new ParameterField();
                 ParameterDiscreteValue dval = new ParameterDiscreteValue();
                 REPORT_TITLE.Name = "rptTitle";
-
                 dval.Value = "DENSO, BANGALORE";
 
                 REPORT_TITLE.CurrentValues.Add(dval);

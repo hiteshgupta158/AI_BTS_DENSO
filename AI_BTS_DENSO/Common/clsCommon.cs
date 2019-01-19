@@ -113,6 +113,9 @@ namespace AI_BTS_DENSO.Common
                     case 123:
                         lfrm = new frmReprintQC();
                         break;
+                    case 124:
+                        lfrm = new frmQCParameter();
+                        break;
                     default:
                         break;
                 }

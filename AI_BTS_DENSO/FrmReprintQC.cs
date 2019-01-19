@@ -343,6 +343,7 @@ namespace AI_BTS_DENSO
                     {
                         foreach (DataGridViewRow currRow in dgvData.SelectedRows)
                         {
+                            LoadLabelList(currRow);
                             PrintIndividualPart(currRow);
                         }
                     }
@@ -363,7 +364,10 @@ namespace AI_BTS_DENSO
             {
                 if (dgvData.SelectedRows.Count > 1)
                 {
-                    dgvPartList.SelectAll();
+                    foreach(DataGridViewRow currRow in dgvPartList.Rows)
+                    {
+                        currRow.Selected = true;
+                    }
                 }
 
                 if (dgvPartList.SelectedRows.Count>0)
@@ -442,6 +446,10 @@ namespace AI_BTS_DENSO
                 }
 
                 byte[] sbplByte = SATOPrinterAPI.Utils.StringToByteArray(sbpl);
+                printer.Interface = Printer.InterfaceType.TCPIP;
+                printer.TCPIPAddress = common.GetConfigKey("PrinterIP");
+                printer.TCPIPPort = common.GetConfigKey("PrinterPort");
+
                 if (printer.GetPrinterStatus().ToString().ToUpper() == "OK")
                     printer.Send(sbplByte);
                 else
@@ -496,6 +504,10 @@ namespace AI_BTS_DENSO
                     //  throw new InfoException("Printing data can not be empty.");
                 }
                 byte[] sbplByte = SATOPrinterAPI.Utils.StringToByteArray(sbpl);
+                printer.Interface = Printer.InterfaceType.TCPIP;
+                printer.TCPIPAddress = common.GetConfigKey("PrinterIP");
+                printer.TCPIPPort = common.GetConfigKey("PrinterPort");
+
                 if (printer.GetPrinterStatus().ToString().ToUpper() == "OK")
                     printer.Send(sbplByte);
                 else
